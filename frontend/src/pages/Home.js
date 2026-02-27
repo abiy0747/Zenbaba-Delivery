@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import bgImage from "../assets/background.png"; // make sure image exists
 
 function Home() {
@@ -74,7 +74,7 @@ function Home() {
     padding: "12px 25px",
     borderRadius: "8px",
     border: "none",
-    backgroundColor: "#FF6B6B",
+    backgroundColor: "#0f0e0e",
     color: "white",
     fontWeight: "bold",
     cursor: "pointer",

@@ -6,7 +6,7 @@ function Navbar() {
     justifyContent: "space-between",
     alignItems: "center",
     padding: "15px 50px",
-    backgroundColor: "#f44336", // red brand color
+    backgroundColor: "#fcf7f6", // red brand color
     color: "white",
     fontFamily: "Arial, sans-serif",
     position: "relative",
@@ -32,10 +32,10 @@ function Navbar() {
     <nav style={navStyle}>
       {/* Left side: Links */}
       <div style={navLinks}>
-        <Link to="/" style={{ color: "white", textDecoration: "none", fontWeight: "bold" }}>
+        <Link to="/" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
           Home
         </Link>
-        <Link to="/cart" style={{ color: "white", textDecoration: "none", fontWeight: "bold" }}>
+        <Link to="/cart" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
           Cart
         </Link>
       </div>
@@ -43,10 +43,10 @@ function Navbar() {
       {/* Right side: Buttons */}
       <div style={navLinks}>
         <Link to="/login" style={{ textDecoration: "none" }}>
-          <button style={{ ...buttonStyle, backgroundColor: "#FF6B6B" }}>Login</button>
+          <button style={{ ...buttonStyle, backgroundColor: "#060606" }}>Login</button>
         </Link>
         <Link to="/register" style={{ textDecoration: "none" }}>
-          <button style={{ ...buttonStyle, backgroundColor: "#4ECDC4" }}>Sign Up</button>
+          <button style={{ ...buttonStyle, backgroundColor: "#090909" }}>Sign Up</button>
         </Link>
       </div>
     </nav>
