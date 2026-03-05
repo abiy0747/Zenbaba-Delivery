@@ -47,21 +47,21 @@ function Navbar() {
   };
 
   const sideMenuStyle = {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "260px",
-    height: "100vh",
-    backgroundColor: "#fcf7f6",
-    padding: "30px",
-    boxShadow: "2px 0 10px rgba(0,0,0,0.2)",
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-    zIndex: 2000,
-    transition: "transform 0.3s ease",
-    transform: menuOpen ? "translateX(0)" : "translateX(-300px)",
-  };
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "260px",
+  height: "100vh",
+  backgroundColor: "#fcf7f6",
+  padding: "30px",
+  boxShadow: "2px 0 10px rgba(0,0,0,0.2)", // keep shadow only when visible
+  display: "flex",
+  flexDirection: "column",
+  gap: "15px",
+  zIndex: 2000,
+  transition: "transform 0.3s ease",
+  transform: menuOpen ? "translateX(0)" : "translateX(-100%)", // <-- changed from -300px
+};
 
   const overlayStyle = {
     position: "fixed",
