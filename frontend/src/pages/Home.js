@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-import bgImage from "../assets/background.png"; // make sure image exists
+import { Link } from "react-router-dom";
+import bgImage from "../assets/background.png";
 
 function Home() {
   const [address, setAddress] = useState("");
   const [deliveryType, setDeliveryType] = useState("deliver_now");
 
-  const homeStyle = {
-    height: "100vh",
-    width: "100%",
-    backgroundImage: `url(${bgImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    position: "relative",
-    color: "white",
-    fontFamily: "Arial, sans-serif",
-  };
-
+ const homeStyle = {
+  minHeight: "150vh",
+  width: "100%",
+  backgroundImage: `url(${bgImage})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  display: "flex",
+  flexDirection: "column",
+  position: "relative",
+  color: "white",
+  fontFamily: "Arial, sans-serif",
+};
   const overlayStyle = {
     position: "absolute",
     top: 0,
@@ -26,24 +27,19 @@ function Home() {
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   };
 
-  const navStyle = {
-    display: "flex",
-    justifyContent: "flex-end",
-    padding: "20px 50px",
-    position: "relative",
-    zIndex: 2,
-  };
-
   const contentStyle = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    textAlign: "center",
-    zIndex: 2,
-    width: "80%",
-    maxWidth: "800px",
-  };
+  flex: 1,                 // takes remaining space
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  textAlign: "center",
+  zIndex: 2,
+  width: "90%",
+  maxWidth: "1200px",      // wider content
+  margin: "0 auto",
+  padding: "40px 20px",
+};
 
   const searchContainerStyle = {
     display: "flex",
@@ -89,14 +85,12 @@ function Home() {
     <div style={homeStyle}>
       <div style={overlayStyle}></div>
 
-      {/* Navbar (empty now) */}
-      <div style={navStyle}></div>
-
       {/* Centered Content */}
       <div style={contentStyle}>
         <h1 style={{ fontSize: "3.5rem", marginBottom: "20px", fontWeight: "bold" }}>
           Welcome to Zenbaba Delivery
         </h1>
+
         <p style={{ fontSize: "1.3rem", marginBottom: "20px" }}>
           Order food online from the best restaurants in Bahir Dar
         </p>
@@ -125,6 +119,85 @@ function Home() {
           </button>
         </div>
       </div>
+
+      <footer
+  style={{
+    width: "100%",
+    backgroundColor: "#111",
+    color: "white",
+    padding: "50px 20px",
+    marginTop: "auto"
+  }}
+>
+  <div
+    style={{
+      maxWidth: "1200px",
+      margin: "auto",
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+      gap: "30px"
+    }}
+  >
+
+    {/* Company */}
+    <div>
+      <h3>Zenbaba Delivery</h3>
+      <p style={{ color: "#bbb", fontSize: "14px" }}>
+        Order food online from the best restaurants in Bahir Dar.
+      </p>
+    </div>
+
+    {/* Get to Know Us */}
+    <div>
+      <h4>Get to Know Us</h4>
+      <p>About Us</p>
+      <p>Careers</p>
+      <p>Investors</p>
+      <p>Blog</p>
+    </div>
+
+    {/* Let Us Help You */}
+    <div>
+      <h4>Let Us Help You</h4>
+      <p>Account Details</p>
+      <p>Order History</p>
+      <p>Help Center</p>
+      <p>Support</p>
+    </div>
+
+    {/* Partner */}
+    <div>
+      <h4>Partner With Us</h4>
+      <p>Add Your Restaurant</p>
+      <p>Become a Driver</p>
+      <p>Business Delivery</p>
+    </div>
+
+    {/* Cities */}
+    <div>
+      <h4>Popular Cities</h4>
+      <p>Bahir Dar</p>
+      <p>Addis Ababa</p>
+      <p>Gondar</p>
+      <p>Hawassa</p>
+    </div>
+
+  </div>
+
+  {/* Bottom Copyright */}
+  <div
+    style={{
+      textAlign: "center",
+      marginTop: "40px",
+      borderTop: "1px solid #333",
+      paddingTop: "20px",
+      fontSize: "14px",
+      color: "#aaa"
+    }}
+  >
+    © 2026 Zenbaba Delivery. All rights reserved.
+  </div>
+</footer>
     </div>
   );
 }
