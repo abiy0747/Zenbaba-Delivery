@@ -1,30 +1,70 @@
+// src/context/ShoppingCartContext.js
 import React, { createContext, useState } from "react";
 
-// Create context
 export const ShoppingCartContext = createContext();
 
-// Provider component
 export function ShoppingCartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
 
-  // Add item to cart
+  // Add item (if exists, increase quantity)
   const addToCart = (item) => {
-    setCartItems((prev) => [...prev, item]);
+    setCartItems((prev) => {
+      const exist = prev.find((i) => i.id === item.id);
+      if (exist) {
+        return prev.map((i) =>
+          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+        );
+      } else {
+        return [...prev, { ...item, quantity: 1 }];
+      }
+    });
   };
 
-  // Remove item from cart by id
+  // Remove item completely
   const removeFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Clear entire cart
-  const clearCart = () => {
-    setCartItems([]);
+  // Increase quantity
+  const increaseQuantity = (id) => {
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
   };
+
+  // Decrease quantity
+  const decreaseQuantity = (id) => {
+    setCartItems((prev) =>
+      prev
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0) // remove if quantity becomes 0
+    );
+  };
+
+  // Clear cart
+  const clearCart = () => setCartItems([]);
+
+  // Total price
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   return (
     <ShoppingCartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, clearCart }}
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        increaseQuantity,
+        decreaseQuantity,
+        clearCart,
+        totalPrice,
+      }}
     >
       {children}
     </ShoppingCartContext.Provider>

@@ -73,7 +73,7 @@ function Navbar() {
   boxShadow: menuOpen ? "2px 0 10px rgba(0,0,0,0.2)" : "none",
   display: "flex",
   flexDirection: "column",
-  gap: "12px",
+  gap: "5px",
   zIndex: 2000,
   transition: "transform 0.3s ease",
   transform: menuOpen ? "translateX(0)" : "translateX(-100%)",
@@ -115,15 +115,31 @@ function Navbar() {
           <Link to="/" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
             Home
           </Link>
-          <Link to="/cart" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
-            Cart
+
+          <Link to="/menu" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
+            Menu
           </Link>
+          <Link to="/restaurants" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
+            Restaurants
+          </Link>
+          
         </div>
 
-        <div style={navLinks}>
-          <button style={loginButtonStyle} onClick={() => setShowLoginPopup(true)}>Login</button>
-          <button style={signupButtonStyle} onClick={() => setShowRegisterPopup(true)}>Sign Up</button>
-        </div>
+       <div style={navLinks}>
+
+  <Link to="/cart" style={{ color: "black", fontSize: "22px" }}>
+    <FaShoppingCart />
+  </Link>
+
+  <Link to="/login" style={{ textDecoration: "none" }}>
+    <button style={loginButtonStyle}>Login</button>
+  </Link>
+
+  <Link to="/register" style={{ textDecoration: "none" }}>
+    <button style={signupButtonStyle}>Sign Up</button>
+  </Link>
+
+</div>
       </nav>
 
       {/* Overlay */}
@@ -176,6 +192,9 @@ function Navbar() {
         </Link>
       <Link to="/contact" style={linkStyle} onClick={() => setMenuOpen(false)}>
   <FaEnvelope /> Contact
+</Link>
+      <Link to="/restaurants" style={linkStyle} onClick={() => setMenuOpen(false)}>
+  <FaUtensils /> Restaurants
 </Link>
       </div>
 

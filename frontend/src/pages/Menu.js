@@ -7,15 +7,34 @@ function Menu() {
 
   useEffect(() => {
     setMenuItems([
-      { id: 1, name: "Pizza Margherita", price: 12.5, restaurant: "Bella Italia" },
-      { id: 2, name: "Burger Combo", price: 9.99, restaurant: "Fast Burger" },
-      { id: 3, name: "Sushi Platter", price: 18.0, restaurant: "Sushi House" },
+      {
+        id: 1,
+        name: "Pizza Margherita",
+        price: 12.5,
+        restaurant: "Bella Italia",
+        image: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
+      },
+      {
+        id: 2,
+        name: "Burger Combo",
+        price: 9.99,
+        restaurant: "Fast Burger",
+        image: "https://images.unsplash.com/photo-1550547660-d9450f859349",
+      },
+      {
+        id: 3,
+        name: "Sushi Platter",
+        price: 18.0,
+        restaurant: "Sushi House",
+        image: "https://images.unsplash.com/photo-1562158070-57c0c9b7f9c7",
+      },
     ]);
   }, []);
 
   return (
     <div style={{ padding: "100px 20px", maxWidth: "1200px", margin: "auto" }}>
       <h1>Menu</h1>
+
       <div
         style={{
           display: "grid",
@@ -29,30 +48,46 @@ function Menu() {
             key={item.id}
             style={{
               border: "1px solid #ddd",
-              borderRadius: "10px",
-              padding: "15px",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-              textAlign: "center",
+              borderRadius: "12px",
+              overflow: "hidden",
+              boxShadow: "0 3px 10px rgba(0,0,0,0.1)",
+              background: "white",
             }}
           >
-            <h3>{item.name}</h3>
-            <p>Restaurant: {item.restaurant}</p>
-            <p>Price: ${item.price.toFixed(2)}</p>
-            <button
-              onClick={() => addToCart(item)}
+            {/* Food Image */}
+            <img
+              src={item.image}
+              alt={item.name}
               style={{
-                marginTop: "10px",
-                padding: "10px 20px",
-                borderRadius: "8px",
-                border: "none",
-                backgroundColor: "#3AB795",
-                color: "white",
-                cursor: "pointer",
-                fontWeight: "bold",
+                width: "100%",
+                height: "180px",
+                objectFit: "cover",
               }}
-            >
-              Add to Cart
-            </button>
+            />
+
+            <div style={{ padding: "15px", textAlign: "center" }}>
+              <h3>{item.name}</h3>
+              <p>Restaurant: {item.restaurant}</p>
+              <p style={{ fontWeight: "bold" }}>
+                Price: ${item.price.toFixed(2)}
+              </p>
+
+              <button
+                onClick={() => addToCart(item)}
+                style={{
+                  marginTop: "10px",
+                  padding: "10px 20px",
+                  borderRadius: "8px",
+                  border: "none",
+                  backgroundColor: "#3AB795",
+                  color: "white",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                }}
+              >
+                Add to Cart
+              </button>
+            </div>
           </div>
         ))}
       </div>
