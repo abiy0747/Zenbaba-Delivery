@@ -7,7 +7,7 @@ function Home() {
   const [deliveryType, setDeliveryType] = useState("deliver_now");
 
  const homeStyle = {
-  minHeight: "150vh",
+  minHeight: "250vh",
   width: "100%",
   backgroundImage: `url(${bgImage})`,
   backgroundSize: "cover",
@@ -81,6 +81,24 @@ function Home() {
     alert(`Searching restaurants for ${address} (${deliveryType})`);
   };
 
+
+  const reviews = [
+  {
+    name: "Abel T.",
+    comment: "Very fast delivery and the food arrived hot. Best service in Bahir Dar!",
+    rating: 5
+  },
+  {
+    name: "Sara M.",
+    comment: "Easy to order and great restaurant choices. Highly recommended.",
+    rating: 4
+  },
+  {
+    name: "Dawit K.",
+    comment: "Zenbaba made food ordering very simple. I love the service.",
+    rating: 5
+  }
+];
   return (
     <div style={homeStyle}>
       <div style={overlayStyle}></div>
@@ -118,6 +136,50 @@ function Home() {
             Search Here
           </button>
         </div>
+
+        {/* Reviews Section */}
+
+<div
+  style={{
+    marginTop: "60px",
+    width: "100%",
+    maxWidth: "1000px"
+  }}
+>
+  <h2 style={{ marginBottom: "30px", fontSize: "2rem" }}>
+    What Our Customers Say
+  </h2>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+      gap: "20px"
+    }}
+  >
+    {reviews.map((review, index) => (
+      <div
+        key={index}
+        style={{
+          background: "rgba(255,255,255,0.1)",
+          padding: "20px",
+          borderRadius: "10px",
+          backdropFilter: "blur(5px)"
+        }}
+      >
+        <p style={{ fontStyle: "italic", marginBottom: "10px" }}>
+          "{review.comment}"
+        </p>
+
+        <strong>{review.name}</strong>
+
+        <div style={{ color: "#FFD700", marginTop: "5px" }}>
+          {"★".repeat(review.rating)}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
       </div>
 
       <footer
