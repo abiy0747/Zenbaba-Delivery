@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import bgImage from "../assets/background.png"; // Make sure this image exists
 
 function Home() {

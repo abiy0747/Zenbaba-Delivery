@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { CartContext } from "./context/CartContext";
 
 function Cart() {
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: "Pizza Margherita", price: 12.5, quantity: 1 },
-    { id: 2, name: "Burger Combo", price: 9.99, quantity: 2 },
-  ]);
+  const { cartItems, removeFromCart, updateQuantity, clearCart } = useContext(CartContext);
 
   const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -16,14 +14,24 @@ function Cart() {
       ) : (
         <div style={{ marginTop: "20px" }}>
           {cartItems.map(item => (
-            <div key={item.id} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #ddd" }}>
-              <span>{item.name} x {item.quantity}</span>
+            <div key={item.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0", borderBottom: "1px solid #ddd" }}>
+              <span>{item.name}</span>
+              <input
+                type="number"
+                value={item.quantity}
+                min="1"
+                style={{ width: "50px", padding: "5px" }}
+                onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
+              />
               <span>${(item.price * item.quantity).toFixed(2)}</span>
+              <button onClick={() => removeFromCart(item.id)} style={{ padding: "5px 10px", backgroundColor: "#FF6B6B", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>
+                Remove
+              </button>
             </div>
           ))}
           <h3 style={{ marginTop: "20px" }}>Total: ${totalPrice.toFixed(2)}</h3>
-          <button style={{ marginTop: "15px", padding: "10px 20px", backgroundColor: "#FF6B6B", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>
-            Proceed to Checkout
+          <button onClick={clearCart} style={{ marginTop: "15px", padding: "10px 20px", backgroundColor: "#0f0e0e", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>
+            Clear Cart
           </button>
         </div>
       )}

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { CartContext } from "./context/CartContext";
 
 function Menu() {
   const [menuItems, setMenuItems] = useState([]);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    // Fetch menu items from backend API
-    // Example: axios.get('/api/menu').then(res => setMenuItems(res.data))
     setMenuItems([
       { id: 1, name: "Pizza Margherita", price: 12.5, restaurant: "Bella Italia" },
       { id: 2, name: "Burger Combo", price: 9.99, restaurant: "Fast Burger" },
@@ -22,7 +22,10 @@ function Menu() {
             <h3>{item.name}</h3>
             <p>Restaurant: {item.restaurant}</p>
             <p>Price: ${item.price}</p>
-            <button style={{ padding: "8px 15px", backgroundColor: "#3AB795", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>
+            <button
+              style={{ padding: "8px 15px", backgroundColor: "#3AB795", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}
+              onClick={() => addToCart(item)}
+            >
               Add to Cart
             </button>
           </div>
