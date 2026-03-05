@@ -255,11 +255,11 @@ function Home() {
 
           {/* Cities */}
           <div>
-            <h4>Popular Cities</h4>
-            <p>Bahir Dar</p>
-            <p>Addis Ababa</p>
-            <p>Gondar</p>
-            <p>Hawassa</p>
+            <h4>Popular Foods</h4>
+            <p>Burger</p>
+            <p>pizza</p>
+            <p>Borito</p>
+            <p>Ertib</p>
           </div>
         </div>
 
