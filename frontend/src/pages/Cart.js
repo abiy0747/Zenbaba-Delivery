@@ -1,8 +1,11 @@
 // src/pages/Cart.js
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ShoppingCartContext } from "../context/ShoppingCartContext";
 
 function Cart() {
+  const navigate = useNavigate();
+
   const {
     cartItems,
     removeFromCart,
@@ -11,6 +14,10 @@ function Cart() {
     clearCart,
     totalPrice,
   } = useContext(ShoppingCartContext);
+
+  const handleCheckout = () => {
+    navigate("/checkout"); // go to checkout page
+  };
 
   return (
     <div style={{ padding: "100px 20px", maxWidth: "1200px", margin: "auto" }}>
@@ -42,7 +49,6 @@ function Cart() {
                   alignItems: "center",
                 }}
               >
-                {/* Food Image */}
                 <img
                   src={item.image || "https://via.placeholder.com/150"}
                   alt={item.name}
@@ -56,12 +62,16 @@ function Cart() {
                 />
 
                 <h3>{item.name}</h3>
+
                 <p style={{ fontSize: "14px", color: "#555" }}>
                   Restaurant: {item.restaurant}
                 </p>
-                <p style={{ fontWeight: "bold" }}>Price: ${item.price.toFixed(2)}</p>
 
-                {/* Quantity Selector */}
+                <p style={{ fontWeight: "bold" }}>
+                  Price: ${item.price.toFixed(2)}
+                </p>
+
+                {/* Quantity */}
                 <div
                   style={{
                     display: "flex",
@@ -70,44 +80,14 @@ function Cart() {
                     marginTop: "10px",
                   }}
                 >
-                  <button
-                    onClick={() => decreaseQuantity(item.id)}
-                    style={{
-                      padding: "5px 12px",
-                      borderRadius: "5px",
-                      border: "1px solid #ccc",
-                      backgroundColor: "#f0f0f0",
-                      cursor: "pointer",
-                      fontWeight: "bold",
-                      transition: "0.2s",
-                    }}
-                    onMouseOver={(e) => (e.target.style.backgroundColor = "#e2e8f0")}
-                    onMouseOut={(e) => (e.target.style.backgroundColor = "#f0f0f0")}
-                  >
-                    −
-                  </button>
-                  <span style={{ minWidth: "20px", textAlign: "center" }}>
-                    {item.quantity}
-                  </span>
-                  <button
-                    onClick={() => increaseQuantity(item.id)}
-                    style={{
-                      padding: "5px 12px",
-                      borderRadius: "5px",
-                      border: "1px solid #ccc",
-                      backgroundColor: "#f0f0f0",
-                      cursor: "pointer",
-                      fontWeight: "bold",
-                      transition: "0.2s",
-                    }}
-                    onMouseOver={(e) => (e.target.style.backgroundColor = "#e2e8f0")}
-                    onMouseOut={(e) => (e.target.style.backgroundColor = "#f0f0f0")}
-                  >
-                    +
-                  </button>
+                  <button onClick={() => decreaseQuantity(item.id)}>−</button>
+
+                  <span>{item.quantity}</span>
+
+                  <button onClick={() => increaseQuantity(item.id)}>+</button>
                 </div>
 
-                {/* Remove Button */}
+                {/* Remove */}
                 <button
                   onClick={() => removeFromCart(item.id)}
                   style={{
@@ -119,10 +99,7 @@ function Cart() {
                     color: "white",
                     cursor: "pointer",
                     fontWeight: "bold",
-                    transition: "0.2s",
                   }}
-                  onMouseOver={(e) => (e.target.style.backgroundColor = "#C53030")}
-                  onMouseOut={(e) => (e.target.style.backgroundColor = "#E53E3E")}
                 >
                   Remove
                 </button>
@@ -130,27 +107,44 @@ function Cart() {
             ))}
           </div>
 
-          {/* Total Price */}
-          <h2 style={{ marginTop: "30px" }}>Total: ${totalPrice.toFixed(2)}</h2>
+          {/* Total */}
+          <h2 style={{ marginTop: "30px" }}>
+            Total: ${totalPrice.toFixed(2)}
+          </h2>
 
-          <button
-            onClick={clearCart}
-            style={{
-              marginTop: "20px",
-              padding: "12px 25px",
-              borderRadius: "8px",
-              border: "none",
-              backgroundColor: "#2C7A7B",
-              color: "white",
-              fontWeight: "bold",
-              cursor: "pointer",
-              transition: "0.2s",
-            }}
-            onMouseOver={(e) => (e.target.style.backgroundColor = "#285E61")}
-            onMouseOut={(e) => (e.target.style.backgroundColor = "#2C7A7B")}
-          >
-            Clear Cart
-          </button>
+          {/* Buttons */}
+          <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
+            <button
+              onClick={clearCart}
+              style={{
+                padding: "12px 25px",
+                borderRadius: "8px",
+                border: "none",
+                backgroundColor: "#2C7A7B",
+                color: "white",
+                fontWeight: "bold",
+                cursor: "pointer",
+              }}
+            >
+              Clear Cart
+            </button>
+
+            {/* Checkout Button */}
+            <button
+              onClick={handleCheckout}
+              style={{
+                padding: "12px 25px",
+                borderRadius: "8px",
+                border: "none",
+                backgroundColor: "#3AB795",
+                color: "white",
+                fontWeight: "bold",
+                cursor: "pointer",
+              }}
+            >
+              Proceed to Checkout
+            </button>
+          </div>
         </>
       )}
     </div>
