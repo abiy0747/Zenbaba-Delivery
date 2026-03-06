@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FaHome, FaUtensils, FaShoppingCart, FaCreditCard, FaQuestionCircle, FaEnvelope } from "react-icons/fa";
 import palmLogo from "../assets/palm.png"; // add your palm logo in assets folder
-
+import { useContext } from "react";
+import { ShoppingCartContext } from "../context/ShoppingCartContext";
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
-
+  const { cartItems } = useContext(ShoppingCartContext);
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -127,17 +128,42 @@ function Navbar() {
 
        <div style={navLinks}>
 
+  <div style={{ position: "relative" }}>
   <Link to="/cart" style={{ color: "black", fontSize: "22px" }}>
     <FaShoppingCart />
   </Link>
 
-  <Link to="/login" style={{ textDecoration: "none" }}>
-    <button style={loginButtonStyle}>Login</button>
-  </Link>
+  {cartItems.length > 0 && (
+    <span
+      style={{
+        position: "absolute",
+        top: "-8px",
+        right: "-10px",
+        backgroundColor: "red",
+        color: "white",
+        borderRadius: "50%",
+        padding: "2px 7px",
+        fontSize: "12px",
+        fontWeight: "bold",
+      }}
+    >
+      {cartItems.length}
+    </span>
+  )}
+</div>
+<button
+  style={loginButtonStyle}
+  onClick={() => setShowLoginPopup(true)}
+>
+  Login
+</button>
 
-  <Link to="/register" style={{ textDecoration: "none" }}>
-    <button style={signupButtonStyle}>Sign Up</button>
-  </Link>
+<button
+  style={signupButtonStyle}
+  onClick={() => setShowRegisterPopup(true)}
+>
+  Sign Up
+</button>
 
 </div>
       </nav>

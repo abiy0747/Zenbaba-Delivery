@@ -7,7 +7,6 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
 // Import the provider (note the correct capitalization)
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import Restaurants from "./pages/Restaurants";

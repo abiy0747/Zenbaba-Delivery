@@ -1,3 +1,4 @@
+// src/pages/Menu.js
 import React, { useState, useEffect, useContext } from "react";
 import { ShoppingCartContext } from "../context/ShoppingCartContext";
 
@@ -30,6 +31,23 @@ function Menu() {
       },
     ]);
   }, []);
+
+  // Button hover & click effects
+  const handleMouseEnter = (e) => {
+    e.target.style.backgroundColor = "#2A8C76"; // darker green
+  };
+
+  const handleMouseLeave = (e) => {
+    e.target.style.backgroundColor = "#3AB795"; // original green
+  };
+
+  const handleMouseDown = (e) => {
+    e.target.style.transform = "scale(0.95)"; // shrink slightly
+  };
+
+  const handleMouseUp = (e) => {
+    e.target.style.transform = "scale(1)"; // back to normal
+  };
 
   return (
     <div style={{ padding: "100px 20px", maxWidth: "1200px", margin: "auto" }}>
@@ -74,6 +92,10 @@ function Menu() {
 
               <button
                 onClick={() => addToCart(item)}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
                 style={{
                   marginTop: "10px",
                   padding: "10px 20px",
@@ -83,6 +105,7 @@ function Menu() {
                   color: "white",
                   cursor: "pointer",
                   fontWeight: "bold",
+                  transition: "all 0.1s ease-in-out",
                 }}
               >
                 Add to Cart
