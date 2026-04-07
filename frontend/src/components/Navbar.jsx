@@ -1,15 +1,19 @@
-
-// src/components/Navbar.js
 import { Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import { FaHome, FaUtensils, FaShoppingCart, FaCreditCard, FaQuestionCircle, FaEnvelope } from "react-icons/fa";
+import { FaHome, FaUtensils, FaShoppingCart, FaCreditCard, FaQuestionCircle, FaEnvelope, FaUser } from "react-icons/fa";
 import palmLogo from "../assets/palm.png";
 import { ShoppingCartContext } from "../context/ShoppingCartContext";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
+  const [user, setUser] = useState(null);
+  const [sidebarProfileOpen, setSidebarProfileOpen] = useState(false);
+  const [navbarProfileOpen, setNavbarProfileOpen] = useState(false);
+
   const { cartItems } = useContext(ShoppingCartContext);
 
   useEffect(() => {
@@ -21,6 +25,12 @@ function Navbar() {
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
+
+  const handleLogout = () => {
+    setUser(null);
+    setSidebarProfileOpen(false);
+    setNavbarProfileOpen(false);
+  };
 
   const navStyle = {
     display: "flex",
@@ -35,14 +45,14 @@ function Navbar() {
     color: "black",
     fontFamily: "Arial, sans-serif",
     zIndex: 1000,
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
   };
 
   const navLinks = {
     display: "flex",
     alignItems: "center",
     gap: "clamp(6px,1.5vw,20px)",
-    fontSize: "clamp(11px,1.2vw,16px)"
+    fontSize: "clamp(11px,1.2vw,16px)",
   };
 
   const loginButtonStyle = {
@@ -53,7 +63,7 @@ function Navbar() {
     fontWeight: "bold",
     backgroundColor: "#3AB795",
     color: "white",
-    fontSize: "clamp(10px,1vw,14px)"
+    fontSize: "clamp(10px,1vw,14px)",
   };
 
   const signupButtonStyle = {
@@ -64,7 +74,7 @@ function Navbar() {
     fontWeight: "bold",
     backgroundColor: "transparent",
     color: "#3AB795",
-    fontSize: "clamp(10px,1vw,14px)"
+    fontSize: "clamp(10px,1vw,14px)",
   };
 
   const sideMenuStyle = {
@@ -82,7 +92,7 @@ function Navbar() {
     zIndex: 2000,
     transition: "transform 0.3s ease",
     transform: menuOpen ? "translateX(0)" : "translateX(-100%)",
-    overflowY: "auto"
+    overflowY: "auto",
   };
 
   const overlayStyle = {
@@ -92,7 +102,7 @@ function Navbar() {
     height: "100vh",
     width: "100vw",
     backgroundColor: "rgba(0,0,0,0.4)",
-    zIndex: 1500
+    zIndex: 1500,
   };
 
   const linkStyle = {
@@ -102,11 +112,38 @@ function Navbar() {
     padding: "10px 0",
     display: "flex",
     alignItems: "center",
-    gap: "10px"
+    gap: "10px",
+  };
+
+  const profileDropdownStyle = {
+    position: "absolute",
+    top: "100%",
+    right: 0, // aligned to right for navbar dropdown
+    backgroundColor: "#fff",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    padding: "10px",
+    width: "220px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+    zIndex: 3000,
+  };
+
+  const sidebarProfileDropdownStyle = {
+    position: "absolute",
+    top: "100%",
+    left: 0,
+    backgroundColor: "#fff",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    padding: "10px",
+    width: "220px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+    zIndex: 3000,
   };
 
   return (
     <>
+      {/* Navbar */}
       <nav style={navStyle}>
         <div style={navLinks}>
           <div
@@ -120,22 +157,19 @@ function Navbar() {
           <Link to="/" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
             Home
           </Link>
-
           <Link to="/menu" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
             Menu
           </Link>
-
           <Link to="/restaurants" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
             Restaurants
           </Link>
         </div>
 
-        <div style={navLinks}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", position: "relative" }}>
           <div style={{ position: "relative" }}>
             <Link to="/cart" style={{ color: "black", fontSize: "clamp(14px,1.5vw,22px)" }}>
               <FaShoppingCart />
             </Link>
-
             {cartItems.length > 0 && (
               <span
                 style={{
@@ -147,7 +181,7 @@ function Navbar() {
                   borderRadius: "50%",
                   padding: "2px 6px",
                   fontSize: "clamp(8px,0.8vw,12px)",
-                  fontWeight: "bold"
+                  fontWeight: "bold",
                 }}
               >
                 {cartItems.length}
@@ -155,49 +189,88 @@ function Navbar() {
             )}
           </div>
 
-          <button
-            style={loginButtonStyle}
-            onClick={() => setShowLoginPopup(true)}
-          >
-            Login
-          </button>
-
-          <button
-            style={signupButtonStyle}
-            onClick={() => setShowRegisterPopup(true)}
-          >
-            Sign Up
-          </button>
+          {/* Navbar Profile */}
+          {user ? (
+            <div style={{ position: "relative" }}>
+              <button
+                onClick={() => setNavbarProfileOpen(!navbarProfileOpen)}
+                style={{
+                  border: "none",
+                  background: "transparent",
+                  cursor: "pointer",
+                  fontSize: "22px",
+                  color: "#3AB795",
+                }}
+              >
+                <FaUser />
+              </button>
+              {navbarProfileOpen && (
+                <div style={profileDropdownStyle}>
+                  <p><strong>{user.name}</strong></p>
+                  <p>{user.email}</p>
+                  <button
+                    style={{ ...loginButtonStyle, width: "100%" }}
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <button style={loginButtonStyle} onClick={() => setShowLoginPopup(true)}>
+                Login
+              </button>
+              <button style={signupButtonStyle} onClick={() => setShowRegisterPopup(true)}>
+                Sign Up
+              </button>
+            </>
+          )}
         </div>
       </nav>
 
       {menuOpen && <div style={overlayStyle} onClick={() => setMenuOpen(false)}></div>}
 
+      {/* Sidebar */}
       <div className="navbar-menu" style={sideMenuStyle}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
           <img src={palmLogo} alt="Palm Logo" style={{ width: "40px", height: "40px" }} />
           <h2 style={{ margin: 0, fontSize: "20px" }}>Zenbaba Delivery</h2>
         </div>
 
-        <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
-          <button
-            style={{ ...loginButtonStyle, flex: 1 }}
-            onClick={() => { setShowLoginPopup(true); setMenuOpen(false); }}
-          >
-            Login
-          </button>
-
-          <button
-            style={{ ...signupButtonStyle, flex: 1 }}
-            onClick={() => { setShowRegisterPopup(true); setMenuOpen(false); }}
-          >
-            Sign Up
-          </button>
-        </div>
-
-        <p style={{ fontSize: "14px", color: "#555", marginBottom: "20px" }}>
-          Please login or sign up first to access full features.
-        </p>
+        {/* Sidebar Profile at Top */}
+        {user && (
+          <div style={{ position: "relative", marginBottom: "20px" }}>
+            <button
+              onClick={() => setSidebarProfileOpen(!sidebarProfileOpen)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                border: "none",
+                background: "transparent",
+                cursor: "pointer",
+                fontSize: "18px",
+                color: "#3AB795",
+              }}
+            >
+              <FaUser /> {user.name}
+            </button>
+            {sidebarProfileOpen && (
+              <div style={sidebarProfileDropdownStyle}>
+                <p><strong>{user.name}</strong></p>
+                <p>{user.email}</p>
+                <button
+                  style={{ ...loginButtonStyle, width: "100%" }}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
         <Link to="/" style={linkStyle}><FaHome /> Home</Link>
         <Link to="/menu" style={linkStyle}><FaUtensils /> Menu</Link>
@@ -207,9 +280,30 @@ function Navbar() {
         <Link to="/contact" style={linkStyle}><FaEnvelope /> Contact</Link>
         <Link to="/restaurants" style={linkStyle}><FaUtensils /> Restaurants</Link>
       </div>
+
+      {showLoginPopup && (
+        <Login
+          onClose={() => setShowLoginPopup(false)}
+          onSwitchToRegister={() => {
+            setShowLoginPopup(false);
+            setShowRegisterPopup(true);
+          }}
+          onLogin={(userData) => setUser(userData)}
+        />
+      )}
+
+      {showRegisterPopup && (
+        <Register
+          onClose={() => setShowRegisterPopup(false)}
+          onSwitchToLogin={() => {
+            setShowRegisterPopup(false);
+            setShowLoginPopup(true);
+          }}
+          onRegister={(userData) => setUser(userData)}
+        />
+      )}
     </>
   );
 }
 
 export default Navbar;
-

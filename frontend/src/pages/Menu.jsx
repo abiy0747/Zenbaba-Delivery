@@ -1,4 +1,3 @@
-// src/pages/Menu.js
 import React, { useState, useEffect, useContext } from "react";
 import { ShoppingCartContext } from "../context/ShoppingCartContext";
 
@@ -32,27 +31,22 @@ function Menu() {
     ]);
   }, []);
 
-  // Button hover & click effects
   const handleMouseEnter = (e) => {
-    e.target.style.backgroundColor = "#2A8C76"; // darker green
+    e.target.style.backgroundColor = "#2A8C76";
   };
-
   const handleMouseLeave = (e) => {
-    e.target.style.backgroundColor = "#3AB795"; // original green
+    e.target.style.backgroundColor = "#3AB795";
   };
-
   const handleMouseDown = (e) => {
-    e.target.style.transform = "scale(0.95)"; // shrink slightly
+    e.target.style.transform = "scale(0.95)";
   };
-
   const handleMouseUp = (e) => {
-    e.target.style.transform = "scale(1)"; // back to normal
+    e.target.style.transform = "scale(1)";
   };
 
   return (
     <div style={{ padding: "100px 20px", maxWidth: "1200px", margin: "auto" }}>
       <h1>Menu</h1>
-
       <div
         style={{
           display: "grid",
@@ -72,24 +66,15 @@ function Menu() {
               background: "white",
             }}
           >
-            {/* Food Image */}
             <img
               src={item.image}
               alt={item.name}
-              style={{
-                width: "100%",
-                height: "180px",
-                objectFit: "cover",
-              }}
+              style={{ width: "100%", height: "180px", objectFit: "cover" }}
             />
-
             <div style={{ padding: "15px", textAlign: "center" }}>
               <h3>{item.name}</h3>
               <p>Restaurant: {item.restaurant}</p>
-              <p style={{ fontWeight: "bold" }}>
-                Price: ${item.price.toFixed(2)}
-              </p>
-
+              <p style={{ fontWeight: "bold" }}>Price: ${item.price.toFixed(2)}</p>
               <button
                 onClick={() => addToCart(item)}
                 onMouseEnter={handleMouseEnter}
