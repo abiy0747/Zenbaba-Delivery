@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import bgImage from "../assets/background.png"; // Make sure this image exists
+import bgImage from "../assets/background.png";
 
 function Home() {
   const [address, setAddress] = useState("");
   const [deliveryType, setDeliveryType] = useState("deliver_now");
 
-  // Sample customer reviews
   const reviews = [
     {
       name: "Abel T.",
@@ -51,10 +50,10 @@ function Home() {
           left: 0,
           height: "100%",
           width: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(0,0,0,0.5)",
           zIndex: 1,
         }}
-      ></div>
+      />
 
       {/* Main Content */}
       <div
@@ -65,18 +64,18 @@ function Home() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          paddingTop: "100px", // space for fixed navbar
-          width: "90%",
+          paddingTop: "90px",
+          width: "95%",
           maxWidth: "1200px",
           margin: "0 auto",
+          textAlign: "center"
         }}
       >
         {/* Heading */}
         <h1
           style={{
-            fontSize: "3rem",
+            fontSize: "clamp(1.8rem,5vw,3rem)",
             fontWeight: "bold",
-            textAlign: "center",
             marginBottom: "20px",
           }}
         >
@@ -85,8 +84,7 @@ function Home() {
 
         <p
           style={{
-            fontSize: "1.3rem",
-            textAlign: "center",
+            fontSize: "clamp(1rem,3vw,1.3rem)",
             marginBottom: "30px",
           }}
         >
@@ -101,7 +99,7 @@ function Home() {
             justifyContent: "center",
             gap: "10px",
             width: "100%",
-            maxWidth: "900px",
+            maxWidth: "800px",
           }}
         >
           <input
@@ -110,12 +108,10 @@ function Home() {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             style={{
-              flex: "2",
-              minWidth: "200px",
+              flex: "1 1 200px",
               padding: "15px",
               borderRadius: "10px",
               border: "none",
-              boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
               fontSize: "1rem",
             }}
           />
@@ -124,12 +120,10 @@ function Home() {
             value={deliveryType}
             onChange={(e) => setDeliveryType(e.target.value)}
             style={{
-              flex: "1",
-              minWidth: "150px",
+              flex: "1 1 150px",
               padding: "15px",
               borderRadius: "10px",
               border: "none",
-              boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
               fontSize: "1rem",
             }}
           >
@@ -140,24 +134,22 @@ function Home() {
           <button
             onClick={handleSearch}
             style={{
-              flex: "1",
-              minWidth: "120px",
+              flex: "1 1 120px",
               padding: "15px",
               borderRadius: "10px",
               border: "none",
-              backgroundColor: "#3AB795", // Palm tree color
+              backgroundColor: "#3AB795",
               color: "white",
               fontWeight: "bold",
               cursor: "pointer",
               fontSize: "1rem",
-              boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
             }}
           >
-            Search Here
+            Search
           </button>
         </div>
 
-        {/* Customer Reviews */}
+        {/* Reviews */}
         <div
           style={{
             marginTop: "60px",
@@ -165,14 +157,19 @@ function Home() {
             maxWidth: "1000px",
           }}
         >
-          <h2 style={{ marginBottom: "30px", fontSize: "2rem", textAlign: "center" }}>
+          <h2
+            style={{
+              marginBottom: "30px",
+              fontSize: "clamp(1.5rem,4vw,2rem)",
+            }}
+          >
             What Our Customers Say
           </h2>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
               gap: "20px",
             }}
           >
@@ -184,7 +181,6 @@ function Home() {
                   padding: "20px",
                   borderRadius: "10px",
                   backdropFilter: "blur(5px)",
-                  textAlign: "center",
                 }}
               >
                 <p style={{ fontStyle: "italic", marginBottom: "10px" }}>
@@ -206,8 +202,7 @@ function Home() {
           width: "100%",
           backgroundColor: "#111",
           color: "white",
-          padding: "50px 20px",
-          marginTop: "auto",
+          padding: "40px 20px",
         }}
       >
         <div
@@ -215,11 +210,10 @@ function Home() {
             maxWidth: "1200px",
             margin: "auto",
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
             gap: "30px",
           }}
         >
-          {/* Company */}
           <div>
             <h3>Zenbaba Delivery</h3>
             <p style={{ color: "#bbb", fontSize: "14px" }}>
@@ -227,7 +221,6 @@ function Home() {
             </p>
           </div>
 
-          {/* Get to Know Us */}
           <div>
             <h4>Get to Know Us</h4>
             <p>About Us</p>
@@ -236,44 +229,32 @@ function Home() {
             <p>Blog</p>
           </div>
 
-          {/* Let Us Help You */}
           <div>
-            <h4>Let Us Help You</h4>
-            <p>Account Details</p>
-            <p>Order History</p>
+            <h4>Help</h4>
+            <p>Account</p>
+            <p>Orders</p>
             <p>Help Center</p>
-            <p>Support</p>
           </div>
 
-          {/* Partner */}
           <div>
-            <h4>Partner With Us</h4>
-            <p>Add Your Restaurant</p>
-            <p>Become a Driver</p>
+            <h4>Partner</h4>
+            <p>Add Restaurant</p>
+            <p>Become Driver</p>
             <p>Business Delivery</p>
-          </div>
-
-          {/* Cities */}
-          <div>
-            <h4>Popular Foods</h4>
-            <p>Burger</p>
-            <p>pizza</p>
-            <p>Borito</p>
-            <p>Ertib</p>
           </div>
         </div>
 
         <div
           style={{
             textAlign: "center",
-            marginTop: "40px",
+            marginTop: "30px",
             borderTop: "1px solid #333",
             paddingTop: "20px",
             fontSize: "14px",
             color: "#aaa",
           }}
         >
-          © 2026 Zenbaba Delivery. All rights reserved.
+          © 2026 Zenbaba Delivery
         </div>
       </footer>
     </div>
