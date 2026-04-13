@@ -1,150 +1,115 @@
 import React, { useState, useEffect } from "react";
+import "../Css/login.css";
 
 function Login({ onClose, onSwitchToRegister, onLogin }) {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const initialState = { email: "", password: "" };
+  const [form, setForm] = useState(initialState);
+
+  const resetForm = () => setForm(initialState);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const resetForm = () => {
-    setForm({ email: "", password: "" });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const userData = {
+    onLogin({
       name: "Demo User",
       email: form.email,
-    };
+    });
 
-    onLogin(userData);
-
-    resetForm(); // ✅ clear inputs after login
+    resetForm();
     onClose();
   };
 
-  // ✅ reset every time component opens
+  // ✅ FIX 1: reset every time modal is opened/used
   useEffect(() => {
     resetForm();
   }, []);
 
   return (
     <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        backgroundColor: "rgba(0,0,0,0.4)",
-        backdropFilter: "blur(5px)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 9999,
-        padding: "10px",
-      }}
+      className="login-overlay"
       onClick={() => {
-        resetForm(); // ✅ clear when closing
+        resetForm();
         onClose();
       }}
     >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          position: "relative",
-          backgroundColor: "white",
-          padding: "40px",
-          borderRadius: "12px",
-          width: "90%",
-          maxWidth: "400px",
-          boxShadow: "0 5px 20px rgba(0,0,0,0.3)",
-          display: "flex",
-          flexDirection: "column",
-          gap: "20px",
-        }}
-      >
+      <div className="login-box" onClick={(e) => e.stopPropagation()}>
         <button
+          className="close-btn"
           onClick={() => {
-            resetForm(); // ✅ clear when clicking X
+            resetForm();
             onClose();
           }}
-          style={{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            border: "none",
-            background: "transparent",
-            fontSize: "20px",
-            cursor: "pointer",
-            fontWeight: "bold",
-          }}
         >
-          ×
+          ✕
         </button>
 
-        <h2 style={{ textAlign: "center", margin: 0 }}>Login</h2>
+        <h2 className="login-title">Welcome Back</h2>
 
-        <form
-          onSubmit={handleSubmit}
-          style={{ display: "flex", flexDirection: "column", gap: "15px" }}
-        >
+        <form onSubmit={handleSubmit}>
           <input
+            className="login-input"
             name="email"
             type="email"
             placeholder="Email"
             value={form.email}
             onChange={handleChange}
-            autoComplete="off" // ✅ prevent browser autofill
+            autoComplete="off"
             required
-            style={{
-              padding: "10px",
-              borderRadius: "5px",
-              border: "1px solid #ddd",
-              fontSize: "16px",
-            }}
           />
 
           <input
+            className="login-input"
             name="password"
             type="password"
             placeholder="Password"
             value={form.password}
             onChange={handleChange}
-            autoComplete="new-password" // ✅ prevent autofill
+            autoComplete="new-password"
             required
-            style={{
-              padding: "10px",
-              borderRadius: "5px",
-              border: "1px solid #ddd",
-              fontSize: "16px",
-            }}
           />
 
-          <button
-            type="submit"
-            style={{
-              padding: "10px 20px",
-              borderRadius: "5px",
-              border: "none",
-              backgroundColor: "#3AB795",
-              color: "white",
-              fontWeight: "bold",
-              cursor: "pointer",
-              fontSize: "16px",
-            }}
-          >
+          <button className="login-btn" type="submit">
             Login
           </button>
         </form>
 
-        <p style={{ fontSize: "14px", textAlign: "center", color: "#555" }}>
+        {/* OR */}
+        <div className="divider">
+          <span>OR</span>
+        </div>
+
+        {/* GOOGLE */}
+        <button
+          className="google-btn"
+          onClick={() => {
+            onLogin({
+              name: "Google User",
+              email: "googleuser@gmail.com",
+            });
+
+            resetForm();
+            onClose();
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 48 48">
+            <path fill="#EA4335" d="M24 9.5c3.5 0 6.7 1.2 9.2 3.6l6.9-6.9C35.9 2.2 30.4 0 24 0 14.6 0 6.4 5.5 2.4 13.5l8 6.2C12.2 13.2 17.7 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-2.8-.4-4H24v8h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 6.7-10.1 6.7-17.1z"/>
+            <path fill="#FBBC05" d="M10.4 28.7c-1-3-1-6.4 0-9.4l-8-6.2C-1.1 18.5-1.1 29.5 2.4 35.5l8-6.8z"/>
+            <path fill="#34A853" d="M24 48c6.4 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.8 2.2-8.3 2.2-6.3 0-11.8-3.7-13.6-9.1l-8 6.2C6.4 42.5 14.6 48 24 48z"/>
+          </svg>
+
+          Continue with Google
+        </button>
+
+        <p className="login-footer">
           Don't have an account?{" "}
           <span
-            style={{ color: "#3AB795", cursor: "pointer" }}
+            className="login-link"
             onClick={() => {
-              resetForm(); // ✅ clear before switching
+              resetForm();
               onSwitchToRegister();
             }}
           >

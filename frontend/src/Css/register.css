@@ -1,0 +1,189 @@
+/* ===== BACKDROP ===== */
+.register-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(14px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.4s ease;
+}
+
+/* floating glow */
+.register-overlay::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #3ab79555, transparent 70%);
+  top: 15%;
+  right: 20%;
+  filter: blur(90px);
+  animation: floatGlow 6s infinite alternate ease-in-out;
+}
+
+/* ===== CARD ===== */
+.register-box {
+  position: relative;
+  width: 90%;
+  max-width: 420px;
+  padding: 40px;
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+
+  transform: scale(0.8);
+  opacity: 0;
+  animation: popIn 0.5s ease forwards;
+
+  color: white;
+}
+
+/* ===== TITLE ===== */
+.register-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 25px;
+
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideDown 0.6s ease forwards;
+}
+
+/* ===== INPUTS ===== */
+.register-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 14px;
+}
+
+.register-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== BUTTON ===== */
+.register-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #3AB795, #2a9d8f);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(58, 183, 149, 0.3);
+}
+
+/* ===== GOOGLE BUTTON ===== */
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background: white;
+  color: #333;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.google-btn:hover {
+  transform: scale(1.03);
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.divider span {
+  margin: 0 10px;
+}
+
+/* ===== FOOTER ===== */
+.register-footer {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.register-link {
+  color: #3AB795;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* close */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatGlow {
+  from { transform: translateY(0px); }
+  to { transform: translateY(30px); }
+}
