@@ -1,17 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function Register({ onClose, onSwitchToLogin, onRegister }) { // <- add onRegister
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+function Register({ onClose, onSwitchToLogin, onRegister }) {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  const resetForm = () => {
+    setForm({ name: "", email: "", password: "" });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userData = { name: form.name, email: form.email }; // send user info back
-    onRegister(userData); // <-- crucial
+
+    const userData = {
+      name: form.name,
+      email: form.email,
+    };
+
+    onRegister(userData);
+
+    resetForm(); // ✅ clear after register
     onClose();
   };
+
+  useEffect(() => {
+    resetForm();
+  }, []);
 
   return (
     <div
@@ -29,7 +48,10 @@ function Register({ onClose, onSwitchToLogin, onRegister }) { // <- add onRegist
         zIndex: 9999,
         padding: "10px",
       }}
-      onClick={onClose}
+      onClick={() => {
+        resetForm();
+        onClose();
+      }}
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -47,7 +69,10 @@ function Register({ onClose, onSwitchToLogin, onRegister }) { // <- add onRegist
         }}
       >
         <button
-          onClick={onClose}
+          onClick={() => {
+            resetForm();
+            onClose();
+          }}
           style={{
             position: "absolute",
             top: "10px",
@@ -74,6 +99,7 @@ function Register({ onClose, onSwitchToLogin, onRegister }) { // <- add onRegist
             placeholder="Full Name"
             value={form.name}
             onChange={handleChange}
+            autoComplete="off"
             required
             style={{
               padding: "10px",
@@ -82,12 +108,14 @@ function Register({ onClose, onSwitchToLogin, onRegister }) { // <- add onRegist
               fontSize: "16px",
             }}
           />
+
           <input
             name="email"
             type="email"
             placeholder="Email"
             value={form.email}
             onChange={handleChange}
+            autoComplete="off"
             required
             style={{
               padding: "10px",
@@ -96,12 +124,14 @@ function Register({ onClose, onSwitchToLogin, onRegister }) { // <- add onRegist
               fontSize: "16px",
             }}
           />
+
           <input
             name="password"
             type="password"
             placeholder="Password"
             value={form.password}
             onChange={handleChange}
+            autoComplete="new-password"
             required
             style={{
               padding: "10px",
@@ -110,6 +140,7 @@ function Register({ onClose, onSwitchToLogin, onRegister }) { // <- add onRegist
               fontSize: "16px",
             }}
           />
+
           <button
             type="submit"
             style={{
@@ -131,7 +162,10 @@ function Register({ onClose, onSwitchToLogin, onRegister }) { // <- add onRegist
           Already have an account?{" "}
           <span
             style={{ color: "#3AB795", cursor: "pointer" }}
-            onClick={() => onSwitchToLogin()}
+            onClick={() => {
+              resetForm(); // ✅ clear before switching
+              onSwitchToLogin();
+            }}
           >
             Login
           </span>

@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function Login({ onClose, onSwitchToRegister, onLogin }) { // <- add onLogin
+function Login({ onClose, onSwitchToRegister, onLogin }) {
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  const resetForm = () => {
+    setForm({ email: "", password: "" });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // send user info back to Navbar
-    const userData = { name: "Demo User", email: form.email }; // replace with real API response
-    onLogin(userData); // <-- this is crucial
+
+    const userData = {
+      name: "Demo User",
+      email: form.email,
+    };
+
+    onLogin(userData);
+
+    resetForm(); // ✅ clear inputs after login
     onClose();
   };
+
+  // ✅ reset every time component opens
+  useEffect(() => {
+    resetForm();
+  }, []);
 
   return (
     <div
@@ -30,7 +45,10 @@ function Login({ onClose, onSwitchToRegister, onLogin }) { // <- add onLogin
         zIndex: 9999,
         padding: "10px",
       }}
-      onClick={onClose}
+      onClick={() => {
+        resetForm(); // ✅ clear when closing
+        onClose();
+      }}
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -48,7 +66,10 @@ function Login({ onClose, onSwitchToRegister, onLogin }) { // <- add onLogin
         }}
       >
         <button
-          onClick={onClose}
+          onClick={() => {
+            resetForm(); // ✅ clear when clicking X
+            onClose();
+          }}
           style={{
             position: "absolute",
             top: "10px",
@@ -75,6 +96,7 @@ function Login({ onClose, onSwitchToRegister, onLogin }) { // <- add onLogin
             placeholder="Email"
             value={form.email}
             onChange={handleChange}
+            autoComplete="off" // ✅ prevent browser autofill
             required
             style={{
               padding: "10px",
@@ -83,12 +105,14 @@ function Login({ onClose, onSwitchToRegister, onLogin }) { // <- add onLogin
               fontSize: "16px",
             }}
           />
+
           <input
             name="password"
             type="password"
             placeholder="Password"
             value={form.password}
             onChange={handleChange}
+            autoComplete="new-password" // ✅ prevent autofill
             required
             style={{
               padding: "10px",
@@ -97,6 +121,7 @@ function Login({ onClose, onSwitchToRegister, onLogin }) { // <- add onLogin
               fontSize: "16px",
             }}
           />
+
           <button
             type="submit"
             style={{
@@ -118,7 +143,10 @@ function Login({ onClose, onSwitchToRegister, onLogin }) { // <- add onLogin
           Don't have an account?{" "}
           <span
             style={{ color: "#3AB795", cursor: "pointer" }}
-            onClick={() => onSwitchToRegister()}
+            onClick={() => {
+              resetForm(); // ✅ clear before switching
+              onSwitchToRegister();
+            }}
           >
             Sign Up
           </span>
