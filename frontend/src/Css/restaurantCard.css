@@ -1,36 +1,66 @@
 .restaurant-card {
   position: relative;
+  background: #1a2a2f;
   border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
   transition: 0.4s;
-}
-
-.restaurant-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+  display: flex;
+  flex-direction: column;
+  height: 260px; /* 🔥 ensures full clickable area */
+  user-select: none;
 }
 
 .restaurant-card:hover {
   transform: scale(1.05);
 }
 
+/* IMAGE */
+.restaurant-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* OVERLAY (rating + time) */
 .overlay {
   position: absolute;
-  bottom: 10px;
+  top: 140px;
   left: 10px;
   right: 10px;
   display: flex;
   justify-content: space-between;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.7);
   padding: 6px 10px;
   border-radius: 8px;
   color: white;
   font-size: 12px;
+  z-index: 2;
+
+  pointer-events: none; /* 🔥 allows click through */
 }
 
+/* INFO SECTION */
 .info {
-  padding: 10px;
+  padding: 15px 10px;
   text-align: center;
+  color: white;
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.info p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* 🔥 CRITICAL FIX: ensures nothing blocks click */
+.restaurant-card * {
+  pointer-events: none;
 }

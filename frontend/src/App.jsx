@@ -12,7 +12,8 @@ import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import Restaurants from "./pages/Restaurants";
 import HelpCenter from "./pages/HelpCenter";
 import Contact from "./pages/Contact";
-
+import AboutUs from "./pages/AboutUs";
+import FAQ from "./pages/FAQ";
 function App() {
   return (
     
@@ -28,6 +29,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/restaurants" element={<Restaurants />} />
+          <Route path="/about" element={<AboutUs />} />
+         <Route path="/faq" element={<FAQ />} />
        <Route path="/help" element={<HelpCenter />} />
        <Route path="/contact" element={<Contact />} />
 

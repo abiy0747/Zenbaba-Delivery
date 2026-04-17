@@ -8,7 +8,7 @@ function Menu() {
   const [menuItems, setMenuItems] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
-
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   useEffect(() => {
   setMenuItems([
     // 🍲 TRADITIONAL
@@ -274,11 +274,12 @@ function Menu() {
 }, []);
 
   const filteredItems = menuItems.filter((item) => {
-    return (
-      (category === "All" || item.category === category) &&
-      item.name.toLowerCase().includes(search.toLowerCase())
-    );
-  });
+  return (
+    (category === "All" || item.category === category) &&
+    item.name.toLowerCase().includes(search.toLowerCase()) &&
+    (!selectedRestaurant || item.restaurant === selectedRestaurant.name)
+  );
+});
 
   return (
     <div className="menu-container">

@@ -16,15 +16,26 @@ function Cart() {
   } = useContext(ShoppingCartContext);
 
   const handleCheckout = () => {
-    navigate("/checkout"); // go to checkout page
+    navigate("/checkout");
   };
 
   return (
-    <div style={{ padding: "100px 20px", maxWidth: "1200px", margin: "auto" }}>
-      <h1>Your Cart</h1>
+    <div
+      style={{
+        padding: "100px 20px",
+        maxWidth: "1200px",
+        margin: "auto",
+        backgroundColor: "#1a2a2f", // 🔥 DARK BACKGROUND
+        color: "white",            // 🔥 TEXT VISIBLE
+        minHeight: "100vh",
+      }}
+    >
+      <h1 style={{ textAlign: "center" }}>Your Cart 🛒</h1>
 
       {cartItems.length === 0 ? (
-        <p style={{ marginTop: "20px" }}>Your cart is empty.</p>
+        <p style={{ marginTop: "20px", textAlign: "center" }}>
+          Your cart is empty.
+        </p>
       ) : (
         <>
           <div
@@ -39,11 +50,11 @@ function Cart() {
               <div
                 key={item.id}
                 style={{
-                  border: "1px solid #ddd",
+                  backgroundColor: "#243b44", // 🔥 card dark
                   borderRadius: "10px",
                   padding: "15px",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
                   textAlign: "center",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -63,7 +74,7 @@ function Cart() {
 
                 <h3>{item.name}</h3>
 
-                <p style={{ fontSize: "14px", color: "#555" }}>
+                <p style={{ fontSize: "14px", opacity: 0.8 }}>
                   Restaurant: {item.restaurant}
                 </p>
 
@@ -80,11 +91,15 @@ function Cart() {
                     marginTop: "10px",
                   }}
                 >
-                  <button onClick={() => decreaseQuantity(item.id)}>−</button>
+                  <button onClick={() => decreaseQuantity(item.id)}>
+                    −
+                  </button>
 
                   <span>{item.quantity}</span>
 
-                  <button onClick={() => increaseQuantity(item.id)}>+</button>
+                  <button onClick={() => increaseQuantity(item.id)}>
+                    +
+                  </button>
                 </div>
 
                 {/* Remove */}
@@ -107,13 +122,20 @@ function Cart() {
             ))}
           </div>
 
-          {/* Total */}
-          <h2 style={{ marginTop: "30px" }}>
+          {/* TOTAL */}
+          <h2 style={{ marginTop: "30px", textAlign: "center" }}>
             Total: ${totalPrice.toFixed(2)}
           </h2>
 
-          {/* Buttons */}
-          <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
+          {/* BUTTONS */}
+          <div
+            style={{
+              display: "flex",
+              gap: "15px",
+              marginTop: "20px",
+              justifyContent: "center",
+            }}
+          >
             <button
               onClick={clearCart}
               style={{
@@ -129,7 +151,6 @@ function Cart() {
               Clear Cart
             </button>
 
-            {/* Checkout Button */}
             <button
               onClick={handleCheckout}
               style={{

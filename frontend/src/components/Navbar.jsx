@@ -163,6 +163,13 @@ function Navbar() {
           <Link to="/restaurants" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
             Restaurants
           </Link>
+          <Link to="/About" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
+            AboutUs
+          </Link>
+          <Link to="/faq" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
+            FAQ
+          </Link>
+            
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "10px", position: "relative" }}>
@@ -312,6 +319,7 @@ function Navbar() {
         <Link to="/help" style={linkStyle}><FaQuestionCircle /> Help Center</Link>
         <Link to="/contact" style={linkStyle}><FaEnvelope /> Contact</Link>
         <Link to="/restaurants" style={linkStyle}><FaUtensils /> Restaurants</Link>
+      
       </div>
 
       {showLoginPopup && (

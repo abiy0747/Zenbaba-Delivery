@@ -58,7 +58,16 @@ function Checkout() {
   };
 
   return (
-    <div style={{ padding: "80px 20px", maxWidth: "500px", margin: "auto" }}>
+    <div
+  style={{
+    padding: "80px 20px",
+    maxWidth: "500px",
+    margin: "auto",
+    backgroundColor: "#1a2a2f",
+    color: "white", // ⭐ THIS FIXES EVERYTHING
+    borderRadius: "10px"
+  }}
+>
       <h1>Checkout</h1>
 
       <form

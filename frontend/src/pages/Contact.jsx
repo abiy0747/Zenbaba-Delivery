@@ -16,34 +16,23 @@ function Contact() {
     alert("Message sent successfully!");
   };
 
-  const container = {
-    padding: "100px 20px",
-    maxWidth: "600px",
-    margin: "auto",
-    fontFamily: "Arial"
-  };
-
-  const inputStyle = {
-    padding: "10px",
-    borderRadius: "5px",
-    border: "1px solid #ddd",
-    width: "100%"
-  };
-
-  const buttonStyle = {
-    padding: "10px",
-    border: "none",
-    borderRadius: "5px",
-    backgroundColor: "#3AB795",
-    color: "white",
-    cursor: "pointer",
-    fontWeight: "bold"
-  };
-
   return (
-    <div style={container}>
-      <h1>Contact Us</h1>
-      <p>If you have any questions, feel free to contact us.</p>
+    <div
+      style={{
+        padding: "100px 20px",
+        maxWidth: "600px",
+        margin: "auto",
+        backgroundColor: "#1a2a2f", // 🔥 dark background
+        color: "white",            // 🔥 text visible
+        borderRadius: "10px",
+        minHeight: "100vh"
+      }}
+    >
+      <h1 style={{ textAlign: "center" }}>Contact Us 📩</h1>
+
+      <p style={{ textAlign: "center", opacity: 0.8 }}>
+        If you have any questions, feel free to contact us.
+      </p>
 
       <form
         onSubmit={handleSubmit}
@@ -60,7 +49,13 @@ function Contact() {
           value={form.name}
           onChange={handleChange}
           required
-          style={inputStyle}
+          style={{
+            padding: "10px",
+            borderRadius: "5px",
+            border: "1px solid #333",
+            backgroundColor: "#243b44",
+            color: "white"
+          }}
         />
 
         <input
@@ -70,7 +65,13 @@ function Contact() {
           value={form.email}
           onChange={handleChange}
           required
-          style={inputStyle}
+          style={{
+            padding: "10px",
+            borderRadius: "5px",
+            border: "1px solid #333",
+            backgroundColor: "#243b44",
+            color: "white"
+          }}
         />
 
         <textarea
@@ -80,10 +81,27 @@ function Contact() {
           value={form.message}
           onChange={handleChange}
           required
-          style={inputStyle}
+          style={{
+            padding: "10px",
+            borderRadius: "5px",
+            border: "1px solid #333",
+            backgroundColor: "#243b44",
+            color: "white"
+          }}
         />
 
-        <button type="submit" style={buttonStyle}>
+        <button
+          type="submit"
+          style={{
+            padding: "12px",
+            border: "none",
+            borderRadius: "5px",
+            backgroundColor: "#3AB795",
+            color: "white",
+            cursor: "pointer",
+            fontWeight: "bold"
+          }}
+        >
           Send Message
         </button>
       </form>
