@@ -240,37 +240,70 @@ function Navbar() {
         </div>
 
         {/* Sidebar Profile at Top */}
-        {user && (
-          <div style={{ position: "relative", marginBottom: "20px" }}>
-            <button
-              onClick={() => setSidebarProfileOpen(!sidebarProfileOpen)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                border: "none",
-                background: "transparent",
-                cursor: "pointer",
-                fontSize: "18px",
-                color: "#3AB795",
-              }}
-            >
-              <FaUser /> {user.name}
-            </button>
-            {sidebarProfileOpen && (
-              <div style={sidebarProfileDropdownStyle}>
-                <p><strong>{user.name}</strong></p>
-                <p>{user.email}</p>
-                <button
-                  style={{ ...loginButtonStyle, width: "100%" }}
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+       
+       {/* ===== SIDEBAR AUTH SECTION ===== */}
+<div style={{ position: "relative", marginBottom: "20px" }}>
+  {user ? (
+    <>
+      {/* Profile Button */}
+      <button
+        onClick={() => setSidebarProfileOpen(!sidebarProfileOpen)}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          border: "none",
+          background: "transparent",
+          cursor: "pointer",
+          fontSize: "18px",
+          color: "#3AB795",
+        }}
+      >
+        <FaUser />
+        {user.name}
+      </button>
+
+      {/* Dropdown */}
+      {sidebarProfileOpen && (
+        <div style={sidebarProfileDropdownStyle}>
+          <p><strong>{user.name}</strong></p>
+          <p>{user.email}</p>
+
+          <button
+            style={{ ...loginButtonStyle, width: "100%" }}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </div>
+      )}
+    </>
+  ) : (
+    <>
+  <div style={{ display: "flex", gap: "10px" }}>
+    <button
+      style={{ ...loginButtonStyle, flex: 1 }}
+      onClick={() => {
+        setMenuOpen(false);
+        setShowLoginPopup(true);
+      }}
+    >
+      Login
+    </button>
+
+    <button
+      style={{ ...signupButtonStyle, flex: 1 }}
+      onClick={() => {
+        setMenuOpen(false);
+        setShowRegisterPopup(true);
+      }}
+    >
+      Sign Up
+    </button>
+  </div>
+</>
+  )}
+</div>
 
         <Link to="/" style={linkStyle}><FaHome /> Home</Link>
         <Link to="/menu" style={linkStyle}><FaUtensils /> Menu</Link>
