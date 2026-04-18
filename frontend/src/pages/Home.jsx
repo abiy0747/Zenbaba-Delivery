@@ -1,208 +1,194 @@
 import React, { useState } from "react";
 import bgImage from "../assets/background.png";
+import AboutUs from "./AboutUs";
+import FAQ from "./FAQ";
 
 function Home() {
   const [address, setAddress] = useState("");
   const [deliveryType, setDeliveryType] = useState("deliver_now");
-
-  const reviews = [
-    {
-      name: "Abel T.",
-      comment: "Very fast delivery and the food arrived hot. Best service in Bahir Dar!",
-      rating: 5
-    },
-    {
-      name: "Sara M.",
-      comment: "Easy to order and great restaurant choices. Highly recommended.",
-      rating: 4
-    },
-    {
-      name: "Dawit K.",
-      comment: "Zenbaba made food ordering very simple. I love the service.",
-      rating: 5
-    }
-  ];
 
   const handleSearch = () => {
     alert(`Searching restaurants for ${address} (${deliveryType})`);
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        width: "100%",
-        backgroundImage: `url(${bgImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        display: "flex",
-        flexDirection: "column",
-        position: "relative",
-        fontFamily: "Arial, sans-serif",
-        color: "white",
-      }}
-    >
-      {/* Overlay */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          height: "100%",
-          width: "100%",
-          backgroundColor: "rgba(0,0,0,0.5)",
-          zIndex: 1,
-        }}
-      />
+    <div style={{ fontFamily: "'Poppins', 'Segoe UI', sans-serif", margin: 0 }}>
 
-      {/* Main Content */}
+      {/* HERO SECTION */}
       <div
         style={{
-          flex: 1,
-          zIndex: 2,
+          minHeight: "100vh",
+          width: "100%",
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          position: "relative",
+          color: "white",
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          paddingTop: "90px",
-          width: "95%",
-          maxWidth: "1200px",
-          margin: "0 auto",
-          textAlign: "center"
         }}
       >
-        {/* Heading */}
-        <h1
-          style={{
-            fontSize: "clamp(1.8rem,5vw,3rem)",
-            fontWeight: "bold",
-            marginBottom: "20px",
-          }}
-        >
-          Welcome to Zenbaba Delivery
-        </h1>
-
-        <p
-          style={{
-            fontSize: "clamp(1rem,3vw,1.3rem)",
-            marginBottom: "30px",
-          }}
-        >
-          Order food online from the best restaurants in Bahir Dar
-        </p>
-
-        {/* Search Section */}
+        {/* Overlay */}
         <div
           style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "10px",
-            width: "100%",
-            maxWidth: "800px",
+            position: "absolute",
+            inset: 0,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            zIndex: 1,
           }}
-        >
-          <input
-            type="text"
-            placeholder="Enter your address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            style={{
-              flex: "1 1 200px",
-              padding: "15px",
-              borderRadius: "10px",
-              border: "none",
-              fontSize: "1rem",
-            }}
-          />
+        />
 
-          <select
-            value={deliveryType}
-            onChange={(e) => setDeliveryType(e.target.value)}
-            style={{
-              flex: "1 1 150px",
-              padding: "15px",
-              borderRadius: "10px",
-              border: "none",
-              fontSize: "1rem",
-            }}
-          >
-            <option value="deliver_now">Deliver Now</option>
-            <option value="schedule">Schedule</option>
-          </select>
-
-          <button
-            onClick={handleSearch}
-            style={{
-              flex: "1 1 120px",
-              padding: "15px",
-              borderRadius: "10px",
-              border: "none",
-              backgroundColor: "#3AB795",
-              color: "white",
-              fontWeight: "bold",
-              cursor: "pointer",
-              fontSize: "1rem",
-            }}
-          >
-            Search
-          </button>
-        </div>
-
-        {/* Reviews */}
+        {/* Content */}
         <div
           style={{
-            marginTop: "60px",
-            width: "100%",
-            maxWidth: "1000px",
+            zIndex: 2,
+            width: "90%",
+            maxWidth: "900px",
+            textAlign: "center",
           }}
         >
-          <h2
+          {/* 🔥 BOLD + NEW FONT TITLE */}
+          <h1
+            className="hero-title"
             style={{
+              fontSize: "clamp(2.5rem,6vw,4rem)",
+              marginBottom: "20px",
+              fontWeight: "900", // 💪 extra bold
+              letterSpacing: "1px",
+              fontFamily: "'Poppins', 'Segoe UI', sans-serif",
+            }}
+          >
+            <span className="white-text">Welcome to</span>{" "}
+            <span className="blue-text">Zenbaba Delivery</span>
+          </h1>
+
+          {/* 🔥 subtitle bold + stylish */}
+          <p
+            style={{
+              fontSize: "clamp(1.1rem,3vw,1.5rem)",
               marginBottom: "30px",
-              fontSize: "clamp(1.5rem,4vw,2rem)",
+              fontWeight: "500",
+              fontFamily: "'Poppins', 'Segoe UI', sans-serif",
             }}
           >
-            What Our Customers Say
-          </h2>
+            Order food online from the best restaurants in Bahir Dar
+          </p>
 
+          {/* Search */}
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-              gap: "20px",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "10px",
+              justifyContent: "center",
             }}
           >
-            {reviews.map((review, index) => (
-              <div
-                key={index}
-                style={{
-                  background: "rgba(255,255,255,0.1)",
-                  padding: "20px",
-                  borderRadius: "10px",
-                  backdropFilter: "blur(5px)",
-                }}
-              >
-                <p style={{ fontStyle: "italic", marginBottom: "10px" }}>
-                  "{review.comment}"
-                </p>
-                <strong>{review.name}</strong>
-                <div style={{ color: "#FFD700", marginTop: "5px" }}>
-                  {"★".repeat(review.rating)}
-                </div>
-              </div>
-            ))}
+            <input
+              type="text"
+              placeholder="Enter your address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              style={{
+                flex: "1 1 200px",
+                padding: "14px",
+                borderRadius: "8px",
+                border: "none",
+                fontSize: "1rem",
+                fontFamily: "'Poppins', sans-serif",
+              }}
+            />
+
+            <select
+              value={deliveryType}
+              onChange={(e) => setDeliveryType(e.target.value)}
+              style={{
+                flex: "1 1 150px",
+                padding: "14px",
+                borderRadius: "8px",
+                border: "none",
+                fontSize: "1rem",
+                fontFamily: "'Poppins', sans-serif",
+              }}
+            >
+              <option value="deliver_now">Deliver Now</option>
+              <option value="schedule">Schedule</option>
+            </select>
+
+            {/* BLUE BUTTON */}
+            <button
+              onClick={handleSearch}
+              style={{
+                flex: "1 1 120px",
+                padding: "14px",
+                borderRadius: "8px",
+                border: "none",
+                backgroundColor: "#0077ff",
+                color: "white",
+                fontWeight: "700",
+                cursor: "pointer",
+                fontSize: "1rem",
+                fontFamily: "'Poppins', sans-serif",
+              }}
+            >
+              Search
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
+      {/* ABOUT */}
+      <section
+        style={{
+          width: "100%",
+          padding: "60px 0",
+          margin: 0,
+          background: "rgba(0, 0, 0, 0.6)",
+          color: "white",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "auto",
+            padding: "0 20px",
+          }}
+        >
+          <AboutUs />
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section
+        id="faq"
+        style={{
+          width: "100%",
+          padding: "60px 0",
+          margin: 0,
+          background: "rgba(0, 0, 0, 0.6)",
+          color: "white",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "auto",
+            padding: "0 20px",
+          }}
+        >
+          <FAQ />
+        </div>
+      </section>
+
+      {/* FOOTER */}
       <footer
         style={{
           width: "100%",
           backgroundColor: "#111",
           color: "white",
           padding: "40px 20px",
+          margin: 0,
+          fontFamily: "'Poppins', sans-serif",
         }}
       >
         <div
@@ -211,11 +197,11 @@ function Home() {
             margin: "auto",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-            gap: "30px",
+            gap: "20px",
           }}
         >
           <div>
-            <h3>Zenbaba Delivery</h3>
+            <h3 style={{ fontWeight: "700" }}>Zenbaba Delivery</h3>
             <p style={{ color: "#bbb", fontSize: "14px" }}>
               Order food online from the best restaurants in Bahir Dar.
             </p>
@@ -247,9 +233,9 @@ function Home() {
         <div
           style={{
             textAlign: "center",
-            marginTop: "30px",
+            marginTop: "20px",
             borderTop: "1px solid #333",
-            paddingTop: "20px",
+            paddingTop: "15px",
             fontSize: "14px",
             color: "#aaa",
           }}
@@ -257,6 +243,36 @@ function Home() {
           © 2026 Zenbaba Delivery
         </div>
       </footer>
+
+      {/* ANIMATION + COLORS */}
+      <style>
+        {`
+          .hero-title {
+            animation: fadeUp 1s ease forwards;
+          }
+
+          .white-text {
+            color: white;
+          }
+
+          .blue-text {
+            color: #0077ff;
+          }
+
+          @keyframes fadeUp {
+            from {
+              opacity: 0;
+              transform: translateY(40px);
+              filter: blur(10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+              filter: blur(0);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }

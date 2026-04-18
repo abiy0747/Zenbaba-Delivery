@@ -50,7 +50,9 @@ const AboutUs = () => {
           <span id="aboutus" className="badge">About Us</span>
 
           {/* ✅ CHANGED */}
-          <h1>Fast & Reliable Food Delivery in Bahir Dar</h1>
+         <h1>
+  About <span className="highlight">Zenbaba Delivery</span>
+</h1>
 
           {/* ✅ CHANGED */}
           <p>

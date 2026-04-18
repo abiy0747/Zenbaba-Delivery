@@ -50,7 +50,7 @@ const FAQ = () => {
     <div className="faq-container">
 
       <div className="faq-header">
-        <button className="got-questions-btn">
+        <button id="faqq" className="got-questions-btn">
           GOT QUESTIONS?
         </button>
 

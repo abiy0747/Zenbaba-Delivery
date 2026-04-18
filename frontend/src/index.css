@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+html {
+  scroll-behavior: smooth;
+}
+
+/* THIS FIXES "middle screen issue" */
+#about,
+#faq {
+  scroll-margin-top: 150px; /* adjust based on navbar height */
+}

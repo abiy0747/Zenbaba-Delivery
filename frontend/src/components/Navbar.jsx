@@ -61,19 +61,19 @@ function Navbar() {
     borderRadius: "5px",
     cursor: "pointer",
     fontWeight: "bold",
-    backgroundColor: "#3AB795",
+    backgroundColor: "#0077ff",
     color: "white",
     fontSize: "clamp(10px,1vw,14px)",
   };
 
   const signupButtonStyle = {
     padding: "clamp(3px,0.5vw,8px) clamp(8px,1vw,18px)",
-    border: "1px solid #3AB795",
+    border: "1px solid #0077ff",
     borderRadius: "5px",
     cursor: "pointer",
     fontWeight: "bold",
     backgroundColor: "transparent",
-    color: "#3AB795",
+    color: "#0077ff",
     fontSize: "clamp(10px,1vw,14px)",
   };
 
@@ -163,12 +163,13 @@ function Navbar() {
           <Link to="/restaurants" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
             Restaurants
           </Link>
-          <Link to="/About" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
-            AboutUs
-          </Link>
-          <Link to="/faq" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
-            FAQ
-          </Link>
+          <a href="/#aboutus" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
+  AboutUs
+</a>
+
+<a href="/#faqq" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
+  FAQ
+</a>
             
         </div>
 
@@ -206,7 +207,7 @@ function Navbar() {
                   background: "transparent",
                   cursor: "pointer",
                   fontSize: "22px",
-                  color: "#3AB795",
+                  color: "#0077ff",
                 }}
               >
                 <FaUser />
@@ -263,7 +264,7 @@ function Navbar() {
           background: "transparent",
           cursor: "pointer",
           fontSize: "18px",
-          color: "#3AB795",
+          color: "#0077ff",
         }}
       >
         <FaUser />
