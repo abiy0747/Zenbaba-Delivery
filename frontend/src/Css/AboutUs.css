@@ -1,12 +1,20 @@
+/* ================= GLOBAL SECTION RESET ================= */
 .about {
   font-family: "Segoe UI", sans-serif;
-  background: rgba(0, 0, 0, 0.6); /* ✅ CHANGED */
-  color: #ffffff; /* better contrast for dark background */
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
   overflow-x: hidden;
   width: 100%;
   margin: 0;
   padding: 0;
-   
+  box-sizing: border-box; /* Ensures padding doesn't cause overflow */
+}
+
+/* Apply border-box to everything in this section */
+.about *, 
+.about *::before, 
+.about *::after {
+  box-sizing: border-box;
 }
 
 /* ================= HERO ================= */
@@ -17,26 +25,22 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-
-  background: rgba(0, 0, 0, 0.6); /* ✅ CHANGED */
+  background: rgba(0, 0, 0, 0.6);
   overflow: hidden;
   padding: 80px 20px 40px 20px;
-}
-
-.hero::before,
-.hero::after {
-  display: none;
+  width: 100%;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: 800px;
+  width: 100%; /* Ensure it fits narrow screens */
   margin: 0 auto;
   animation: fadeUp 1s ease forwards;
 }
 
-/* badge */
+/* Badge */
 .badge {
   display: inline-block;
   padding: 8px 18px;
@@ -51,17 +55,15 @@
 
 /* ================= TITLE ================= */
 .hero-content h1 {
-  font-size: 42px;
+  font-size: clamp(28px, 8vw, 42px); /* Responsive font sizing */
   margin-bottom: 15px;
-  color: #e5e7eb; /* light gray for dark background */
+  color: #e5e7eb;
 }
 
-/* blue part of title */
 .highlight {
   color: #0077cc;
 }
 
-/* subtitle */
 .hero-content p {
   color: #cbd5e1;
   font-size: 16px;
@@ -80,7 +82,7 @@
 .about-card {
   width: 100%;
   max-width: 1000px;
-  background: rgba(255, 255, 255, 0.05); /* glass effect */
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 40px;
@@ -105,17 +107,19 @@
 .stats {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 20px; /* Reduced gap for better wrapping */
   padding: 60px 20px;
   flex-wrap: wrap;
-  background: rgba(0, 0, 0, 0.6); /* ✅ CHANGED */
+  background: rgba(0, 0, 0, 0.6);
   width: 100%;
 }
 
 .stat {
   text-align: center;
   padding: 20px;
-  min-width: 150px;
+  /* Changed from fixed min-width to flex-basis for better mobile fit */
+  flex: 1 1 140px; 
+  max-width: 250px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -127,32 +131,59 @@
   box-shadow: 0 8px 25px rgba(0, 170, 255, 0.2);
 }
 
-/* 🔵 STATS NUMBER COLOR */
 .stat h3 {
-  font-size: 40px;
+  font-size: 36px;
   color: #4db8ff;
+  margin: 0;
 }
 
 .stat p {
   color: #cbd5e1;
+  margin: 10px 0 0 0;
 }
 
-/* ================= MOBILE ================= */
+/* ================= MOBILE OPTIMIZATION ================= */
 @media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 28px;
+  .hero {
+    padding: 60px 15px 30px 15px;
+  }
+
+  .about-container {
+    padding: 30px 15px;
   }
 
   .about-card {
-    padding: 25px;
+    padding: 25px; /* Less padding on small screens */
+    border-radius: 15px;
+  }
+
+  .about-card h2 {
+    font-size: 24px;
   }
 
   .stats {
-    gap: 20px;
+    gap: 15px;
+    padding: 40px 15px;
+  }
+
+  .stat {
+    padding: 15px;
+    flex: 1 1 120px; /* Allows 2 items per row on medium-small phones */
+  }
+
+  .stat h3 {
+    font-size: 28px;
   }
 }
 
-/* animation */
+/* Special fix for very small phones (iPhone SE, etc.) */
+@media (max-width: 380px) {
+  .stat {
+    flex: 1 1 100%; /* Stack stats vertically on tiny screens */
+  }
+}
+
+/* Animation */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -165,5 +196,5 @@
 }
 
 #aboutus {
-  scroll-margin-top: 60px;
+  scroll-margin-top: 75px;
 }

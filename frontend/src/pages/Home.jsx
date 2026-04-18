@@ -12,7 +12,7 @@ function Home() {
   };
 
   return (
-    <div style={{ fontFamily: "'Poppins', 'Segoe UI', sans-serif", margin: 0 }}>
+    <div style={{ fontFamily: "'Poppins', 'Segoe UI', sans-serif", margin: 0, overflowX: "hidden", width: "100%" }}>
 
       {/* HERO SECTION */}
       <div
@@ -27,6 +27,8 @@ function Home() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          boxSizing: "border-box", // Prevents overflow
+          padding: "20px"
         }}
       >
         {/* Overlay */}
@@ -43,7 +45,7 @@ function Home() {
         <div
           style={{
             zIndex: 2,
-            width: "90%",
+            width: "100%", // Changed to 100% for mobile
             maxWidth: "900px",
             textAlign: "center",
           }}
@@ -52,9 +54,9 @@ function Home() {
           <h1
             className="hero-title"
             style={{
-              fontSize: "clamp(2.5rem,6vw,4rem)",
+              fontSize: "clamp(2.2rem, 8vw, 4rem)", // Slightly smaller mobile font
               marginBottom: "20px",
-              fontWeight: "900", // 💪 extra bold
+              fontWeight: "900",
               letterSpacing: "1px",
               fontFamily: "'Poppins', 'Segoe UI', sans-serif",
             }}
@@ -63,10 +65,9 @@ function Home() {
             <span className="blue-text">Zenbaba Delivery</span>
           </h1>
 
-          {/* 🔥 subtitle bold + stylish */}
           <p
             style={{
-              fontSize: "clamp(1.1rem,3vw,1.5rem)",
+              fontSize: "clamp(1rem, 4vw, 1.5rem)",
               marginBottom: "30px",
               fontWeight: "500",
               fontFamily: "'Poppins', 'Segoe UI', sans-serif",
@@ -75,14 +76,17 @@ function Home() {
             Order food online from the best restaurants in Bahir Dar
           </p>
 
-          {/* Search */}
+          {/* Search Box Container */}
           <div
             style={{
               display: "flex",
-              flexWrap: "wrap",
+              flexDirection: "column", // Stack vertically on mobile
               gap: "10px",
-              justifyContent: "center",
+              width: "100%",
+              maxWidth: "500px", // Better for mobile reach
+              margin: "0 auto",
             }}
+            className="search-container"
           >
             <input
               type="text"
@@ -90,49 +94,51 @@ function Home() {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               style={{
-                flex: "1 1 200px",
+                width: "100%",
                 padding: "14px",
                 borderRadius: "8px",
                 border: "none",
                 fontSize: "1rem",
                 fontFamily: "'Poppins', sans-serif",
+                boxSizing: "border-box"
               }}
             />
 
-            <select
-              value={deliveryType}
-              onChange={(e) => setDeliveryType(e.target.value)}
-              style={{
-                flex: "1 1 150px",
-                padding: "14px",
-                borderRadius: "8px",
-                border: "none",
-                fontSize: "1rem",
-                fontFamily: "'Poppins', sans-serif",
-              }}
-            >
-              <option value="deliver_now">Deliver Now</option>
-              <option value="schedule">Schedule</option>
-            </select>
+            <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+              <select
+                value={deliveryType}
+                onChange={(e) => setDeliveryType(e.target.value)}
+                style={{
+                  flex: "1",
+                  padding: "14px",
+                  borderRadius: "8px",
+                  border: "none",
+                  fontSize: "1rem",
+                  fontFamily: "'Poppins', sans-serif",
+                }}
+              >
+                <option value="deliver_now">Deliver Now</option>
+                <option value="schedule">Schedule</option>
+              </select>
 
-            {/* BLUE BUTTON */}
-            <button
-              onClick={handleSearch}
-              style={{
-                flex: "1 1 120px",
-                padding: "14px",
-                borderRadius: "8px",
-                border: "none",
-                backgroundColor: "#0077ff",
-                color: "white",
-                fontWeight: "700",
-                cursor: "pointer",
-                fontSize: "1rem",
-                fontFamily: "'Poppins', sans-serif",
-              }}
-            >
-              Search
-            </button>
+              <button
+                onClick={handleSearch}
+                style={{
+                  flex: "1",
+                  padding: "14px",
+                  borderRadius: "8px",
+                  border: "none",
+                  backgroundColor: "#0077ff",
+                  color: "white",
+                  fontWeight: "700",
+                  cursor: "pointer",
+                  fontSize: "1rem",
+                  fontFamily: "'Poppins', sans-serif",
+                }}
+              >
+                Search
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -143,8 +149,9 @@ function Home() {
           width: "100%",
           padding: "60px 0",
           margin: 0,
-          background: "rgba(0, 0, 0, 0.6)",
+          background: "black",
           color: "white",
+          boxSizing: "border-box"
         }}
       >
         <div
@@ -152,6 +159,7 @@ function Home() {
             maxWidth: "1200px",
             margin: "auto",
             padding: "0 20px",
+            boxSizing: "border-box"
           }}
         >
           <AboutUs />
@@ -167,6 +175,7 @@ function Home() {
           margin: 0,
           background: "rgba(0, 0, 0, 0.6)",
           color: "white",
+          boxSizing: "border-box"
         }}
       >
         <div
@@ -174,6 +183,7 @@ function Home() {
             maxWidth: "1200px",
             margin: "auto",
             padding: "0 20px",
+            boxSizing: "border-box"
           }}
         >
           <FAQ />
@@ -189,6 +199,7 @@ function Home() {
           padding: "40px 20px",
           margin: 0,
           fontFamily: "'Poppins', sans-serif",
+          boxSizing: "border-box"
         }}
       >
         <div
@@ -206,57 +217,50 @@ function Home() {
               Order food online from the best restaurants in Bahir Dar.
             </p>
           </div>
-
           <div>
             <h4>Get to Know Us</h4>
-            <p>About Us</p>
-            <p>Careers</p>
-            <p>Investors</p>
-            <p>Blog</p>
+            <p>About Us</p><p>Careers</p><p>Investors</p><p>Blog</p>
           </div>
-
           <div>
             <h4>Help</h4>
-            <p>Account</p>
-            <p>Orders</p>
-            <p>Help Center</p>
+            <p>Account</p><p>Orders</p><p>Help Center</p>
           </div>
-
           <div>
             <h4>Partner</h4>
-            <p>Add Restaurant</p>
-            <p>Become Driver</p>
-            <p>Business Delivery</p>
+            <p>Add Restaurant</p><p>Become Driver</p><p>Business Delivery</p>
           </div>
         </div>
-
-        <div
-          style={{
-            textAlign: "center",
-            marginTop: "20px",
-            borderTop: "1px solid #333",
-            paddingTop: "15px",
-            fontSize: "14px",
-            color: "#aaa",
-          }}
-        >
+        <div style={{ textAlign: "center", marginTop: "20px", borderTop: "1px solid #333", paddingTop: "15px", fontSize: "14px", color: "#aaa" }}>
           © 2026 Zenbaba Delivery
         </div>
       </footer>
 
-      {/* ANIMATION + COLORS */}
+      {/* STYLES */}
       <style>
         {`
+          * {
+            box-sizing: border-box; /* CRITICAL: Fixes the side gap */
+          }
+          
+          body, html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+            width: 100%;
+          }
+
           .hero-title {
             animation: fadeUp 1s ease forwards;
           }
 
-          .white-text {
-            color: white;
-          }
+          .white-text { color: white; }
+          .blue-text { color: #0077ff; }
 
-          .blue-text {
-            color: #0077ff;
+          @media (min-width: 600px) {
+            .search-container {
+              flex-direction: row !important;
+              max-width: 900px !important;
+            }
           }
 
           @keyframes fadeUp {
