@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import "../Css/login.css";
 
 function Login({ onClose, onSwitchToRegister, onLogin }) {
-  const initialState = { email: "", password: "" };
+ const initialState = {
+  email: "",
+  password: "",
+  phone: "",
+  address: ""
+};
   const [form, setForm] = useState(initialState);
 
   const resetForm = () => setForm(initialState);
@@ -13,10 +18,12 @@ function Login({ onClose, onSwitchToRegister, onLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onLogin({
-      name: "Demo User",
-      email: form.email,
-    });
+   onLogin({
+  name: "Demo User",
+  email: form.email,
+  phone: form.phone,
+  address: form.address,
+});
 
     resetForm();
     onClose();
@@ -70,7 +77,27 @@ function Login({ onClose, onSwitchToRegister, onLogin }) {
             autoComplete="new-password"
             required
           />
+         <input
+  className="login-input"
+  name="phone"
+  type="text"
+  placeholder="Phone Number"
+  value={form.phone || ""}
+  onChange={handleChange}
+  autoComplete="off"
+  required
+/>
 
+<input
+  className="login-input"
+  name="address"
+  type="text"
+  placeholder="Address"
+  value={form.address || ""}
+  onChange={handleChange}
+  autoComplete="off"
+  required
+/>
           <button className="login-btn" type="submit">
             Login
           </button>

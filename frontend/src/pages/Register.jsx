@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import "../Css/register.css";
 
 function Register({ onClose, onSwitchToLogin, onRegister }) {
-  const initialState = { name: "", email: "", password: "" };
+  const initialState = {
+  name: "",
+  email: "",
+  password: "",
+  phone: "",
+  address: ""
+};
   const [form, setForm] = useState(initialState);
 
   const resetForm = () => setForm(initialState);
@@ -13,10 +19,12 @@ function Register({ onClose, onSwitchToLogin, onRegister }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onRegister({
-      name: form.name,
-      email: form.email,
-    });
+   onRegister({
+  name: form.name,
+  email: form.email,
+  phone: form.phone,
+  address: form.address,
+});
 
     resetForm();
     onClose();
@@ -84,7 +92,27 @@ function Register({ onClose, onSwitchToLogin, onRegister }) {
             autoComplete="new-password"
             required
           />
+        <input
+  className="register-input"
+  name="phone"
+  type="text"
+  placeholder="Phone Number"
+  value={form.phone || ""}
+  onChange={handleChange}
+  autoComplete="off"
+  required
+/>
 
+<input
+  className="register-input"
+  name="address"
+  type="text"
+  placeholder="Address"
+  value={form.address || ""}
+  onChange={handleChange}
+  autoComplete="off"
+  required
+/>
           <button className="register-btn" type="submit">
             Sign Up
           </button>

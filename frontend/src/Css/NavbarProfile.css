@@ -1,0 +1,137 @@
+
+/* ===== BACKDROP BLUR OVERLAY ===== */
+.profile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+
+  z-index: 999;
+}
+
+/* ===== MAIN DROPDOWN (UBER STYLE) ===== */
+.navbar-profile-dropdown {
+  position: absolute;
+  top: 120%;
+  right: 0;
+
+  width: 280px;
+  padding: 16px;
+  border-radius: 18px;
+
+  background: rgba(20, 20, 20, 0.92);
+  backdrop-filter: blur(22px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+
+  color: white;
+
+  animation: dropdownFade 0.25s ease;
+
+  z-index: 1000;
+}
+
+/* ===== USER NAME + EMAIL ===== */
+.navbar-profile-dropdown p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-profile-dropdown p strong {
+  font-size: 15px;
+  color: #ffffff;
+}
+
+/* ===== PROFILE INFO BLOCK ===== */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 10px;
+  padding: 6px 0;
+}
+
+.profile-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.profile-value {
+  font-size: 13px;
+  color: #ffffff;
+  margin-top: 2px;
+}
+
+/* ===== DIVIDER ===== */
+.profile-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 10px 0;
+}
+
+/* ===== ACTION ITEMS ===== */
+.profile-action {
+  padding: 8px 6px;
+  border-radius: 8px;
+
+  font-size: 14px;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.profile-action:hover {
+  background: rgba(0, 119, 255, 0.12);
+  color: #4da3ff;
+  transform: translateX(3px);
+}
+
+/* ===== LOGOUT BUTTON ===== */
+.logout-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #0077ff, #4da3ff);
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 119, 255, 0.4);
+}
+
+.logout-btn:active {
+  transform: scale(0.97);
+}
+
+/* ===== ANIMATION ===== */
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

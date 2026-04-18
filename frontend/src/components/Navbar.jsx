@@ -5,7 +5,7 @@ import palmLogo from "../assets/palm.png";
 import { ShoppingCartContext } from "../context/ShoppingCartContext";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-
+import "../Css/NavbarProfile.css";
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
@@ -116,17 +116,22 @@ function Navbar() {
   };
 
   const profileDropdownStyle = {
-    position: "absolute",
-    top: "100%",
-    right: 0, // aligned to right for navbar dropdown
-    backgroundColor: "#fff",
-    border: "1px solid #ddd",
-    borderRadius: "8px",
-    padding: "10px",
-    width: "220px",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-    zIndex: 3000,
-  };
+  position: "absolute",
+  top: "120%",
+  right: 0,
+
+  width: "270px",
+  padding: "18px",
+  borderRadius: "18px",
+
+  background: "rgba(0, 0, 0, 0.65)",
+  backdropFilter: "blur(18px)",
+  border: "1px solid rgba(255,255,255,0.15)",
+  boxShadow: "0 25px 60px rgba(0,0,0,0.4)",
+
+  color: "white",
+  animation: "fadeIn 0.25s ease",
+};
 
   const sidebarProfileDropdownStyle = {
     position: "absolute",
@@ -212,18 +217,44 @@ function Navbar() {
               >
                 <FaUser />
               </button>
-              {navbarProfileOpen && (
-                <div style={profileDropdownStyle}>
-                  <p><strong>{user.name}</strong></p>
-                  <p>{user.email}</p>
-                  <button
-                    style={{ ...loginButtonStyle, width: "100%" }}
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
+             {navbarProfileOpen && (
+  <div className="navbar-profile-dropdown">
+
+    {/* USER INFO */}
+    <p><strong>{user.name}</strong></p>
+    <p>{user.email}</p>
+
+    {/* PHONE */}
+    <div className="profile-info">
+      <span className="profile-label">Phone</span>
+      <span className="profile-value">
+        {user.phone || "+251 9XX XXX XXX"}
+      </span>
+    </div>
+
+    {/* ADDRESS */}
+    <div className="profile-info">
+      <span className="profile-label">Address</span>
+      <span className="profile-value">
+        {user.address || "Add your address"}
+      </span>
+    </div>
+
+    {/* DIVIDER */}
+    <div className="profile-divider"></div>
+
+    {/* ACTIONS */}
+    <p className="profile-action">🛒 Orders</p>
+    <p className="profile-action">💳 Payment</p>
+    <p className="profile-action">⚙️ Settings</p>
+
+    {/* LOGOUT */}
+    <button className="logout-btn" onClick={handleLogout}>
+      Logout
+    </button>
+
+  </div>
+)}
             </div>
           ) : (
             <>
@@ -273,17 +304,33 @@ function Navbar() {
 
       {/* Dropdown */}
       {sidebarProfileOpen && (
-        <div style={sidebarProfileDropdownStyle}>
-          <p><strong>{user.name}</strong></p>
-          <p>{user.email}</p>
+        <div className="navbar-profile-dropdown">
 
-          <button
-            style={{ ...loginButtonStyle, width: "100%" }}
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-        </div>
+  {/* User Info */}
+  <p><strong>{user.name}</strong></p>
+  <p>{user.email}</p>
+  <p>{user.phone || "+251 9XX XXX XXX"}</p>
+
+  {/* Divider */}
+  <div className="profile-divider"></div>
+
+  {/* Delivery Info */}
+  <p><strong>Delivery</strong></p>
+  <p>{user.address || "Add your address"}</p>
+
+  {/* Divider */}
+  <div className="profile-divider"></div>
+
+  {/* Actions */}
+  <p className="profile-action">🛒 Orders</p>
+  <p className="profile-action">💳 Payment</p>
+  <p className="profile-action">⚙️ Settings</p>
+
+  <button className="logout-btn" onClick={handleLogout}>
+    Logout
+  </button>
+
+</div>
       )}
     </>
   ) : (

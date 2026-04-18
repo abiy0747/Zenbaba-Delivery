@@ -27,11 +27,10 @@ function Home() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          boxSizing: "border-box", // Prevents overflow
+          boxSizing: "border-box",
           padding: "20px"
         }}
       >
-        {/* Overlay */}
         <div
           style={{
             position: "absolute",
@@ -41,20 +40,18 @@ function Home() {
           }}
         />
 
-        {/* Content */}
         <div
           style={{
             zIndex: 2,
-            width: "100%", // Changed to 100% for mobile
+            width: "100%",
             maxWidth: "900px",
             textAlign: "center",
           }}
         >
-          {/* 🔥 BOLD + NEW FONT TITLE */}
           <h1
             className="hero-title"
             style={{
-              fontSize: "clamp(2.2rem, 8vw, 4rem)", // Slightly smaller mobile font
+              fontSize: "clamp(2.2rem, 8vw, 4rem)",
               marginBottom: "20px",
               fontWeight: "900",
               letterSpacing: "1px",
@@ -76,17 +73,15 @@ function Home() {
             Order food online from the best restaurants in Bahir Dar
           </p>
 
-          {/* Search Box Container */}
           <div
             style={{
               display: "flex",
-              flexDirection: "column", // Stack vertically on mobile
+              flexDirection: "column",
               gap: "10px",
               width: "100%",
-              maxWidth: "500px", // Better for mobile reach
+              maxWidth: "500px",
               margin: "0 auto",
             }}
-            className="search-container"
           >
             <input
               type="text"
@@ -99,8 +94,6 @@ function Home() {
                 borderRadius: "8px",
                 border: "none",
                 fontSize: "1rem",
-                fontFamily: "'Poppins', sans-serif",
-                boxSizing: "border-box"
               }}
             />
 
@@ -113,8 +106,6 @@ function Home() {
                   padding: "14px",
                   borderRadius: "8px",
                   border: "none",
-                  fontSize: "1rem",
-                  fontFamily: "'Poppins', sans-serif",
                 }}
               >
                 <option value="deliver_now">Deliver Now</option>
@@ -132,8 +123,6 @@ function Home() {
                   color: "white",
                   fontWeight: "700",
                   cursor: "pointer",
-                  fontSize: "1rem",
-                  fontFamily: "'Poppins', sans-serif",
                 }}
               >
                 Search
@@ -144,109 +133,163 @@ function Home() {
       </div>
 
       {/* ABOUT */}
-      <section
-        style={{
-          width: "100%",
-          padding: "60px 0",
-          margin: 0,
-          background: "black",
-          color: "white",
-          boxSizing: "border-box"
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "auto",
-            padding: "0 20px",
-            boxSizing: "border-box"
-          }}
-        >
+      <section style={{ width: "100%", padding: "60px 0", background: "black", color: "white" }}>
+        <div style={{ maxWidth: "1200px", margin: "auto", padding: "0 20px" }}>
           <AboutUs />
         </div>
       </section>
 
       {/* FAQ */}
-      <section
-        id="faq"
-        style={{
-          width: "100%",
-          padding: "60px 0",
-          margin: 0,
-          background: "rgba(0, 0, 0, 0.6)",
-          color: "white",
-          boxSizing: "border-box"
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "auto",
-            padding: "0 20px",
-            boxSizing: "border-box"
-          }}
-        >
+      <section id="faq" style={{ width: "100%", padding: "60px 0", background: "rgba(0, 0, 0, 0.6)", color: "white" }}>
+        <div style={{ maxWidth: "1200px", margin: "auto", padding: "0 20px" }}>
           <FAQ />
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer
-        style={{
-          width: "100%",
-          backgroundColor: "#111",
-          color: "white",
-          padding: "40px 20px",
-          margin: 0,
-          fontFamily: "'Poppins', sans-serif",
-          boxSizing: "border-box"
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-            gap: "20px",
-          }}
+      {/* ================= FOOTER ================= */}
+<footer
+  style={{
+    width: "100%",
+    backgroundColor: "#0b0f14",
+    color: "white",
+    padding: "60px 20px 30px",
+    boxSizing: "border-box",
+  }}
+>
+  <div
+    style={{
+      maxWidth: "1200px",
+      margin: "auto",
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+      gap: "30px",
+    }}
+  >
+
+    {/* BRAND */}
+    <div>
+      <h2 style={{ color: "#0077ff", marginBottom: "10px" }}>
+        Zenbaba Delivery
+      </h2>
+      <p style={{ color: "#bbb", fontSize: "14px", lineHeight: "1.6" }}>
+        Fast, fresh food delivery from the best restaurants in Bahir Dar.
+      </p>
+    </div>
+
+    {/* CONTACT */}
+    <div>
+      <h3 style={{ marginBottom: "12px" }}>Get in Touch</h3>
+      <p style={{ color: "#bbb" }}>📧 support@zenbaba.com</p>
+      <p style={{ color: "#bbb" }}>📞 +251 911 234 567</p>
+      <p style={{ color: "#bbb" }}>📍 Bahir Dar, Ethiopia</p>
+    </div>
+
+    {/* SOCIAL MEDIA (REAL ICONS) */}
+    <div>
+      <h3 style={{ marginBottom: "12px" }}>Follow Us</h3>
+
+      <div style={{ display: "flex", gap: "15px", fontSize: "20px" }}>
+        
+        <a
+          href="https://facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#1877F2" }}
         >
-          <div>
-            <h3 style={{ fontWeight: "700" }}>Zenbaba Delivery</h3>
-            <p style={{ color: "#bbb", fontSize: "14px" }}>
-              Order food online from the best restaurants in Bahir Dar.
-            </p>
-          </div>
-          <div>
-            <h4>Get to Know Us</h4>
-            <p>About Us</p><p>Careers</p><p>Investors</p><p>Blog</p>
-          </div>
-          <div>
-            <h4>Help</h4>
-            <p>Account</p><p>Orders</p><p>Help Center</p>
-          </div>
-          <div>
-            <h4>Partner</h4>
-            <p>Add Restaurant</p><p>Become Driver</p><p>Business Delivery</p>
-          </div>
-        </div>
-        <div style={{ textAlign: "center", marginTop: "20px", borderTop: "1px solid #333", paddingTop: "15px", fontSize: "14px", color: "#aaa" }}>
-          © 2026 Zenbaba Delivery
-        </div>
-      </footer>
+          <i className="fab fa-facebook-f"></i>
+        </a>
+
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#E4405F" }}
+        >
+          <i className="fab fa-instagram"></i>
+        </a>
+
+        <a
+          href="https://twitter.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#1DA1F2" }}
+        >
+          <i className="fab fa-twitter"></i>
+        </a>
+
+        <a
+          href="https://linkedin.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#0A66C2" }}
+        >
+          <i className="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+
+    {/* QUICK LINKS (REACT ROUTER NAVIGATION) */}
+    <div>
+      <h3 style={{ marginBottom: "12px" }}>Quick Links</h3>
+
+      <p style={{ color: "#bbb" }}>
+        <a href="/" style={{ color: "#bbb", textDecoration: "none" }}>
+          Home
+        </a>
+      </p>
+
+      <p style={{ color: "#bbb" }}>
+        <a href="/menu" style={{ color: "#bbb", textDecoration: "none" }}>
+          Menu
+        </a>
+      </p>
+
+      <p style={{ color: "#bbb" }}>
+        <a href="/restaurants" style={{ color: "#bbb", textDecoration: "none" }}>
+          Restaurants
+        </a>
+      </p>
+
+      <p style={{ color: "#bbb" }}>
+        <a href="#about" style={{ color: "#bbb", textDecoration: "none" }}>
+          About Us
+        </a>
+      </p>
+
+      <p style={{ color: "#bbb" }}>
+        <a href="#faq" style={{ color: "#bbb", textDecoration: "none" }}>
+          FAQ
+        </a>
+      </p>
+    </div>
+  </div>
+
+  {/* BOTTOM LINE */}
+  <div
+    style={{
+      textAlign: "center",
+      marginTop: "40px",
+      borderTop: "1px solid #222",
+      paddingTop: "20px",
+      fontSize: "14px",
+      color: "#777",
+    }}
+  >
+    © 2026 Zenbaba Delivery — All rights reserved
+  </div>
+</footer>
 
       {/* STYLES */}
       <style>
         {`
           * {
-            box-sizing: border-box; /* CRITICAL: Fixes the side gap */
+            box-sizing: border-box;
           }
-          
+
           body, html {
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Prevents horizontal scrolling */
-            width: 100%;
+            overflow-x: hidden;
           }
 
           .hero-title {
@@ -256,24 +299,9 @@ function Home() {
           .white-text { color: white; }
           .blue-text { color: #0077ff; }
 
-          @media (min-width: 600px) {
-            .search-container {
-              flex-direction: row !important;
-              max-width: 900px !important;
-            }
-          }
-
           @keyframes fadeUp {
-            from {
-              opacity: 0;
-              transform: translateY(40px);
-              filter: blur(10px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-              filter: blur(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
           }
         `}
       </style>
