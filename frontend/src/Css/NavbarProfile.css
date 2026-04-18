@@ -135,3 +135,125 @@
     transform: translateY(0);
   }
 }
+
+
+
+/* ===============================
+   SIDEBAR PROFILE DROPDOWN ONLY
+   FIX: no off-screen + responsive
+================================ */
+.sidebar-profile-dropdown {
+  position: absolute;
+  top: 120%;
+
+  /* 🔥 move slightly LEFT but still safe */
+  left: 4px;
+  right: auto;
+
+  /* 🔥 prevent overflow / clipping */
+  transform: translateX(0);
+
+  /* responsive width */
+  width: min(260px, 88vw);
+
+  padding: 16px;
+  border-radius: 18px;
+
+  background: rgba(20, 20, 20, 0.92);
+  backdrop-filter: blur(22px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+
+  color: white;
+
+  z-index: 2000;
+
+  animation: dropdownFade 0.75s ease;
+
+  /* 🔥 IMPORTANT FIX */
+  overflow: visible;
+}
+/* text styles */
+.sidebar-profile-dropdown p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sidebar-profile-dropdown p strong {
+  font-size: 15px;
+  color: #ffffff;
+}
+
+/* info blocks */
+.sidebar-profile-dropdown .profile-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.sidebar-profile-dropdown .profile-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.sidebar-profile-dropdown .profile-value {
+  font-size: 13px;
+  color: white;
+}
+
+/* divider */
+.sidebar-profile-dropdown .profile-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 10px 0;
+}
+
+/* actions */
+.sidebar-profile-dropdown .profile-action {
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sidebar-profile-dropdown .profile-action:hover {
+  background: rgba(0, 119, 255, 0.12);
+  color: #4da3ff;
+}
+
+/* logout button */
+.sidebar-profile-dropdown .logout-btn {
+  width: 100%;
+  margin-top: 12px;
+  
+  padding: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #0077ff, #4da3ff);
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.sidebar-profile-dropdown .logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 119, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+  .sidebar-profile-dropdown {
+    left: 8px;
+    width: min(240px, 90vw);
+  }
+}
+
+

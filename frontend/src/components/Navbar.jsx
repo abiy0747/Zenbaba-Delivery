@@ -6,6 +6,7 @@ import { ShoppingCartContext } from "../context/ShoppingCartContext";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import "../Css/NavbarProfile.css";
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
@@ -218,7 +219,7 @@ function Navbar() {
                 <FaUser />
               </button>
              {navbarProfileOpen && (
-  <div className="navbar-profile-dropdown">
+<div className="navbar-profile-dropdown">
 
     {/* USER INFO */}
     <p><strong>{user.name}</strong></p>
@@ -304,7 +305,7 @@ function Navbar() {
 
       {/* Dropdown */}
       {sidebarProfileOpen && (
-        <div className="navbar-profile-dropdown">
+        <div className="sidebar-profile-dropdown">
 
   {/* User Info */}
   <p><strong>{user.name}</strong></p>
