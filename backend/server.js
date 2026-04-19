@@ -1,17 +1,21 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// Middleware
+// middleware
 app.use(cors());
 app.use(express.json());
 
-// Test route
-app.get('/', (req, res) => {
-  res.send('Zenbaba Delivery Backend is running!');
+// test route
+app.get("/", (req, res) => {
+  res.send("🚀 Zenbaba Backend is running...");
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// server start
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`🔥 Server running on port ${PORT}`);
+});
