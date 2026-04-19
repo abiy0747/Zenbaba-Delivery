@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "../Css/login.css";
 
+
+
 function Login({ onClose, onSwitchToRegister, onLogin }) {
- const initialState = {
-  email: "",
-  password: "",
-  phone: "",
-  address: ""
-};
+  const initialState = {
+    email: "",
+    password: "",
+    phone: "",
+    address: ""
+  };
+
   const [form, setForm] = useState(initialState);
 
   const resetForm = () => setForm(initialState);
@@ -15,21 +18,50 @@ function Login({ onClose, onSwitchToRegister, onLogin }) {
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // ✅ BACKEND LOGIN FUNCTION
+  const loginUser = async (email, password) => {
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
 
-   onLogin({
-  name: "Demo User",
-  email: form.email,
-  phone: form.phone,
-  address: form.address,
-});
-
-    resetForm();
-    onClose();
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log("Login error:", error);
+    }
   };
 
-  // ✅ FIX 1: reset every time modal is opened/used
+  // ✅ UPDATED HANDLE SUBMIT (REAL LOGIN)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = await loginUser(form.email, form.password);
+
+    if (data && data.token) {
+      onLogin({
+        name: data.user.name,
+        email: data.user.email,
+        phone: form.phone,
+        address: form.address,
+        token: data.token
+      });
+
+      // store token locally
+      localStorage.setItem("token", data.token);
+
+      resetForm();
+      onClose();
+    } else {
+      alert(data.message || "Login failed");
+    }
+  };
+
+  // reset form when opened
   useEffect(() => {
     resetForm();
   }, []);
@@ -77,27 +109,29 @@ function Login({ onClose, onSwitchToRegister, onLogin }) {
             autoComplete="new-password"
             required
           />
-         <input
-  className="login-input"
-  name="phone"
-  type="text"
-  placeholder="Phone Number"
-  value={form.phone || ""}
-  onChange={handleChange}
-  autoComplete="off"
-  required
-/>
 
-<input
-  className="login-input"
-  name="address"
-  type="text"
-  placeholder="Address"
-  value={form.address || ""}
-  onChange={handleChange}
-  autoComplete="off"
-  required
-/>
+          <input
+            className="login-input"
+            name="phone"
+            type="text"
+            placeholder="Phone Number"
+            value={form.phone || ""}
+            onChange={handleChange}
+            autoComplete="off"
+            required
+          />
+
+          <input
+            className="login-input"
+            name="address"
+            type="text"
+            placeholder="Address"
+            value={form.address || ""}
+            onChange={handleChange}
+            autoComplete="off"
+            required
+          />
+
           <button className="login-btn" type="submit">
             Login
           </button>
@@ -114,20 +148,13 @@ function Login({ onClose, onSwitchToRegister, onLogin }) {
           onClick={() => {
             onLogin({
               name: "Google User",
-              email: "googleuser@gmail.com",
+              email: "googleuser@gmail.com"
             });
 
             resetForm();
             onClose();
           }}
         >
-          <svg width="18" height="18" viewBox="0 0 48 48">
-            <path fill="#EA4335" d="M24 9.5c3.5 0 6.7 1.2 9.2 3.6l6.9-6.9C35.9 2.2 30.4 0 24 0 14.6 0 6.4 5.5 2.4 13.5l8 6.2C12.2 13.2 17.7 9.5 24 9.5z"/>
-            <path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-2.8-.4-4H24v8h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 6.7-10.1 6.7-17.1z"/>
-            <path fill="#FBBC05" d="M10.4 28.7c-1-3-1-6.4 0-9.4l-8-6.2C-1.1 18.5-1.1 29.5 2.4 35.5l8-6.8z"/>
-            <path fill="#34A853" d="M24 48c6.4 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.8 2.2-8.3 2.2-6.3 0-11.8-3.7-13.6-9.1l-8 6.2C6.4 42.5 14.6 48 24 48z"/>
-          </svg>
-
           Continue with Google
         </button>
 
