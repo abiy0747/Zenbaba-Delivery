@@ -1,26 +1,9 @@
 import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import authRoutes from "./routes/auth.js";
-import cors from "cors";
 const app = express();
-app.use(cors());
-app.use(express.json());
-dotenv.config();
-
-
-
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected 🚀"))
-  .catch((err) => console.log("Connection error ❌", err));
-
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+const PORT = 5000;
+app.get("/", (req, res) => {
+  res.send("Welcome to Zenbaba Backend 🚀");
 });
-
-app.get("/api/test", (req, res) => {
-  res.json({ message: "Backend is working perfectly 🚀" });
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT} 🚀`);
 });
-
-app.use(express.json());
-app.use("/api/auth", authRoutes);
