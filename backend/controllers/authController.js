@@ -6,7 +6,13 @@ import {
 } from "../utils/generateToken.js";
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password, phone } = req.body;
+   const {
+  name,
+  email,
+  password,
+  phone,
+  role,
+} = req.body;
 
 
     // Check existing user
@@ -25,12 +31,26 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
 
 
+    const allowedRoles = [
+  "customer",
+  "restaurant",
+  "driver",
+];
+
+if (role && !allowedRoles.includes(role)) {
+  return res.status(400).json({
+    success: false,
+    message: "Invalid role selected.",
+  });
+}
+
     // Create user
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
       phone,
+      role: role || "customer",
     });
 
 
@@ -190,4 +210,44 @@ await user.save();
 
 }
 
+};
+
+// ===============================
+// Customer Dashboard
+// ===============================
+export const customerDashboard = async (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: `Welcome Customer ${req.user.name}`,
+  });
+};
+
+// ===============================
+// Restaurant Dashboard
+// ===============================
+export const restaurantDashboard = async (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: `Welcome Restaurant ${req.user.name}`,
+  });
+};
+
+// ===============================
+// Driver Dashboard
+// ===============================
+export const driverDashboard = async (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: `Welcome Driver ${req.user.name}`,
+  });
+};
+
+// ===============================
+// Admin Dashboard
+// ===============================
+export const adminDashboard = async (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: `Welcome Admin ${req.user.name}`,
+  });
 };

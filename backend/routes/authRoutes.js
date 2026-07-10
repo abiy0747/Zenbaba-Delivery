@@ -1,6 +1,14 @@
 import express from "express";
-import { registerUser, loginUser } from "../controllers/authController.js";
+import {
+  registerUser,
+  loginUser,
+  customerDashboard,
+  restaurantDashboard,
+  driverDashboard,
+  adminDashboard,
+} from "../controllers/authController.js";
 import protect from "../middleware/authMiddleware.js";
+import authorize from "../middleware/roleMiddleware.js";
 const router = express.Router();
 
 import validate from "../middleware/validate.js";
@@ -40,4 +48,37 @@ router.get(
   }
 );
 
+// Customer Only
+router.get(
+  "/customer",
+  protect,
+  authorize("customer"),
+  customerDashboard
+);
+
+// Restaurant Only
+router.get(
+  "/restaurant",
+  protect,
+  authorize("restaurant"),
+  restaurantDashboard
+);
+
+// Driver Only
+router.get(
+  "/driver",
+  protect,
+  authorize("driver"),
+  driverDashboard
+);
+
+// Admin Only
+router.get(
+  "/admin",
+  protect,
+  authorize("admin"),
+  adminDashboard
+);
+
 export default router;
+
