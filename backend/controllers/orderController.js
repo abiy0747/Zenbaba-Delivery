@@ -194,9 +194,29 @@ export const updateOrderStatus = async (req, res) => {
       });
     }
 
-    order.orderStatus = orderStatus;
+    const validTransitions = {
+  pending: ["accepted", "cancelled"],
+  accepted: ["preparing"],
+  preparing: ["ready_for_pickup"],
+  ready_for_pickup: ["driver_assigned"],
+  driver_assigned: ["out_for_delivery"],
+  out_for_delivery: ["delivered"],
+  delivered: [],
+  cancelled: [],
+};
 
-    await order.save();
+const currentStatus = order.orderStatus;
+
+if (!validTransitions[currentStatus].includes(orderStatus)) {
+  return res.status(400).json({
+    success: false,
+    message: `Cannot change order status from '${currentStatus}' to '${orderStatus}'.`,
+  });
+}
+
+order.orderStatus = orderStatus;
+
+await order.save();
 
     res.status(200).json({
       success: true,

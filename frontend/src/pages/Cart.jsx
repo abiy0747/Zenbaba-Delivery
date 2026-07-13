@@ -1,24 +1,25 @@
 // src/pages/Cart.js
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ShoppingCartContext } from "../context/ShoppingCartContext";
-
+import { useCart } from "../context/CartContext";
 function Cart() {
-  const navigate = useNavigate();
+const {
+  cartItems,
+  totalPrice,
+  increaseQuantity,
+  decreaseQuantity,
+  removeItem,
+  clearMyCart,
+} = useCart();
 
-  const {
-    cartItems,
-    removeFromCart,
-    increaseQuantity,
-    decreaseQuantity,
-    clearCart,
-    totalPrice,
-  } = useContext(ShoppingCartContext);
+const navigate = useNavigate();
+const handleCheckout = () => {
+  navigate("/checkout");
+};
+  
 
-  const handleCheckout = () => {
-    navigate("/checkout");
-  };
 
+  
   return (
     <div
       style={{
@@ -48,7 +49,7 @@ function Cart() {
           >
             {cartItems.map((item) => (
               <div
-                key={item.id}
+                key={item.menuItem._id}
                 style={{
                   backgroundColor: "#243b44", // 🔥 card dark
                   borderRadius: "10px",
@@ -61,8 +62,8 @@ function Cart() {
                 }}
               >
                 <img
-                  src={item.image || "https://via.placeholder.com/150"}
-                  alt={item.name}
+                  src={item.menuItem.image || "https://via.placeholder.com/150"}
+                  alt={item.menuItem.name}
                   style={{
                     width: "150px",
                     height: "150px",
@@ -72,14 +73,16 @@ function Cart() {
                   }}
                 />
 
-                <h3>{item.name}</h3>
+                <h3>{item.menuItem.name}</h3>
 
                 <p style={{ fontSize: "14px", opacity: 0.8 }}>
-                  Restaurant: {item.restaurant}
+                 <p style={{ fontSize:"14px", opacity:0.8 }}>
+ Restaurant: {item.menuItem.restaurant?.name}
+</p>
                 </p>
 
                 <p style={{ fontWeight: "bold" }}>
-                  Price: ${item.price.toFixed(2)}
+                  Price: ${Number(item.menuItem.price || 0).toFixed(2)}
                 </p>
 
                 {/* Quantity */}
@@ -91,20 +94,20 @@ function Cart() {
                     marginTop: "10px",
                   }}
                 >
-                  <button onClick={() => decreaseQuantity(item.id)}>
+                  <button onClick={() => decreaseQuantity(item)}>
                     −
                   </button>
 
                   <span>{item.quantity}</span>
 
-                  <button onClick={() => increaseQuantity(item.id)}>
+                  <button onClick={() => increaseQuantity(item)}>
                     +
                   </button>
                 </div>
 
                 {/* Remove */}
                 <button
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() => removeItem(item)}
                   style={{
                     marginTop: "15px",
                     padding: "8px 20px",
@@ -137,7 +140,7 @@ function Cart() {
             }}
           >
             <button
-              onClick={clearCart}
+              onClick={clearMyCart}
               style={{
                 padding: "12px 25px",
                 borderRadius: "8px",

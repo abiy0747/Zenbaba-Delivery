@@ -12,16 +12,19 @@ import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import Restaurants from "./pages/Restaurants";
 import HelpCenter from "./pages/HelpCenter";
 import Contact from "./pages/Contact";
-
+import { AuthProvider } from "./context/AuthContext";
+import Profile from "./pages/Profile";
+import { CartProvider } from "./context/CartContext";
 function App() {
   return (
-    
-    <ShoppingCartProvider>
+    <AuthProvider>
+    <CartProvider>
       <Router>
         <Navbar />
         <Routes>
           <Route path="/restaurants" element={<Restaurants />} />
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
@@ -34,7 +37,8 @@ function App() {
 
         </Routes>
       </Router>
-    </ShoppingCartProvider>
+    </CartProvider>
+    </AuthProvider>
   );
 }
 

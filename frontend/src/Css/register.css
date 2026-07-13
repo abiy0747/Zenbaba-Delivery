@@ -71,6 +71,11 @@
   font-size: 14px;
 }
 
+.register-input option {
+  background-color: white;
+  color: black;
+}
+
 .register-input::placeholder {
   color: rgba(255, 255, 255, 0.6);
 }

@@ -57,17 +57,19 @@ const orderSchema = new mongoose.Schema(
     },
 
     orderStatus: {
-      type: String,
-      enum: [
-        "pending",
-        "accepted",
-        "preparing",
-        "out_for_delivery",
-        "delivered",
-        "cancelled",
-      ],
-      default: "pending",
-    },
+  type: String,
+  enum: [
+    "pending",
+    "accepted",
+    "preparing",
+    "ready_for_pickup",
+    "driver_assigned",
+    "out_for_delivery",
+    "delivered",
+    "cancelled",
+  ],
+  default: "pending",
+},
   },
   {
     timestamps: true,
