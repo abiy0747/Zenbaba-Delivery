@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import RestaurantCard from "../components/RestaurantCard";
-import "../Css/restaurants.css";
+// import "../Css/restaurants.css";
 
 function Restaurants() {
   const [restaurants, setRestaurants] = useState([]);

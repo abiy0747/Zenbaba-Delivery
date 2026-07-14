@@ -2,77 +2,286 @@ import Order from "../models/Order.js";
 import Cart from "../models/Cart.js";
 import Restaurant from "../models/Restaurant.js";
 
-// Create Order
+// Create Order (Selected Cart Items Only)
 export const createOrder = async (req, res) => {
-  try {
-    const { deliveryAddress, phone } = req.body;
 
-    // Get customer cart
-    const cart = await Cart.findOne({ user: req.user._id })
-      .populate("items.menuItem");
+  try {
+
+
+    const {
+      deliveryAddress,
+      phone,
+      selectedItems
+    } = req.body;
+
+
+
+    // Check selected items
+
+    if (!selectedItems || selectedItems.length === 0) {
+
+      return res.status(400).json({
+
+        success:false,
+
+        message:"No items selected."
+
+      });
+
+    }
+
+
+
+
+    // Get user cart
+
+    const cart = await Cart.findOne({
+
+      user:req.user._id
+
+    }).populate("items.menuItem");
+
+
+
+
 
     if (!cart || cart.items.length === 0) {
+
+
       return res.status(400).json({
-        success: false,
-        message: "Your cart is empty.",
+
+        success:false,
+
+        message:"Your cart is empty."
+
       });
+
+
     }
 
-    // Get restaurant from first menu item
-    const restaurant = await Restaurant.findById(
-      cart.items[0].menuItem.restaurant
+
+
+
+
+
+
+    // Find selected items from cart
+
+    const orderedItems = cart.items.filter(cartItem =>
+
+
+      selectedItems.some(selected =>
+
+        selected.menuItem ===
+        cartItem.menuItem._id.toString()
+
+      )
+
+
     );
 
-    if (!restaurant) {
-      return res.status(404).json({
-        success: false,
-        message: "Restaurant not found.",
+
+
+
+
+
+
+    if(orderedItems.length === 0){
+
+
+      return res.status(400).json({
+
+        success:false,
+
+        message:"Selected items not found in cart."
+
       });
+
+
     }
+
+
+
+
+
+
+
+
+
+    // Restaurant from first selected item
+
+    const restaurant = await Restaurant.findById(
+
+      orderedItems[0].menuItem.restaurant
+
+    );
+
+
+
+
+
+    if(!restaurant){
+
+
+      return res.status(404).json({
+
+        success:false,
+
+        message:"Restaurant not found."
+
+      });
+
+
+    }
+
+
+
+
+
+
+
+
 
     let totalAmount = 0;
 
-    const orderItems = cart.items.map((item) => {
-      totalAmount += item.menuItem.price * item.quantity;
+
+
+
+
+
+
+    const orderItems = orderedItems.map(item=>{
+
+
+      totalAmount +=
+
+      item.menuItem.price *
+
+      item.quantity;
+
+
+
+
 
       return {
-        menuItem: item.menuItem._id,
-        quantity: item.quantity,
-        price: item.menuItem.price,
+
+        menuItem:item.menuItem._id,
+
+        quantity:item.quantity,
+
+        price:item.menuItem.price
+
       };
+
+
     });
+
+
+
+
+
+
+
+
+
+    // Create order
+
 
     const order = await Order.create({
-      customer: req.user._id,
-      restaurant: restaurant._id,
-      items: orderItems,
+
+      customer:req.user._id,
+
+      restaurant:restaurant._id,
+
+      items:orderItems,
+
       totalAmount,
+
       deliveryAddress,
+
       phone,
+
     });
 
-    // Clear cart
-    cart.items = [];
+
+
+
+
+
+
+
+
+    // REMOVE ONLY ORDERED ITEMS
+
+    cart.items = cart.items.filter(cartItem =>
+
+
+      !selectedItems.some(selected =>
+
+
+        selected.menuItem ===
+
+        cartItem.menuItem._id.toString()
+
+
+      )
+
+
+    );
+
+
+
+
+
+
+
     await cart.save();
 
+
+
+
+
+
+
+
+
     res.status(201).json({
-      success: true,
-      message: "Order placed successfully.",
-      data: order,
+
+      success:true,
+
+      message:"Order placed successfully.",
+
+      data:order
+
     });
 
-  } catch (error) {
+
+
+
+
+
+
+  } catch(error){
+
 
     console.error(error);
 
+
+
     res.status(500).json({
-      success: false,
-      message: "Failed to create order.",
+
+      success:false,
+
+      message:"Failed to create order."
+
     });
 
-  }
-};
 
+
+  }
+
+
+};
 
 
 // Customer - Get My Orders

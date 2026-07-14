@@ -1,44 +1,76 @@
 import express from "express";
 
 import {
-  createMenuItem,
-  getMenuItems,
-  getMenuItemById,
-  updateMenuItem,
-  deleteMenuItem,
-} from "../controllers/menuController.js";
+
+createMenuItem,
+getMenuItems,
+getMyMenu,
+getMenuItemById,
+updateMenuItem,
+deleteMenuItem
+
+}
+from "../controllers/menuController.js";
+
 
 import protect from "../middleware/authMiddleware.js";
-import authorize from "../middleware/roleMiddleware.js";
+
 
 const router = express.Router();
 
 
-// Public Routes
-router.get("/", getMenuItems);
-router.get("/:id", getMenuItemById);
 
+// Restaurant create
 
-// Restaurant Routes
 router.post(
-  "/",
-  protect,
-  authorize("restaurant"),
-  createMenuItem
+"/",
+protect,
+createMenuItem
 );
+
+
+
+// IMPORTANT
+// keep this before /:id
+
+router.get(
+"/my-menu",
+protect,
+getMyMenu
+);
+
+
+
+// Public menu
+
+router.get(
+"/",
+getMenuItems
+);
+
+
+
+router.get(
+"/:id",
+getMenuItemById
+);
+
+
 
 router.put(
-  "/:id",
-  protect,
-  authorize("restaurant"),
-  updateMenuItem
+"/:id",
+protect,
+updateMenuItem
 );
 
+
+
 router.delete(
-  "/:id",
-  protect,
-  authorize("restaurant"),
-  deleteMenuItem
+"/:id",
+protect,
+deleteMenuItem
 );
+
+
 
 export default router;

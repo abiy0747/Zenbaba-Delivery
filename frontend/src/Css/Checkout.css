@@ -1,0 +1,416 @@
+/* ==================================
+   Zenbaba Checkout Page
+   Blue + White Classic UI
+================================== */
+
+
+.checkout-page {
+
+  min-height:100vh;
+
+  background:#f8fafc;
+
+  padding:100px 20px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:flex-start;
+
+  font-family:Arial, Helvetica, sans-serif;
+
+}
+
+
+
+
+.checkout-card {
+
+
+width:100%;
+
+max-width:520px;
+
+background:white;
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:0 10px 35px rgba(0,0,0,.08);
+
+animation:fadeUp .6s ease;
+
+}
+
+
+
+
+
+.checkout-card h1 {
+
+
+text-align:center;
+
+font-size:38px;
+
+color:#2563eb;
+
+margin-bottom:10px;
+
+}
+
+
+
+
+
+.checkout-subtitle {
+
+
+text-align:center;
+
+color:#64748b;
+
+margin-bottom:25px;
+
+}
+
+
+
+
+
+
+
+
+.selected-box {
+
+
+background:#eff6ff;
+
+border-left:5px solid #2563eb;
+
+padding:15px;
+
+border-radius:12px;
+
+margin-bottom:25px;
+
+color:#1e40af;
+
+font-weight:bold;
+
+}
+
+
+
+
+
+
+
+
+
+.checkout-card form {
+
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+
+
+
+
+
+
+
+.checkout-card input,
+
+.checkout-card select {
+
+
+width:100%;
+
+padding:13px;
+
+border-radius:10px;
+
+border:1px solid #cbd5e1;
+
+font-size:15px;
+
+outline:none;
+
+transition:.3s;
+
+}
+
+
+
+
+
+.checkout-card input:focus,
+
+.checkout-card select:focus {
+
+
+border-color:#2563eb;
+
+box-shadow:0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+
+
+
+
+
+
+
+.checkout-card label {
+
+
+font-weight:bold;
+
+color:#334155;
+
+margin-top:5px;
+
+}
+
+
+
+
+
+
+
+
+
+.checkout-card button {
+
+
+margin-top:20px;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+background:#2563eb;
+
+color:white;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+
+
+
+.checkout-card button:hover {
+
+
+background:#1d4ed8;
+
+transform:translateY(-3px);
+
+}
+
+
+
+
+
+.checkout-card button:disabled {
+
+
+background:#94a3b8;
+
+cursor:not-allowed;
+
+transform:none;
+
+}
+
+
+
+
+
+
+
+
+
+/* Toast Message */
+
+
+.checkout-toast {
+
+
+position:fixed;
+
+top:90px;
+
+right:30px;
+
+padding:15px 25px;
+
+border-radius:12px;
+
+color:white;
+
+font-weight:bold;
+
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+z-index:9999;
+
+animation:slideIn .4s ease;
+
+}
+
+
+
+
+.checkout-toast.success {
+
+
+background:#16a34a;
+
+}
+
+
+
+
+.checkout-toast.error {
+
+
+background:#dc2626;
+
+}
+
+
+
+
+
+
+
+
+
+/* Animations */
+
+
+@keyframes fadeUp {
+
+
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+
+
+@keyframes slideIn {
+
+
+from{
+
+opacity:0;
+
+transform:translateX(100px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateX(0);
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+/* Mobile */
+
+
+@media(max-width:600px){
+
+
+.checkout-page {
+
+
+padding:80px 15px;
+
+}
+
+
+
+.checkout-card {
+
+
+padding:25px;
+
+}
+
+
+
+.checkout-card h1 {
+
+
+font-size:30px;
+
+}
+
+
+.checkout-toast {
+
+
+right:15px;
+
+left:15px;
+
+text-align:center;
+
+}
+
+
+}

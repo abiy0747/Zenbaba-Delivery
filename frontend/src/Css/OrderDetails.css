@@ -1,0 +1,612 @@
+/* =================================
+   Zenbaba Order Details UI
+================================= */
+
+
+.details-page {
+
+  min-height:100vh;
+
+  background:#f8fafc;
+
+  padding:100px 20px;
+
+  font-family:Arial, Helvetica, sans-serif;
+
+  color:#1e293b;
+
+}
+
+
+
+
+
+.details-container {
+
+  max-width:900px;
+
+  margin:auto;
+
+}
+
+
+
+
+
+.details-header {
+
+  text-align:center;
+
+  margin-bottom:35px;
+
+  animation:fadeDown .6s ease;
+
+}
+
+
+
+.details-header h1 {
+
+  color:#2563eb;
+
+  font-size:40px;
+
+}
+
+
+
+.details-header p {
+
+  color:#64748b;
+
+}
+
+
+
+
+
+
+
+
+/* Loading */
+
+
+.details-loading {
+
+  height:100vh;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  flex-direction:column;
+
+  color:#2563eb;
+
+}
+
+
+
+.loader {
+
+  width:45px;
+
+  height:45px;
+
+  border-radius:50%;
+
+  border:5px solid #dbeafe;
+
+  border-top:5px solid #2563eb;
+
+  animation:spin 1s linear infinite;
+
+}
+
+
+
+
+
+@keyframes spin {
+
+from{
+
+transform:rotate(0deg);
+
+}
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+
+
+
+
+
+
+
+
+/* Tracking */
+
+
+
+.tracking-box {
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+margin-bottom:25px;
+
+animation:fadeUp .6s ease;
+
+}
+
+
+
+.tracking-box h2 {
+
+color:#2563eb;
+
+text-align:center;
+
+}
+
+
+
+
+
+
+.timeline {
+
+
+display:flex;
+
+justify-content:space-between;
+
+gap:10px;
+
+margin-top:35px;
+
+position:relative;
+
+}
+
+
+
+
+
+.timeline::before {
+
+
+content:"";
+
+position:absolute;
+
+top:25px;
+
+left:5%;
+
+right:5%;
+
+height:4px;
+
+background:#e2e8f0;
+
+z-index:0;
+
+}
+
+
+
+
+
+
+
+.step {
+
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+width:100px;
+
+font-size:12px;
+
+text-align:center;
+
+z-index:1;
+
+color:#94a3b8;
+
+}
+
+
+
+
+
+.circle {
+
+
+width:45px;
+
+height:45px;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+background:#e2e8f0;
+
+font-weight:bold;
+
+margin-bottom:10px;
+
+transition:.3s;
+
+}
+
+
+
+
+
+.step.active {
+
+color:#2563eb;
+
+}
+
+
+
+
+.step.active .circle {
+
+
+background:#2563eb;
+
+color:white;
+
+transform:scale(1.1);
+
+}
+
+
+
+
+
+
+
+
+
+/* Cards */
+
+
+.info-card {
+
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+margin-bottom:20px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.07);
+
+animation:fadeUp .6s ease;
+
+}
+
+
+
+.info-card h2 {
+
+
+color:#2563eb;
+
+margin-bottom:15px;
+
+}
+
+
+
+
+
+
+
+
+/* Items */
+
+
+.detail-item {
+
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:#f8fafc;
+
+padding:15px;
+
+border-radius:12px;
+
+margin-bottom:10px;
+
+}
+
+
+
+.detail-item h4 {
+
+
+margin:0 0 5px;
+
+}
+
+
+
+.detail-item p {
+
+margin:0;
+
+color:#64748b;
+
+}
+
+
+
+
+
+
+
+
+
+/* Total */
+
+
+.total-box {
+
+
+background:#2563eb;
+
+color:white;
+
+padding:20px;
+
+border-radius:18px;
+
+text-align:center;
+
+margin-bottom:25px;
+
+box-shadow:0 10px 25px rgba(37,99,235,.25);
+
+}
+
+
+
+
+
+
+
+
+/* Button */
+
+
+.back-btn {
+
+
+background:#2563eb;
+
+color:white;
+
+border:none;
+
+padding:13px 25px;
+
+border-radius:12px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+.back-btn:hover {
+
+
+background:#1d4ed8;
+
+transform:translateY(-3px);
+
+}
+
+
+
+
+
+
+
+
+/* Not Found */
+
+
+.not-found {
+
+
+height:100vh;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+
+
+
+
+
+
+
+/* Animations */
+
+
+@keyframes fadeUp {
+
+
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+
+@keyframes fadeDown {
+
+
+from{
+
+opacity:0;
+
+transform:translateY(-20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+/* Mobile */
+
+
+@media(max-width:700px){
+
+
+.timeline {
+
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:25px;
+
+}
+
+
+
+.timeline::before {
+
+
+left:22px;
+
+top:20px;
+
+bottom:20px;
+
+width:4px;
+
+height:auto;
+
+right:auto;
+
+}
+
+
+
+
+.step {
+
+
+flex-direction:row;
+
+gap:15px;
+
+width:auto;
+
+}
+
+
+
+
+.circle {
+
+
+margin:0;
+
+}
+
+
+
+.details-header h1 {
+
+
+font-size:30px;
+
+}
+
+
+}

@@ -1,192 +1,621 @@
-/* ===== GLOBAL BACKGROUND ===== */
-body {
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+/* =====================================
+   Zenbaba Menu Page
+   Cinematic Food Delivery UI
+===================================== */
+
+
+.menu-page {
+
+min-height:100vh;
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#eff6ff,
+
+#ffffff
+
+);
+
+padding:100px 20px;
+
+font-family:Arial, Helvetica, sans-serif;
+
+color:#1e293b;
+
 }
 
-/* ===== CONTAINER ===== */
-.menu-container {
-  padding: 100px 20px;
-  max-width: 1200px;
-  margin: auto;
-  color: white;
+
+
+
+
+
+
+/* HEADER */
+
+
+.menu-header {
+
+text-align:center;
+
+animation:fadeDown .8s ease;
+
 }
 
-/* ===== TITLE ===== */
+
+
 .menu-title {
-  text-align: center;
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 30px;
 
-  background: linear-gradient(90deg, #3AB795, #00c6ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+font-size:48px;
 
-  animation: fadeDown 0.8s ease;
+color:#2563eb;
+
+margin-bottom:10px;
+
 }
 
-/* ===== SEARCH ===== */
+
+
+.menu-subtitle {
+
+font-size:18px;
+
+color:#64748b;
+
+}
+
+
+
+
+
+
+
+/* SEARCH */
+
+
+.search-wrapper {
+
+
+display:flex;
+
+justify-content:center;
+
+margin:40px 0 25px;
+
+
+}
+
+
+
 .menu-search {
-  width: 100%;
-  padding: 14px;
-  border-radius: 12px;
-  border: none;
-  margin-bottom: 20px;
 
-  background: rgba(255,255,255,0.1);
-  color: white;
-  backdrop-filter: blur(10px);
+
+width:100%;
+
+max-width:600px;
+
+padding:16px 25px;
+
+border-radius:50px;
+
+border:1px solid #cbd5e1;
+
+font-size:17px;
+
+outline:none;
+
+background:white;
+
+
+box-shadow:
+
+0 10px 30px rgba(0,0,0,.08);
+
+
+transition:.3s;
+
 }
 
-.menu-search::placeholder {
-  color: rgba(255,255,255,0.6);
+
+
+
+
+.menu-search:focus {
+
+
+border-color:#2563eb;
+
+
+box-shadow:
+
+0 0 0 4px rgba(37,99,235,.15);
+
 }
 
-/* ===== FILTER ===== */
+
+
+
+
+
+
+/* FILTER */
+
+
 .menu-filters {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 30px;
+
+
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
+margin-bottom:40px;
+
 }
+
+
 
 .filter-btn {
-  padding: 10px 18px;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
 
-  background: rgba(255,255,255,0.1);
-  color: white;
-  transition: 0.3s;
+
+padding:12px 30px;
+
+border-radius:30px;
+
+border:none;
+
+background:white;
+
+color:#2563eb;
+
+font-weight:bold;
+
+cursor:pointer;
+
+box-shadow:
+
+0 8px 20px rgba(0,0,0,.08);
+
+
+transition:.3s;
+
 }
+
+
 
 .filter-btn:hover {
-  transform: translateY(-3px);
-  background: rgba(255,255,255,0.2);
+
+
+transform:translateY(-3px);
+
 }
+
+
 
 .filter-btn.active {
-  background: linear-gradient(135deg, #3AB795, #00c6ff);
+
+
+background:#2563eb;
+
+color:white;
+
 }
 
-/* ===== GRID ===== */
+
+
+
+
+
+
+
+/* GRID */
+
+
 .menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
+
+
+display:grid;
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(280px,1fr));
+
+
+gap:30px;
+
+max-width:1200px;
+
+margin:auto;
+
 }
 
-/* ===== CARD ===== */
+
+
+
+
+
+
+
+/* CARD */
+
+
 .menu-card {
-  border-radius: 18px;
-  overflow: hidden;
 
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(20px);
 
-  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+background:white;
 
-  transition: 0.4s;
-  animation: fadeUp 0.6s ease forwards;
+border-radius:25px;
+
+overflow:hidden;
+
+
+box-shadow:
+
+0 15px 35px rgba(0,0,0,.08);
+
+
+transition:.4s;
+
+
+animation:cardShow .6s ease;
+
+
 }
+
+
+
 
 .menu-card:hover {
-  transform: translateY(-12px) scale(1.03);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+
+
+transform:
+
+translateY(-12px);
+
+
+box-shadow:
+
+0 25px 50px rgba(37,99,235,.2);
+
+
 }
 
-/* ===== IMAGE ===== */
-.image-wrapper {
-  position: relative;
+
+
+
+
+
+
+
+/* IMAGE */
+
+
+.food-image-box {
+
+
+height:230px;
+
+position:relative;
+
+overflow:hidden;
+
 }
 
-.image-wrapper img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  transition: 0.5s;
+
+
+
+
+.food-image-box img {
+
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+transition:.6s;
+
 }
+
+
 
 .menu-card:hover img {
-  transform: scale(1.1);
+
+
+transform:scale(1.12);
+
 }
 
-/* ===== OVERLAY ===== */
-.overlay {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
 
-  display: flex;
-  justify-content: space-between;
 
-  background: rgba(0,0,0,0.7);
-  padding: 6px 10px;
-  border-radius: 10px;
-  font-size: 12px;
+
+
+
+
+
+/* RATING */
+
+
+.food-badge {
+
+
+position:absolute;
+
+top:15px;
+
+right:15px;
+
+
+background:white;
+
+padding:8px 15px;
+
+
+border-radius:20px;
+
+
+font-weight:bold;
+
+
+box-shadow:
+
+0 5px 15px rgba(0,0,0,.15);
+
+
 }
 
-/* ===== CONTENT ===== */
+
+
+
+
+
+
+/* CONTENT */
+
+
 .menu-content {
-  padding: 18px;
+
+
+padding:25px;
+
 }
+
+
 
 .menu-content h3 {
-  margin: 0;
-  font-size: 18px;
+
+
+font-size:24px;
+
+margin-bottom:10px;
+
 }
 
-.menu-content p {
-  color: rgba(255,255,255,0.7);
-  margin: 5px 0 10px;
+
+
+
+
+.restaurant-name {
+
+
+color:#64748b;
+
 }
 
-/* ===== FOOTER ===== */
-.menu-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+
+
+
+.menu-bottom {
+
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-top:20px;
+
 }
 
-/* ===== BUTTON ===== */
+
+
+
+
+.menu-bottom h4 {
+
+
+font-size:22px;
+
+color:#2563eb;
+
+}
+
+
+
+
+
+
+
+
+/* ADD BUTTON */
+
+
 .add-btn {
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: none;
 
-  background: linear-gradient(135deg, #3AB795, #00c6ff);
-  color: white;
 
-  cursor: pointer;
-  transition: 0.3s;
+background:#2563eb;
+
+color:white;
+
+
+border:none;
+
+
+padding:12px 25px;
+
+
+border-radius:30px;
+
+
+font-weight:bold;
+
+
+cursor:pointer;
+
+
+transition:.3s;
+
+
 }
+
+
 
 .add-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 10px 25px rgba(0,198,255,0.5);
+
+
+background:#1d4ed8;
+
+
+transform:
+
+scale(1.1);
+
+
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+
+
+
+
+
+
+
+/* ANIMATION */
+
+
+@keyframes cardShow {
+
+
+from{
+
+
+opacity:0;
+
+transform:
+
+translateY(50px);
+
+
 }
+
+
+to{
+
+
+opacity:1;
+
+transform:
+
+translateY(0);
+
+
+}
+
+
+}
+
+
+
+
+
+
 
 @keyframes fadeDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+
+
+from{
+
+
+opacity:0;
+
+transform:
+
+translateY(-30px);
+
+
+}
+
+
+to{
+
+
+opacity:1;
+
+transform:
+
+translateY(0);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+/* MOBILE */
+
+
+@media(max-width:600px){
+
+
+
+.menu-page {
+
+
+padding:80px 15px;
+
+}
+
+
+
+.menu-title {
+
+
+font-size:34px;
+
+}
+
+
+
+.menu-filters {
+
+
+flex-wrap:wrap;
+
+}
+
+
+
+.food-image-box {
+
+
+height:200px;
+
+}
+
+
+
 }

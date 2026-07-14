@@ -1,0 +1,864 @@
+/* ================================
+   My Orders Page
+   Zenbaba Delivery UI
+================================ */
+
+
+.orders-page {
+
+  min-height:100vh;
+
+  background:#f8fafc;
+
+  padding:100px 20px;
+
+  font-family:Arial, Helvetica, sans-serif;
+
+  color:#1e293b;
+
+}
+
+
+
+
+
+.orders-container {
+
+  max-width:1000px;
+
+  margin:auto;
+
+}
+
+
+
+
+
+.orders-title {
+
+  text-align:center;
+
+  font-size:40px;
+
+  color:#2563eb;
+
+  animation:fadeDown 0.7s ease;
+
+}
+
+
+
+.orders-subtitle {
+
+  text-align:center;
+
+  color:#64748b;
+
+  margin-bottom:40px;
+
+}
+
+
+
+
+
+
+
+
+/* ================================
+   Loading
+================================ */
+
+
+.orders-loading {
+
+  height:100vh;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  align-items:center;
+
+  color:#2563eb;
+
+}
+
+
+
+.loader {
+
+  width:45px;
+
+  height:45px;
+
+  border:5px solid #dbeafe;
+
+  border-top:5px solid #2563eb;
+
+  border-radius:50%;
+
+  animation:spin 1s linear infinite;
+
+}
+
+
+
+
+@keyframes spin {
+
+  from {
+
+    transform:rotate(0deg);
+
+  }
+
+
+  to {
+
+    transform:rotate(360deg);
+
+  }
+
+}
+
+
+
+
+
+
+
+
+/* ================================
+   Empty Orders
+================================ */
+
+
+.empty-orders {
+
+  background:white;
+
+  padding:50px;
+
+  text-align:center;
+
+  border-radius:20px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+  animation:fadeUp .6s ease;
+
+}
+
+
+
+
+.primary-btn {
+
+  background:#2563eb;
+
+  color:white;
+
+  border:none;
+
+  padding:12px 25px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  margin-top:20px;
+
+  font-weight:bold;
+
+  transition:.3s;
+
+}
+
+
+
+.primary-btn:hover {
+
+  transform:translateY(-3px);
+
+  background:#1d4ed8;
+
+}
+
+
+
+
+
+
+
+
+/* ================================
+   Order Cards
+================================ */
+
+
+.orders-list {
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:25px;
+
+}
+
+
+
+
+.order-card {
+
+  background:white;
+
+  border-radius:20px;
+
+  padding:25px;
+
+  box-shadow:
+
+  0 10px 25px rgba(0,0,0,0.08);
+
+  animation:fadeUp .6s ease;
+
+  transition:.3s;
+
+}
+
+
+
+
+
+.order-card:hover {
+
+  transform:translateY(-5px);
+
+  box-shadow:
+
+  0 15px 35px rgba(37,99,235,.15);
+
+}
+
+
+
+
+
+
+
+.order-header {
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  border-bottom:1px solid #e2e8f0;
+
+  padding-bottom:15px;
+
+}
+
+
+
+
+
+.order-header h3 {
+
+  margin:0 0 10px;
+
+}
+
+
+
+
+
+.price {
+
+  color:#2563eb;
+
+}
+
+
+
+
+
+
+
+
+/* ================================
+ Status Badge
+================================ */
+
+
+.status {
+
+  padding:6px 14px;
+
+  border-radius:20px;
+
+  font-size:13px;
+
+  font-weight:bold;
+
+  text-transform:capitalize;
+
+}
+
+
+
+
+.status.pending {
+
+  background:#fef3c7;
+
+  color:#92400e;
+
+}
+
+
+
+.status.accepted {
+
+  background:#dbeafe;
+
+  color:#1d4ed8;
+
+}
+
+
+
+.status.preparing {
+
+  background:#fed7aa;
+
+  color:#c2410c;
+
+}
+
+
+
+.status.ready_for_pickup {
+
+  background:#ede9fe;
+
+  color:#6d28d9;
+
+}
+
+
+
+.status.out_for_delivery {
+
+  background:#cffafe;
+
+  color:#0e7490;
+
+}
+
+
+
+.status.delivered {
+
+  background:#dcfce7;
+
+  color:#15803d;
+
+}
+
+
+
+.status.cancelled {
+
+  background:#fee2e2;
+
+  color:#b91c1c;
+
+}
+
+
+
+
+
+
+
+
+/* ================================
+ Items
+================================ */
+
+
+.order-items {
+
+  margin-top:15px;
+
+}
+
+
+
+.order-item {
+
+  display:flex;
+
+  justify-content:space-between;
+
+  background:#f8fafc;
+
+  padding:12px;
+
+  border-radius:10px;
+
+  margin-bottom:8px;
+
+}
+
+
+
+
+
+
+
+
+/* ================================
+ Delivery
+================================ */
+
+
+.delivery-box {
+
+  background:#eff6ff;
+
+  padding:15px;
+
+  margin-top:20px;
+
+  border-radius:12px;
+
+  border-left:5px solid #2563eb;
+
+}
+
+
+
+.delivery-box p {
+
+  margin:8px 0;
+
+}
+
+
+
+
+
+
+
+
+/* ================================
+ Buttons
+================================ */
+
+
+.order-actions {
+
+  display:flex;
+
+  gap:15px;
+
+  margin-top:25px;
+
+}
+
+
+
+
+
+.secondary-btn,
+
+.cancel-btn {
+
+
+  padding:12px 20px;
+
+  border-radius:10px;
+
+  border:none;
+
+  cursor:pointer;
+
+  font-weight:bold;
+
+  transition:.3s;
+
+}
+
+
+
+
+
+.secondary-btn {
+
+  background:#2563eb;
+
+  color:white;
+
+}
+
+
+
+
+
+.secondary-btn:hover {
+
+  background:#1d4ed8;
+
+  transform:scale(1.03);
+
+}
+
+
+
+
+
+.cancel-btn {
+
+  background:#ef4444;
+
+  color:white;
+
+}
+
+
+
+
+
+.cancel-btn:hover {
+
+  background:#dc2626;
+
+  transform:scale(1.03);
+
+}
+
+
+
+
+
+
+
+
+
+/* ================================
+ Toast
+================================ */
+
+
+.toast {
+
+  position:fixed;
+
+  top:90px;
+
+  right:30px;
+
+  background:#2563eb;
+
+  color:white;
+
+  padding:15px 25px;
+
+  border-radius:12px;
+
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+  animation:slideIn .4s ease;
+
+  z-index:9999;
+
+}
+
+
+
+
+
+
+
+
+/* ================================
+ Modal
+================================ */
+
+
+.modal-overlay {
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(15,23,42,.6);
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  z-index:10000;
+
+  animation:fadeIn .3s ease;
+
+}
+
+
+
+
+
+.cancel-modal {
+
+  background:white;
+
+  width:90%;
+
+  max-width:450px;
+
+  padding:35px;
+
+  border-radius:20px;
+
+  text-align:center;
+
+  animation:scaleIn .3s ease;
+
+}
+
+
+
+
+
+.cancel-modal h2 {
+
+  color:#dc2626;
+
+}
+
+
+
+
+.warning-text {
+
+  color:#64748b;
+
+  font-size:14px;
+
+}
+
+
+
+
+.modal-buttons {
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:15px;
+
+  margin-top:25px;
+
+}
+
+
+
+
+
+
+
+
+/* ================================
+ Animations
+================================ */
+
+
+@keyframes fadeUp {
+
+  from {
+
+    opacity:0;
+
+    transform:translateY(30px);
+
+  }
+
+
+  to {
+
+    opacity:1;
+
+    transform:translateY(0);
+
+  }
+
+}
+
+
+
+
+@keyframes fadeDown {
+
+
+  from {
+
+    opacity:0;
+
+    transform:translateY(-20px);
+
+  }
+
+
+  to {
+
+    opacity:1;
+
+    transform:translateY(0);
+
+  }
+
+}
+
+
+
+
+
+@keyframes fadeIn {
+
+  from {
+
+    opacity:0;
+
+  }
+
+  to {
+
+    opacity:1;
+
+  }
+
+}
+
+
+
+
+
+@keyframes scaleIn {
+
+  from {
+
+    transform:scale(.8);
+
+    opacity:0;
+
+  }
+
+
+  to {
+
+    transform:scale(1);
+
+    opacity:1;
+
+  }
+
+}
+
+
+
+
+
+@keyframes slideIn {
+
+  from {
+
+    transform:translateX(100px);
+
+    opacity:0;
+
+  }
+
+
+  to {
+
+    transform:translateX(0);
+
+    opacity:1;
+
+  }
+
+}
+
+
+
+
+
+
+
+
+/* ================================
+ Mobile
+================================ */
+
+
+@media(max-width:600px){
+
+
+.orders-page {
+
+padding:80px 15px;
+
+}
+
+
+
+.orders-title {
+
+font-size:30px;
+
+}
+
+
+
+
+.order-header {
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:15px;
+
+}
+
+
+
+
+.order-actions {
+
+flex-direction:column;
+
+}
+
+
+
+
+.modal-buttons {
+
+flex-direction:column;
+
+}
+
+
+
+}

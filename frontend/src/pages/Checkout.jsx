@@ -1,187 +1,642 @@
-// src/pages/Checkout.js
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { createOrder } from "../services/orderService";
+import { useCart } from "../context/CartContext";
+
+import "../Css/Checkout.css";
+
 
 function Checkout() {
-  const [form, setForm] = useState({
-    name: "",
-    address: "",
-    phone: "",
-    paymentMethod: "telebirr", // default
-    mobileNumber: "", // for Telebirr
-    cardNumber: "",   // for Card Payment
-    cardExpiry: "",
-    cardCVC: "",
-  });
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const navigate = useNavigate();
 
-    // Frontend validation for Ethiopian phone numbers
-    if (!/^09\d{8}$/.test(form.phone)) {
-      alert("Please enter a valid Ethiopian phone number (e.g., 0912345678)");
-      return;
-    }
 
-    if (form.paymentMethod === "telebirr" && !/^09\d{8}$/.test(form.mobileNumber)) {
-      alert("Please enter a valid Telebirr mobile number (e.g., 0912345678)");
-      return;
-    }
+const {
 
-    if (form.paymentMethod === "card") {
-      if (!/^\d{16}$/.test(form.cardNumber)) {
-        alert("Please enter a valid 16-digit card number");
-        return;
-      }
-      if (!/^\d{2}\/\d{2}$/.test(form.cardExpiry)) {
-        alert("Enter expiry in MM/YY format");
-        return;
-      }
-      if (!/^\d{3,4}$/.test(form.cardCVC)) {
-        alert("Enter a valid 3 or 4-digit CVC");
-        return;
-      }
-    }
+selectedItems,
 
-    // Simulate order submission
-    if (form.paymentMethod === "telebirr") {
-      alert(
-        `Telebirr payment request sent to ${form.mobileNumber}.\nPlease approve it on your phone.`
-      );
-    } else if (form.paymentMethod === "card") {
-      alert(`Card payment processed for ${form.name}`);
-    } else {
-      alert(`Order confirmed for ${form.name}, pay cash on delivery.`);
-    }
-  };
+clearSelectedItems,
 
-  return (
-    <div
-  style={{
-    padding: "80px 20px",
-    maxWidth: "500px",
-    margin: "auto",
-    backgroundColor: "#1a2a2f",
-    color: "white", // ⭐ THIS FIXES EVERYTHING
-    borderRadius: "10px"
-  }}
->
-      <h1>Checkout</h1>
+} = useCart();
 
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: "flex", flexDirection: "column", gap: "15px", marginTop: "20px" }}
-      >
-        <input
-          name="name"
-          placeholder="Full Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-          style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
-        />
-        <input
-          name="address"
-          placeholder="Delivery Address"
-          value={form.address}
-          onChange={handleChange}
-          required
-          style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
-        />
-        <input
-          name="phone"
-          placeholder="Phone Number (e.g., 0912345678)"
-          value={form.phone}
-          onChange={handleChange}
-          required
-          maxLength={10}
-          style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
-        />
 
-        {/* Payment Method */}
-        <label style={{ marginTop: "10px", fontWeight: "bold" }}>Payment Method:</label>
-        <select
-          name="paymentMethod"
-          value={form.paymentMethod}
-          onChange={handleChange}
-          style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
-        >
-          <option value="telebirr">Telebirr</option>
-          <option value="card">Card Payment</option>
-          <option value="cod">Cash on Delivery</option>
-        </select>
 
-        {/* Telebirr Inputs */}
-        {form.paymentMethod === "telebirr" && (
-          <>
-            <input
-              name="mobileNumber"
-              placeholder="Telebirr Mobile Number (e.g., 0912345678)"
-              value={form.mobileNumber}
-              onChange={handleChange}
-              required
-              maxLength={10}
-              style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
-            />
-            <p style={{ fontSize: "12px", color: "#555" }}>
-              After submitting, a Telebirr payment request will be sent to your mobile.
-            </p>
-          </>
-        )}
 
-        {/* Card Payment Inputs */}
-        {form.paymentMethod === "card" && (
-          <>
-            <input
-              name="cardNumber"
-              placeholder="Card Number (16 digits)"
-              value={form.cardNumber}
-              onChange={handleChange}
-              required
-              maxLength={16}
-              style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
-            />
-            <input
-              name="cardExpiry"
-              placeholder="Expiry (MM/YY)"
-              value={form.cardExpiry}
-              onChange={handleChange}
-              required
-              maxLength={5}
-              style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
-            />
-            <input
-              name="cardCVC"
-              placeholder="CVC"
-              value={form.cardCVC}
-              onChange={handleChange}
-              required
-              maxLength={4}
-              style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
-            />
-          </>
-        )}
 
-        <button
-          type="submit"
-          style={{
-            padding: "12px 20px",
-            backgroundColor: "#3AB795",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            fontWeight: "bold",
-            marginTop: "10px",
-          }}
-        >
-          Confirm Order
-        </button>
-      </form>
-    </div>
-  );
+const [form,setForm] = useState({
+
+name:"",
+
+address:"",
+
+phone:"",
+
+paymentMethod:"telebirr",
+
+mobileNumber:"",
+
+cardNumber:"",
+
+cardExpiry:"",
+
+cardCVC:"",
+
+});
+
+
+
+
+
+const [loading,setLoading] = useState(false);
+
+
+const [message,setMessage] = useState("");
+
+const [messageType,setMessageType] = useState("");
+
+
+
+
+
+
+const showMessage=(msg,type="success")=>{
+
+
+setMessage(msg);
+
+setMessageType(type);
+
+
+setTimeout(()=>{
+
+setMessage("");
+
+},3000);
+
+
+};
+
+
+
+
+
+
+
+
+const handleChange=(e)=>{
+
+
+setForm({
+
+...form,
+
+[e.target.name]:e.target.value
+
+});
+
+
+};
+
+
+
+
+
+
+
+
+
+const handleSubmit=async(e)=>{
+
+
+e.preventDefault();
+
+
+
+
+
+if(selectedItems.length===0){
+
+
+showMessage(
+
+"No items selected for checkout",
+
+"error"
+
+);
+
+
+setTimeout(()=>{
+
+navigate("/cart");
+
+},1500);
+
+
+return;
+
+
 }
+
+
+
+
+
+
+
+if(!/^09\d{8}$/.test(form.phone)){
+
+
+showMessage(
+
+"Enter valid Ethiopian phone number",
+
+"error"
+
+);
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+if(
+
+form.paymentMethod==="telebirr"
+
+&&
+
+!/^09\d{8}$/.test(form.mobileNumber)
+
+){
+
+
+showMessage(
+
+"Enter valid Telebirr number",
+
+"error"
+
+);
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+try{
+
+
+setLoading(true);
+
+
+
+
+
+
+const orderData={
+
+
+deliveryAddress:form.address,
+
+
+phone:form.phone,
+
+
+selectedItems:selectedItems.map(item=>(
+
+{
+
+menuItem:item.menuItem._id,
+
+quantity:item.quantity
+
+}
+
+))
+
+
+};
+
+
+
+
+
+
+
+const res=await createOrder(orderData);
+
+
+
+
+
+if(res.success){
+
+
+showMessage(
+
+"Order placed successfully 🎉"
+
+);
+
+
+
+
+
+clearSelectedItems();
+
+
+
+
+
+setTimeout(()=>{
+
+
+navigate("/my-orders");
+
+
+},1500);
+
+
+
+}
+
+
+
+
+
+}catch(error){
+
+
+
+console.log(error);
+
+
+
+showMessage(
+
+error.response?.data?.message ||
+
+"Order failed",
+
+"error"
+
+);
+
+
+
+}finally{
+
+
+setLoading(false);
+
+
+}
+
+
+
+};
+
+
+
+
+
+
+
+
+
+return (
+
+
+<div className="checkout-page">
+
+
+
+{
+message &&
+
+<div className={`checkout-toast ${messageType}`}>
+
+{message}
+
+</div>
+
+}
+
+
+
+
+
+
+
+<div className="checkout-card">
+
+
+
+
+
+<h1>
+
+Checkout
+
+</h1>
+
+
+
+<p className="checkout-subtitle">
+
+Complete your order details
+
+</p>
+
+
+
+
+
+<div className="selected-box">
+
+
+Selected Items:
+
+<strong>
+
+{selectedItems.length}
+
+</strong>
+
+
+</div>
+
+
+
+
+
+
+
+
+<form onSubmit={handleSubmit}>
+
+
+<input
+
+name="name"
+
+placeholder="Full Name"
+
+value={form.name}
+
+onChange={handleChange}
+
+required
+
+/>
+
+
+
+
+
+<input
+
+name="address"
+
+placeholder="Delivery Address"
+
+value={form.address}
+
+onChange={handleChange}
+
+required
+
+/>
+
+
+
+
+
+
+
+<input
+
+name="phone"
+
+placeholder="Phone Number 0912345678"
+
+value={form.phone}
+
+onChange={handleChange}
+
+required
+
+/>
+
+
+
+
+
+
+
+
+<label>
+
+Payment Method
+
+</label>
+
+
+
+
+
+<select
+
+name="paymentMethod"
+
+value={form.paymentMethod}
+
+onChange={handleChange}
+
+>
+
+
+<option value="telebirr">
+
+Telebirr
+
+</option>
+
+
+<option value="card">
+
+Card Payment
+
+</option>
+
+
+<option value="cod">
+
+Cash On Delivery
+
+</option>
+
+
+
+</select>
+
+
+
+
+
+
+
+
+{
+form.paymentMethod==="telebirr" &&
+
+
+<input
+
+name="mobileNumber"
+
+placeholder="Telebirr Number"
+
+value={form.mobileNumber}
+
+onChange={handleChange}
+
+required
+
+/>
+
+}
+
+
+
+
+
+
+
+
+{
+form.paymentMethod==="card" &&
+
+<>
+
+
+<input
+
+name="cardNumber"
+
+placeholder="Card Number"
+
+value={form.cardNumber}
+
+onChange={handleChange}
+
+/>
+
+
+
+
+<input
+
+name="cardExpiry"
+
+placeholder="MM/YY"
+
+value={form.cardExpiry}
+
+onChange={handleChange}
+
+/>
+
+
+
+
+<input
+
+name="cardCVC"
+
+placeholder="CVC"
+
+value={form.cardCVC}
+
+onChange={handleChange}
+
+/>
+
+
+</>
+
+
+}
+
+
+
+
+
+
+
+
+<button
+
+disabled={loading}
+
+>
+
+
+{
+
+loading ?
+
+"Placing Order..."
+
+:
+
+"Confirm Order"
+
+}
+
+
+</button>
+
+
+
+
+
+
+
+</form>
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+);
+
+
+}
+
 
 export default Checkout;

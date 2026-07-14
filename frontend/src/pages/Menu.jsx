@@ -1,125 +1,381 @@
 import React, { useState, useEffect } from "react";
+
 import "../Css/menu.css";
+
 import { getMenus } from "../services/menuService";
+
 import { useCart } from "../context/CartContext";
+
+
 function Menu() {
-   const { addItem } = useCart();
-  const [menuItems, setMenuItems] = useState([]);
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("All");
-  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-  useEffect(() => {
 
-  loadMenus();
 
-}, []);
+const { addItem } = useCart();
 
-const loadMenus = async () => {
 
-  try {
+const [menuItems,setMenuItems]=useState([]);
 
-    const data = await getMenus();
+const [search,setSearch]=useState("");
 
-    console.log(data);
+const [category,setCategory]=useState("All");
 
-    if (data.success) {
+const [selectedRestaurant,setSelectedRestaurant]=useState(null);
 
-      setMenuItems(data.data);
 
-    }
 
-  } catch (error) {
 
-    console.log(error);
 
-  }
+useEffect(()=>{
+
+loadMenus();
+
+},[]);
+
+
+
+
+
+const loadMenus=async()=>{
+
+
+try{
+
+
+const data=await getMenus();
+
+
+console.log(data);
+
+
+
+if(data.success){
+
+setMenuItems(data.data);
+
+}
+
+
+
+}catch(error){
+
+
+console.log(error);
+
+
+}
+
+
 
 };
 
-  const filteredItems = menuItems.filter((item) => {
-  return (
-    (category === "All" || item.category === category) &&
-    item.name.toLowerCase().includes(search.toLowerCase()) &&
-   (
- !selectedRestaurant ||
- item.restaurant.name === selectedRestaurant.name
+
+
+
+
+
+
+
+
+const filteredItems = menuItems.filter((item)=>{
+
+
+return (
+
+(category==="All" || item.category===category)
+
+&&
+
+item.name
+.toLowerCase()
+.includes(search.toLowerCase())
+
+
+&&
+
+(
+
+!selectedRestaurant ||
+
+item.restaurant.name === selectedRestaurant.name
+
 )
-  );
+
+
+);
+
+
 });
 
 
 
-  return (
-    <div className="menu-container">
-      <h1 className="menu-title">🍔 Discover Your Meal</h1>
 
-      {/* SEARCH */}
-      <input
-        className="menu-search"
-        placeholder="Search delicious food..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
 
-      {/* FILTER */}
-      <div className="menu-filters">
-        {[
-"All",
-"Burger"
-].map((cat) => (
-          <button
-            key={cat}
-            className={`filter-btn ${category === cat ? "active" : ""}`}
-            onClick={() => setCategory(cat)}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
 
-      {/* MENU GRID */}
-      <div className="menu-grid">
-        {filteredItems.map((item) => (
-          <div key={item._id} className="menu-card">
-            <div className="image-wrapper">
-              <img
-src={
-  item.image
-    ? item.image
-    : "https://via.placeholder.com/300x200?text=No+Image"
-}
-alt={item.name}
+
+
+
+return (
+
+<div className="menu-page">
+
+
+
+<div className="menu-header">
+
+
+<h1 className="menu-title">
+
+🍔 Discover Your Meal
+
+</h1>
+
+
+<p className="menu-subtitle">
+
+Fresh food from your favorite restaurants
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div className="search-wrapper">
+
+
+<input
+
+className="menu-search"
+
+placeholder="Search delicious food..."
+
+value={search}
+
+onChange={(e)=>setSearch(e.target.value)}
+
 />
 
-              <div className="overlay">
-                <span>⭐ {item.rating}</span>
-                <span>{item.time}</span>
-              </div>
-            </div>
 
-            <div className="menu-content">
-              <h3>{item.name}</h3>
-              <p>{item.restaurant.name}</p>
+</div>
 
-              <div className="menu-footer">
-                <span>${item.price.toFixed(2)}</span>
 
-              <button
- className="add-btn"
- onClick={() => {
-   console.log("ADDING ITEM:", item._id);
-   addItem(item._id);
- }}
+
+
+
+
+
+
+<div className="menu-filters">
+
+
+{
+
+["All","Burger"].map((cat)=>(
+
+
+<button
+
+key={cat}
+
+className={`filter-btn ${
+category===cat ? "active": ""
+}`}
+
+
+onClick={()=>setCategory(cat)}
+
 >
- Add
+
+{cat}
+
 </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+
+
+))
+
+
 }
+
+
+</div>
+
+
+
+
+
+
+
+
+<div className="menu-grid">
+
+
+
+{
+
+filteredItems.map((item)=>(
+
+
+
+<div
+
+key={item._id}
+
+className="menu-card"
+
+
+>
+
+
+
+<div className="food-image-box">
+
+
+<img
+
+src={
+
+item.image ||
+
+"https://via.placeholder.com/300"
+
+}
+
+
+alt={item.name}
+
+
+/>
+
+
+
+<div className="food-badge">
+
+⭐ {item.rating || "4.5"}
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div className="menu-content">
+
+
+<h3>
+
+{item.name}
+
+</h3>
+
+
+
+
+<p className="restaurant-name">
+
+🍽️ {item.restaurant?.name}
+
+</p>
+
+
+
+
+
+
+<div className="menu-bottom">
+
+
+<h4>
+
+ETB {Number(item.price).toFixed(2)}
+
+</h4>
+
+
+
+
+
+<button
+
+className="add-btn"
+
+onClick={()=>{
+
+
+console.log(
+
+"ADDING ITEM:",
+
+item._id
+
+);
+
+
+addItem(item._id);
+
+
+}}
+
+
+>
+
+
++
+
+Add
+
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+))
+
+
+}
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+);
+
+
+}
+
 
 export default Menu;

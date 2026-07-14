@@ -2,235 +2,549 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+import "../Css/profile.css";
+
+
 function Profile() {
-  const { user, logout } = useContext(AuthContext);
-  const navigate = useNavigate();
 
-  if (!user) {
-    return (
-      <div
-        style={{
-          padding: "120px 20px",
-          textAlign: "center",
-        }}
-      >
-        <h2>Please login first.</h2>
 
-        <button
-          onClick={() => navigate("/")}
-          style={{
-            marginTop: "20px",
-            padding: "12px 25px",
-            border: "none",
-            borderRadius: "8px",
-            background: "#0077ff",
-            color: "#fff",
-            cursor: "pointer",
-            fontSize: "16px",
-          }}
-        >
-          Go Home
-        </button>
-      </div>
-    );
-  }
+const { user, logout } = useContext(AuthContext);
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
+const navigate = useNavigate();
 
-  return (
-    <div
-      style={{
-        maxWidth: "900px",
-        margin: "110px auto",
-        padding: "20px",
-      }}
-    >
-      {/* ================= PROFILE CARD ================= */}
 
-      <div
-        style={{
-          background: "#0077ff",
-          color: "white",
-          borderRadius: "20px",
-          padding: "35px",
-          display: "flex",
-          alignItems: "center",
-          gap: "25px",
-          boxShadow: "0 10px 30px rgba(0,0,0,.15)",
-          marginBottom: "30px",
-        }}
-      >
-        <div
-          style={{
-            width: "120px",
-            height: "120px",
-            borderRadius: "50%",
-            background: "white",
-            color: "#0077ff",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            fontSize: "60px",
-            fontWeight: "bold",
-          }}
-        >
-          👤
-        </div>
 
-        <div>
-          <h1 style={{ marginBottom: "10px" }}>
-            {user.name}
-          </h1>
 
-          <p>{user.email}</p>
 
-          <p>
-            <strong>Role:</strong> {user.role}
-          </p>
+if(!user){
 
-          {user.phone && (
-            <p>
-              <strong>Phone:</strong> {user.phone}
-            </p>
-          )}
-        </div>
-      </div>
+return (
 
-      {/* ================= ACCOUNT MENU ================= */}
+<div className="login-screen">
 
-      <div
-        style={{
-          background: "#fff",
-          borderRadius: "20px",
-          overflow: "hidden",
-          boxShadow: "0 5px 20px rgba(0,0,0,.15)",
-        }}
-      >
-        <h2
-          style={{
-            margin: 0,
-            padding: "20px",
-            background: "#0077ff",
-            color: "white",
-          }}
-        >
-          My Account
-        </h2>
+<div className="login-card">
 
-        <ProfileItem
-          icon="📦"
-          title="My Orders"
-          onClick={() => navigate("/orders")}
-        />
 
-        <ProfileItem
-          icon="❤️"
-          title="Favorite Restaurants"
-          onClick={() => navigate("/favorites")}
-        />
+<h2>
 
-        <ProfileItem
-          icon="📍"
-          title="Saved Addresses"
-          onClick={() => navigate("/addresses")}
-        />
+Welcome to Zenbaba 🍽️
 
-        <ProfileItem
-          icon="💳"
-          title="Payment Methods"
-          onClick={() => navigate("/payments")}
-        />
+</h2>
 
-        <ProfileItem
-          icon="🔔"
-          title="Notifications"
-          onClick={() => navigate("/notifications")}
-        />
 
-        <ProfileItem
-          icon="⚙️"
-          title="Account Settings"
-          onClick={() => navigate("/settings")}
-        />
+<p>
 
-        <ProfileItem
-          icon="❓"
-          title="Help Center"
-          onClick={() => navigate("/help")}
-        />
+Please login to access your profile
 
-        <div style={{ padding: "20px" }}>
-          <button
-            onClick={handleLogout}
-            style={{
-              width: "100%",
-              padding: "15px",
-              border: "none",
-              borderRadius: "10px",
-              background: "#0077ff",
-              color: "white",
-              fontSize: "17px",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-          >
-            Logout
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+</p>
+
+
+
+<button
+
+onClick={()=>navigate("/")}
+
+>
+
+Go Home
+
+</button>
+
+
+</div>
+
+
+</div>
+
+);
+
+
 }
 
-/* ================= MENU ITEM ================= */
 
-function ProfileItem({ icon, title, onClick }) {
-  return (
-    <div
-      onClick={onClick}
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "18px 22px",
-        borderBottom: "1px solid #eee",
-        cursor: "pointer",
-        transition: "0.2s",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.background = "#eef6ff";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.background = "#fff";
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "15px",
-          fontSize: "17px",
-        }}
-      >
-        <span style={{ fontSize: "24px" }}>{icon}</span>
 
-        <span>{title}</span>
-      </div>
 
-      <span
-        style={{
-          color: "#0077ff",
-          fontSize: "22px",
-          fontWeight: "bold",
-        }}
-      >
-        ❯
-      </span>
-    </div>
-  );
+
+
+const handleLogout = ()=>{
+
+
+logout();
+
+navigate("/");
+
+
+};
+
+
+
+
+
+
+
+
+
+return (
+
+<div className="luxury-profile-page">
+
+
+
+
+
+<div className="profile-wrapper">
+
+
+
+
+
+{/* TOP HEADER */}
+
+
+
+<div className="profile-header">
+
+
+<p>
+
+Zenbaba Account
+
+</p>
+
+
+<h1>
+
+My Profile
+
+</h1>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+{/* PROFILE CARD */}
+
+
+
+<div className="luxury-profile-card">
+
+
+
+
+
+<div className="avatar-container">
+
+
+<div className="avatar-ring">
+
+
+<div className="avatar">
+
+
+👤
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div className="user-info">
+
+
+<h2>
+
+{user.name}
+
+</h2>
+
+
+
+<p>
+
+{user.email}
+
+</p>
+
+
+
+<span className="role">
+
+{user.role}
+
+</span>
+
+
+
+{
+
+user.phone &&
+
+<p className="phone">
+
+📱 {user.phone}
+
+</p>
+
 }
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{/* STATS */}
+
+
+
+<div className="profile-stats">
+
+
+<div>
+
+<h2>
+
+0
+
+</h2>
+
+<p>
+
+Orders
+
+</p>
+
+</div>
+
+
+
+<div>
+
+<h2>
+
+0
+
+</h2>
+
+<p>
+
+Favorites
+
+</p>
+
+</div>
+
+
+
+
+<div>
+
+<h2>
+
+0
+
+</h2>
+
+<p>
+
+Reviews
+
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{/* MENU */}
+
+
+
+<div className="luxury-menu">
+
+
+
+<h2>
+
+Account
+
+</h2>
+
+
+
+
+
+<ProfileItem
+
+icon="📦"
+
+title="My Orders"
+
+desc="Track your food deliveries"
+
+onClick={()=>navigate("/my-orders")}
+
+/>
+
+
+
+
+
+
+
+<ProfileItem
+
+icon="❤️"
+
+title="Favorite Restaurants"
+
+desc="Your saved restaurants"
+
+onClick={()=>navigate("/favorites")}
+
+/>
+
+
+
+
+
+
+<ProfileItem
+
+icon="📍"
+
+title="Delivery Addresses"
+
+desc="Manage your locations"
+
+onClick={()=>navigate("/addresses")}
+
+/>
+
+
+
+
+
+
+
+<ProfileItem
+
+icon="💳"
+
+title="Payment Methods"
+
+desc="Manage payments"
+
+onClick={()=>navigate("/payments")}
+
+/>
+
+
+
+
+
+
+
+<ProfileItem
+
+icon="🔔"
+
+title="Notifications"
+
+desc="Your latest updates"
+
+onClick={()=>navigate("/notifications")}
+
+/>
+
+
+
+
+
+
+
+
+<ProfileItem
+
+icon="⚙️"
+
+title="Settings"
+
+desc="Account preferences"
+
+onClick={()=>navigate("/settings")}
+
+/>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<button
+
+className="luxury-logout"
+
+onClick={handleLogout}
+
+>
+
+Logout
+
+</button>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+);
+
+
+}
+
+
+
+
+
+
+
+
+
+function ProfileItem({
+
+icon,
+
+title,
+
+desc,
+
+onClick
+
+}){
+
+
+return(
+
+
+<div
+
+className="luxury-item"
+
+onClick={onClick}
+
+>
+
+
+<div className="item-icon">
+
+{icon}
+
+</div>
+
+
+
+
+
+<div className="item-text">
+
+
+<h3>
+
+{title}
+
+</h3>
+
+
+<p>
+
+{desc}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div className="item-arrow">
+
+›
+
+</div>
+
+
+
+</div>
+
+
+);
+
+
+}
+
+
+
 
 export default Profile;

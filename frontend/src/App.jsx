@@ -15,6 +15,12 @@ import Contact from "./pages/Contact";
 import { AuthProvider } from "./context/AuthContext";
 import Profile from "./pages/Profile";
 import { CartProvider } from "./context/CartContext";
+import MyOrders from "./pages/MyOrders";
+import OrderDetails from "./pages/OrderDetails";
+import RestaurantDashboard from "./pages/restaurant/RestaurantDashboard";
+import RestaurantMenu from "./pages/restaurant/RestaurantMenu";
+import AddMenu from "./pages/restaurant/AddMenu";
+import EditMenu from "./pages/restaurant/EditMenu";
 function App() {
   return (
     <AuthProvider>
@@ -32,6 +38,32 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/restaurants" element={<Restaurants />} />
          
+           <Route
+  path="/my-orders"
+  element={<MyOrders />}
+
+/>
+ <Route
+ path="/orders/:id"
+ element={<OrderDetails />}
+
+/>
+<Route
+path="/restaurant-dashboard"
+element={<RestaurantDashboard />}
+/>
+<Route
+path="/restaurant-menu"
+element={<RestaurantMenu/>}
+/>
+<Route
+path="/add-menu"
+element={<AddMenu/>}
+/>
+<Route
+path="/edit-menu/:id"
+element={<EditMenu/>}
+/>
        <Route path="/help" element={<HelpCenter />} />
        <Route path="/contact" element={<Contact />} />
 

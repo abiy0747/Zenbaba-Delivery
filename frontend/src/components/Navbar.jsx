@@ -149,13 +149,13 @@ const { user, logout } = useContext(AuthContext);
           <Link to="/restaurants" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
             Restaurants
           </Link>
-          <a href="/#aboutus" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
-  AboutUs
-</a>
 
-<a href="/#faqq" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
-  FAQ
-</a>
+          <Link to="/my-orders" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
+            My Orders
+          </Link>
+
+          
+
             
         </div>
 

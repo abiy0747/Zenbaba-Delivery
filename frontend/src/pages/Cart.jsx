@@ -1,178 +1,488 @@
 // src/pages/Cart.js
-import React from "react";
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { useCart } from "../context/CartContext";
+
+import "../Css/Cart.css";
+
+
 function Cart() {
+
+
 const {
-  cartItems,
-  totalPrice,
-  increaseQuantity,
-  decreaseQuantity,
-  removeItem,
-  clearMyCart,
-} = useCart();
 
-const navigate = useNavigate();
-const handleCheckout = () => {
-  navigate("/checkout");
+cartItems,
+
+selectedItems,
+
+selectedTotalPrice,
+
+increaseQuantity,
+
+decreaseQuantity,
+
+removeItem,
+
+clearMyCart,
+
+toggleSelectItem,
+
+}=useCart();
+
+
+
+const navigate=useNavigate();
+
+
+const [message,setMessage]=useState("");
+
+const [type,setType]=useState("");
+
+
+
+
+const showMessage=(msg,status="success")=>{
+
+
+setMessage(msg);
+
+setType(status);
+
+
+setTimeout(()=>{
+
+setMessage("");
+
+},3000);
+
+
 };
-  
 
 
-  
-  return (
-    <div
-      style={{
-        padding: "100px 20px",
-        maxWidth: "1200px",
-        margin: "auto",
-        backgroundColor: "#1a2a2f", // 🔥 DARK BACKGROUND
-        color: "white",            // 🔥 TEXT VISIBLE
-        minHeight: "100vh",
-      }}
-    >
-      <h1 style={{ textAlign: "center" }}>Your Cart 🛒</h1>
 
-      {cartItems.length === 0 ? (
-        <p style={{ marginTop: "20px", textAlign: "center" }}>
-          Your cart is empty.
-        </p>
-      ) : (
-        <>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-              gap: "20px",
-              marginTop: "30px",
-            }}
-          >
-            {cartItems.map((item) => (
-              <div
-                key={item.menuItem._id}
-                style={{
-                  backgroundColor: "#243b44", // 🔥 card dark
-                  borderRadius: "10px",
-                  padding: "15px",
-                  textAlign: "center",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  src={item.menuItem.image || "https://via.placeholder.com/150"}
-                  alt={item.menuItem.name}
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                    borderRadius: "10px",
-                    objectFit: "cover",
-                    marginBottom: "10px",
-                  }}
-                />
 
-                <h3>{item.menuItem.name}</h3>
 
-                <p style={{ fontSize: "14px", opacity: 0.8 }}>
-                 <p style={{ fontSize:"14px", opacity:0.8 }}>
- Restaurant: {item.menuItem.restaurant?.name}
-</p>
-                </p>
 
-                <p style={{ fontWeight: "bold" }}>
-                  Price: ${Number(item.menuItem.price || 0).toFixed(2)}
-                </p>
 
-                {/* Quantity */}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    marginTop: "10px",
-                  }}
-                >
-                  <button onClick={() => decreaseQuantity(item)}>
-                    −
-                  </button>
 
-                  <span>{item.quantity}</span>
+const handleCheckout=()=>{
 
-                  <button onClick={() => increaseQuantity(item)}>
-                    +
-                  </button>
-                </div>
 
-                {/* Remove */}
-                <button
-                  onClick={() => removeItem(item)}
-                  style={{
-                    marginTop: "15px",
-                    padding: "8px 20px",
-                    borderRadius: "8px",
-                    border: "none",
-                    backgroundColor: "#E53E3E",
-                    color: "white",
-                    cursor: "pointer",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-          </div>
+if(selectedItems.length===0){
 
-          {/* TOTAL */}
-          <h2 style={{ marginTop: "30px", textAlign: "center" }}>
-            Total: ${totalPrice.toFixed(2)}
-          </h2>
 
-          {/* BUTTONS */}
-          <div
-            style={{
-              display: "flex",
-              gap: "15px",
-              marginTop: "20px",
-              justifyContent: "center",
-            }}
-          >
-            <button
-              onClick={clearMyCart}
-              style={{
-                padding: "12px 25px",
-                borderRadius: "8px",
-                border: "none",
-                backgroundColor: "#2C7A7B",
-                color: "white",
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-            >
-              Clear Cart
-            </button>
+showMessage(
 
-            <button
-              onClick={handleCheckout}
-              style={{
-                padding: "12px 25px",
-                borderRadius: "8px",
-                border: "none",
-                backgroundColor: "#3AB795",
-                color: "white",
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-            >
-              Proceed to Checkout
-            </button>
-          </div>
-        </>
-      )}
-    </div>
-  );
+"Please select items before checkout",
+
+"error"
+
+);
+
+
+return;
+
 }
+
+
+
+navigate("/checkout");
+
+
+};
+
+
+
+
+
+
+
+
+
+return (
+
+<div className="cart-page">
+
+
+
+{
+message &&
+
+<div className={`cart-toast ${type}`}>
+
+{message}
+
+</div>
+
+}
+
+
+
+
+
+
+
+<div className="cart-container">
+
+
+
+
+
+<h1 className="cart-title">
+
+Your Cart 🛒
+
+</h1>
+
+
+
+<p className="cart-subtitle">
+
+Select your favorite meals and continue checkout
+
+</p>
+
+
+
+
+
+
+
+
+{
+
+cartItems.length===0 ?
+
+
+<div className="empty-cart">
+
+
+<h2>
+
+Your cart is empty
+
+</h2>
+
+
+<p>
+
+Add delicious food from restaurants
+
+</p>
+
+
+</div>
+
+
+
+:
+
+
+<>
+
+
+
+<div className="cart-grid">
+
+
+
+{
+
+
+cartItems.map(item=>(
+
+
+<div
+
+className="cart-card"
+
+key={item.menuItem._id}
+
+>
+
+
+
+
+<div className="select-box">
+
+
+<input
+
+
+type="checkbox"
+
+
+checked={
+
+selectedItems.some(
+
+selected=>
+
+selected.menuItem._id===item.menuItem._id
+
+)
+
+}
+
+
+onChange={()=>toggleSelectItem(item)}
+
+
+/>
+
+
+<span>
+
+Select
+
+</span>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<img
+
+src={
+
+item.menuItem.image ||
+
+"https://via.placeholder.com/150"
+
+}
+
+alt={item.menuItem.name}
+
+className="food-image"
+
+/>
+
+
+
+
+
+
+
+<h3>
+
+{item.menuItem.name}
+
+</h3>
+
+
+
+
+
+
+<p className="restaurant">
+
+
+🍽️ {item.menuItem.restaurant?.name}
+
+
+</p>
+
+
+
+
+
+
+
+<h4>
+
+
+ETB {Number(item.menuItem.price).toFixed(2)}
+
+
+</h4>
+
+
+
+
+
+
+
+
+
+<div className="quantity-box">
+
+
+<button
+
+onClick={()=>decreaseQuantity(item)}
+
+>
+
+−
+
+</button>
+
+
+
+<span>
+
+{item.quantity}
+
+</span>
+
+
+
+<button
+
+onClick={()=>increaseQuantity(item)}
+
+>
+
++
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<button
+
+
+className="remove-btn"
+
+
+onClick={()=>removeItem(item)}
+
+
+>
+
+
+Remove
+
+</button>
+
+
+
+
+
+
+
+</div>
+
+
+
+))
+
+
+}
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div className="cart-summary">
+
+
+<h2>
+
+Selected Total
+
+</h2>
+
+
+<h1>
+
+ETB {selectedTotalPrice.toFixed(2)}
+
+</h1>
+
+
+
+
+
+
+<div className="cart-buttons">
+
+
+<button
+
+className="clear-btn"
+
+onClick={clearMyCart}
+
+>
+
+Clear Cart
+
+</button>
+
+
+
+
+
+
+<button
+
+className="checkout-btn"
+
+onClick={handleCheckout}
+
+>
+
+Checkout Selected
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+</>
+
+
+}
+
+
+
+</div>
+
+
+</div>
+
+
+);
+
+
+}
+
+
 
 export default Cart;
