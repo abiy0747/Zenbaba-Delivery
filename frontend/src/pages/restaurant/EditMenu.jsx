@@ -1,284 +1,284 @@
-import React,{useEffect,useState} from "react";
-import {useNavigate,useParams} from "react-router-dom";
+// import React,{useEffect,useState} from "react";
+// import {useNavigate,useParams} from "react-router-dom";
 
-import "../../Css/restaurant.css";
+// import "../../Css/restaurant.css";
 
-import {
-getMenuById,
-updateMenu
-} from "../../services/menuService";
+// import {
+// getMenuById,
+// updateMenu
+// } from "../../services/menuService";
 
 
-function EditMenu(){
+// function EditMenu(){
 
 
-const {id}=useParams();
+// const {id}=useParams();
 
-const navigate=useNavigate();
+// const navigate=useNavigate();
 
 
 
-const [form,setForm]=useState({
+// const [form,setForm]=useState({
 
-name:"",
-description:"",
-price:"",
-category:"",
-image:""
+// name:"",
+// description:"",
+// price:"",
+// category:"",
+// image:""
 
-});
+// });
 
 
 
 
 
-useEffect(()=>{
+// useEffect(()=>{
 
-loadMenu();
+// loadMenu();
 
-},[]);
+// },[]);
 
 
 
 
 
-const loadMenu=async()=>{
+// const loadMenu=async()=>{
 
 
-try{
+// try{
 
 
-const res=await getMenuById(id);
+// const res=await getMenuById(id);
 
 
-if(res.success){
+// if(res.success){
 
-setForm(res.data);
+// setForm(res.data);
 
-}
+// }
 
 
-}catch(error){
+// }catch(error){
 
-console.log(error);
+// console.log(error);
 
-}
+// }
 
 
-};
+// };
 
 
 
 
 
-const handleChange=(e)=>{
+// const handleChange=(e)=>{
 
 
-setForm({
+// setForm({
 
-...form,
+// ...form,
 
-[e.target.name]:e.target.value
+// [e.target.name]:e.target.value
 
-});
+// });
 
 
-};
+// };
 
 
 
 
 
-const handleSubmit=async(e)=>{
+// const handleSubmit=async(e)=>{
 
 
-e.preventDefault();
+// e.preventDefault();
 
 
 
-try{
+// try{
 
 
-const res=await updateMenu(
-id,
-form
-);
+// const res=await updateMenu(
+// id,
+// form
+// );
 
 
 
-if(res.success){
+// if(res.success){
 
 
-alert(
-"Menu updated successfully"
-);
+// alert(
+// "Menu updated successfully"
+// );
 
 
-navigate("/restaurant-menu");
+// navigate("/restaurant-menu");
 
 
-}
+// }
 
 
-}catch(error){
+// }catch(error){
 
-console.log(error);
+// console.log(error);
 
-}
+// }
 
 
-};
+// };
 
 
 
 
 
-return(
+// return(
 
-<div className="restaurant-dashboard">
+// <div className="restaurant-dashboard">
 
 
-<div className="restaurant-header">
+// <div className="restaurant-header">
 
-<h1>
-✏️ Edit Menu
-</h1>
+// <h1>
+// ✏️ Edit Menu
+// </h1>
 
 
-</div>
+// </div>
 
 
 
 
-<form
+// <form
 
-onSubmit={handleSubmit}
+// onSubmit={handleSubmit}
 
-style={{
+// style={{
 
-background:"white",
+// background:"white",
 
-padding:"30px",
+// padding:"30px",
 
-borderRadius:"25px",
+// borderRadius:"25px",
 
-maxWidth:"500px",
+// maxWidth:"500px",
 
-margin:"auto"
+// margin:"auto"
 
-}}
+// }}
 
->
+// >
 
 
-<input
+// <input
 
-name="name"
+// name="name"
 
-value={form.name}
+// value={form.name}
 
-onChange={handleChange}
+// onChange={handleChange}
 
-style={inputStyle}
+// style={inputStyle}
 
-/>
+// />
 
 
 
-<textarea
+// <textarea
 
-name="description"
+// name="description"
 
-value={form.description}
+// value={form.description}
 
-onChange={handleChange}
+// onChange={handleChange}
 
-style={inputStyle}
+// style={inputStyle}
 
-/>
+// />
 
 
 
 
-<input
+// <input
 
-name="price"
+// name="price"
 
-value={form.price}
+// value={form.price}
 
-onChange={handleChange}
+// onChange={handleChange}
 
-style={inputStyle}
+// style={inputStyle}
 
-/>
+// />
 
 
 
 
-<input
+// <input
 
-name="image"
+// name="image"
 
-value={form.image}
+// value={form.image}
 
-onChange={handleChange}
+// onChange={handleChange}
 
-style={inputStyle}
+// style={inputStyle}
 
-/>
+// />
 
 
 
 
-<button style={buttonStyle}>
+// <button style={buttonStyle}>
 
-Update Food
+// Update Food
 
-</button>
+// </button>
 
 
 
-</form>
+// </form>
 
 
-</div>
+// </div>
 
 
-);
+// );
 
 
-}
+// }
 
 
 
-const inputStyle={
+// const inputStyle={
 
-width:"100%",
+// width:"100%",
 
-padding:"12px",
+// padding:"12px",
 
-marginBottom:"15px"
+// marginBottom:"15px"
 
-};
+// };
 
 
 
-const buttonStyle={
+// const buttonStyle={
 
-width:"100%",
+// width:"100%",
 
-padding:"15px",
+// padding:"15px",
 
-background:"#2563eb",
+// background:"#2563eb",
 
-color:"white",
+// color:"white",
 
-border:"none",
+// border:"none",
 
-borderRadius:"20px"
+// borderRadius:"20px"
 
-};
+// };
 
 
 
-export default EditMenu;
+// export default EditMenu;

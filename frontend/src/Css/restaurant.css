@@ -1,172 +1,110 @@
-/* =====================================
-   ZENBABA RESTAURANT PREMIUM UI
-   WHITE + BLUE LUXURY STYLE
-===================================== */
+.restaurant-dashboard {
 
+    padding: 30px;
 
-.restaurant-dashboard,
-.restaurant-menu-page{
+    padding-top: 120px;
 
-min-height:100vh;
+    min-height: 100vh;
 
-padding:110px 40px;
+    background: #f5f8ff;
 
-background:
-linear-gradient(
-135deg,
-#f8fbff,
-#eaf3ff
-);
-
-color:#1f2937;
-
-animation:pageLoad .6s ease;
+    font-family: "Poppins", sans-serif;
 
 }
 
 
 
-@keyframes pageLoad{
+/* =========================
+   HEADER
+========================= */
 
-from{
 
-opacity:0;
+.restaurant-header {
 
-transform:translateY(30px);
+    display: flex;
 
-}
+    justify-content: space-between;
 
-to{
+    align-items: center;
 
-opacity:1;
-
-transform:translateY(0);
-
-}
+    margin-bottom: 35px;
 
 }
 
 
 
-/* ================= HEADER ================= */
+.restaurant-header h1 {
 
+    font-size: 32px;
 
-.restaurant-header{
+    color: #0b3d91;
 
-text-align:center;
-
-margin-bottom:40px;
-
-}
-
-
-
-.restaurant-header h1{
-
-font-size:42px;
-
-color:#0077ff;
-
-font-weight:800;
+    margin-bottom: 8px;
 
 }
 
 
 
-.restaurant-header p{
+.restaurant-header p {
 
-font-size:18px;
+    color: #6b7280;
 
-color:#64748b;
+    font-size: 15px;
 
 }
 
 
 
 
+.add-food-btn {
 
 
-/* ================= DASHBOARD CARDS ================= */
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
 
 
-.dashboard-cards{
+    background: #0b5ed7;
 
 
-display:grid;
+    color: white;
 
 
-grid-template-columns:
-repeat(auto-fit,minmax(220px,1fr));
+    border: none;
 
 
-gap:25px;
+    padding: 14px 22px;
 
 
-}
+    border-radius: 12px;
 
 
-
-.dashboard-card{
-
-
-background:white;
+    cursor: pointer;
 
 
-border-radius:25px;
+    font-size: 15px;
 
 
-padding:25px;
+    font-weight: 600;
 
 
-text-align:center;
-
-
-box-shadow:
-
-0 15px 35px rgba(0,119,255,.15);
-
-
-border:
-
-1px solid #e5efff;
-
-
-transition:.35s;
+    transition: 0.3s;
 
 
 }
 
 
 
-.dashboard-card:hover{
+.add-food-btn:hover {
 
 
-transform:
-
-translateY(-10px);
+    background: #084298;
 
 
-box-shadow:
+    transform: translateY(-3px);
 
-0 25px 50px rgba(0,119,255,.25);
-
-
-}
-
-
-
-
-.dashboard-card h2{
-
-font-size:40px;
-
-}
-
-
-
-.dashboard-card h3{
-
-color:#0077ff;
 
 }
 
@@ -176,90 +114,27 @@ color:#0077ff;
 
 
 
-/* ================= BUTTON AREA ================= */
+/* =========================
+   ERROR
+========================= */
 
 
-.dashboard-actions{
+.dashboard-error {
 
 
-display:flex;
+    background: #fee2e2;
 
 
-justify-content:center;
+    color: #b91c1c;
 
 
-gap:20px;
+    padding: 15px;
 
 
-flex-wrap:wrap;
+    border-radius: 10px;
 
 
-margin:40px 0;
-
-
-}
-
-
-
-
-.dashboard-actions button{
-
-
-padding:
-
-14px 35px;
-
-
-border:none;
-
-
-border-radius:40px;
-
-
-background:
-
-linear-gradient(
-135deg,
-#0077ff,
-#00bfff
-);
-
-
-color:white;
-
-
-font-size:16px;
-
-
-font-weight:bold;
-
-
-cursor:pointer;
-
-
-transition:.35s;
-
-
-box-shadow:
-
-0 10px 25px rgba(0,119,255,.3);
-
-
-}
-
-
-
-.dashboard-actions button:hover{
-
-
-transform:
-
-translateY(-5px);
-
-
-box-shadow:
-
-0 20px 40px rgba(0,119,255,.45);
+    margin-bottom: 20px;
 
 
 }
@@ -271,251 +146,128 @@ box-shadow:
 
 
 
-
-/* ================= MY MENU ================= */
-
-
-.my-menu-section{
+/* =========================
+   STATISTICS
+========================= */
 
 
-margin-top:40px;
+.restaurant-stats {
 
 
-}
+    display: grid;
 
 
+    grid-template-columns: repeat(4,1fr);
 
 
-.my-menu-section h2{
+    gap: 20px;
 
 
-color:#0077ff;
-
-
-font-size:30px;
+    margin-bottom: 40px;
 
 
 }
 
 
 
+.stat-card {
 
 
-
-.dashboard-menu-grid{
-
-
-display:grid;
+    background: white;
 
 
-grid-template-columns:
-
-repeat(
-auto-fit,
-minmax(220px,1fr)
-);
+    border-radius: 18px;
 
 
-gap:20px;
+    padding: 22px;
 
 
-}
+    display: flex;
 
 
+    align-items: center;
 
 
-.dashboard-menu-card{
+    gap: 18px;
 
 
-background:white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
 
 
-border-radius:18px;
-
-
-overflow:hidden;
-
-
-box-shadow:
-
-0 8px 25px rgba(0,119,255,.12);
-
-
-transition:.35s;
-
-
-animation:
-
-cardAnimation .5s ease;
+    transition: .3s;
 
 
 }
 
 
 
+.stat-card:hover {
 
 
-@keyframes cardAnimation{
-
-
-from{
-
-opacity:0;
-
-transform:scale(.9);
-
-
-}
-
-
-to{
-
-opacity:1;
-
-transform:scale(1);
-
-
-}
+    transform: translateY(-6px);
 
 
 }
 
 
 
+.stat-icon {
 
 
+    width: 55px;
 
 
-.dashboard-menu-card:hover{
+    height: 55px;
 
 
-transform:
-
-translateY(-8px);
+    border-radius: 50%;
 
 
-box-shadow:
-
-0 18px 40px rgba(0,119,255,.25);
+    background: #e7f0ff;
 
 
-}
+    color: #0b5ed7;
 
 
+    display: flex;
 
 
-
-.dashboard-menu-card img{
-
-
-width:100%;
+    justify-content: center;
 
 
-height:140px;
+    align-items: center;
 
 
-object-fit:cover;
+    font-size: 22px;
 
 
 }
 
 
 
-
-.dashboard-menu-card h3{
-
-
-font-size:18px;
+.stat-card h3 {
 
 
-color:#0077ff;
+    margin:0;
 
 
-padding:
-
-12px 15px 0;
+    font-size:25px;
 
 
-margin:0;
+    color:#111827;
 
 
 }
 
 
 
-
-.dashboard-menu-card p{
-
-
-font-size:14px;
+.stat-card p {
 
 
-padding-left:15px;
+    margin-top:5px;
 
 
-color:#64748b;
-
-
-margin:8px 0;
-
-
-}
-
-
-
-
-.dashboard-menu-card button{
-
-
-margin:15px;
-
-
-width:
-
-calc(100% - 30px);
-
-
-padding:10px;
-
-
-border:none;
-
-
-border-radius:25px;
-
-
-background:
-
-linear-gradient(
-135deg,
-#0077ff,
-#00bfff
-);
-
-
-color:white;
-
-
-font-weight:bold;
-
-
-cursor:pointer;
-
-
-transition:.3s;
-
-
-}
-
-
-
-
-.dashboard-menu-card button:hover{
-
-
-transform:
-
-scale(1.05);
+    color:#6b7280;
 
 
 }
@@ -526,105 +278,59 @@ scale(1.05);
 
 
 
-/* ================= MANAGE MENU ================= */
+/* =========================
+   SECTION
+========================= */
 
 
-
-.manage-menu-card{
-
-
-background:white;
+.dashboard-section {
 
 
-border-radius:20px;
+    background:white;
 
 
-padding:18px;
+    padding:25px;
 
 
-margin-bottom:18px;
+    border-radius:20px;
 
 
-display:flex;
+    margin-bottom:30px;
 
 
-align-items:center;
-
-
-justify-content:space-between;
-
-
-box-shadow:
-
-0 10px 30px rgba(0,0,0,.08);
-
-
-transition:.3s;
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
 
 
 }
 
 
 
-.manage-menu-card:hover{
+.section-title {
 
 
-transform:
-
-translateX(8px);
+    display:flex;
 
 
-box-shadow:
-
-0 15px 40px rgba(0,119,255,.2);
+    justify-content:space-between;
 
 
-}
+    align-items:center;
 
 
-
-
-
-
-
-.manage-buttons{
-
-
-display:flex;
-
-
-gap:12px;
+    margin-bottom:25px;
 
 
 }
 
 
 
-
-.manage-buttons button{
-
-
-padding:
-
-10px 22px;
+.section-title h2 {
 
 
-border:none;
+    color:#0b3d91;
 
 
-border-radius:30px;
-
-
-font-weight:bold;
-
-
-cursor:pointer;
-
-
-transition:.3s;
-
-
-font-size:14px;
+    font-size:24px;
 
 
 }
@@ -635,42 +341,21 @@ font-size:14px;
 
 
 
-.edit-btn{
+/* =========================
+   FOOD GRID
+========================= */
 
 
-background:
-
-linear-gradient(
-135deg,
-#0077ff,
-#00bfff
-);
+.food-grid {
 
 
-color:white;
+    display:grid;
 
 
-box-shadow:
-
-0 8px 20px rgba(0,119,255,.25);
+    grid-template-columns:repeat(3,1fr);
 
 
-}
-
-
-
-
-.edit-btn:hover{
-
-
-transform:
-
-translateY(-3px);
-
-
-box-shadow:
-
-0 15px 30px rgba(0,119,255,.4);
+    gap:25px;
 
 
 }
@@ -680,42 +365,332 @@ box-shadow:
 
 
 
-
-.delete-btn{
-
-
-background:
-
-linear-gradient(
-135deg,
-#ff6b6b,
-#ff0000
-);
+.food-card {
 
 
-color:white;
+    background:#ffffff;
 
 
-box-shadow:
+    border-radius:18px;
 
-0 8px 20px rgba(255,0,0,.2);
+
+    overflow:hidden;
+
+
+    border:1px solid #e5e7eb;
+
+
+    transition:.3s;
 
 
 }
 
 
 
-.delete-btn:hover{
+.food-card:hover {
 
 
-transform:
-
-translateY(-3px);
+    transform:translateY(-5px);
 
 
-box-shadow:
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
 
-0 15px 30px rgba(255,0,0,.35);
+
+}
+
+
+
+
+.food-card img {
+
+
+    width:100%;
+
+
+    height:190px;
+
+
+    object-fit:cover;
+
+
+}
+
+
+
+
+
+.food-info {
+
+
+    padding:20px;
+
+
+}
+
+
+
+.food-info h3 {
+
+
+    margin-bottom:10px;
+
+
+    color:#111827;
+
+
+}
+
+
+
+.food-info p {
+
+
+    height:45px;
+
+
+    overflow:hidden;
+
+
+    color:#6b7280;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+.food-info strong {
+
+
+    display:block;
+
+
+    color:#0b5ed7;
+
+
+    font-size:18px;
+
+
+    margin:15px 0;
+
+
+}
+
+
+
+
+
+
+/* =========================
+   FOOD ACTION BUTTONS
+========================= */
+
+
+
+.food-actions {
+
+
+    display:flex;
+
+
+    gap:12px;
+
+
+}
+
+
+
+.food-actions button {
+
+
+    flex:1;
+
+
+    padding:10px;
+
+
+    border-radius:10px;
+
+
+    border:none;
+
+
+    cursor:pointer;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:8px;
+
+
+    font-weight:600;
+
+
+}
+
+
+
+
+.edit-btn {
+
+
+    background:#dbeafe;
+
+
+    color:#1d4ed8;
+
+
+}
+
+
+
+.edit-btn:hover {
+
+
+    background:#bfdbfe;
+
+
+}
+
+
+
+
+
+
+.delete-btn {
+
+
+    background:#fee2e2;
+
+
+    color:#dc2626;
+
+
+}
+
+
+
+.delete-btn:hover {
+
+
+    background:#fecaca;
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   EMPTY STATES
+========================= */
+
+
+.empty-menu,
+.empty-orders {
+
+
+    text-align:center;
+
+
+    padding:50px;
+
+
+    color:#6b7280;
+
+
+}
+
+
+
+.empty-menu svg,
+.empty-orders svg {
+
+
+    font-size:45px;
+
+
+    color:#0b5ed7;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   ORDER CARD
+========================= */
+
+
+.order-card {
+
+
+    padding:18px;
+
+
+    border-radius:12px;
+
+
+    background:#f8fafc;
+
+
+    margin-bottom:12px;
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   LOADING
+========================= */
+
+
+.restaurant-loading {
+
+
+    height:100vh;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    background:#f5f8ff;
+
+
+    color:#0b5ed7;
 
 
 }
@@ -728,52 +703,31 @@ box-shadow:
 
 
 
-/* ================= FORMS ================= */
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
 
 
-.restaurant-form{
+@media(max-width:1100px){
 
 
-max-width:600px;
+    .restaurant-stats {
 
 
-margin:100px auto;
+        grid-template-columns:repeat(2,1fr);
 
 
-background:white;
-
-
-padding:40px;
-
-
-border-radius:30px;
-
-
-box-shadow:
-
-0 20px 50px rgba(0,119,255,.15);
-
-
-animation:
-
-pageLoad .6s;
-
-
-}
+    }
 
 
 
-
-.restaurant-form h1{
-
-
-text-align:center;
+    .food-grid {
 
 
-color:#0077ff;
+        grid-template-columns:repeat(2,1fr);
 
 
-margin-bottom:30px;
+    }
 
 
 }
@@ -782,48 +736,420 @@ margin-bottom:30px;
 
 
 
-.restaurant-form input,
-.restaurant-form textarea,
-.restaurant-form select{
+
+@media(max-width:700px){
 
 
-width:100%;
+    .restaurant-dashboard {
 
 
-padding:15px;
+        padding:15px;
 
 
-margin-bottom:20px;
+    }
 
 
-border-radius:15px;
+
+    .restaurant-header {
 
 
-border:
-
-1px solid #dbeafe;
+        flex-direction:column;
 
 
-font-size:16px;
+        align-items:flex-start;
 
 
-outline:none;
+        gap:20px;
+
+
+    }
+
+
+
+
+
+    .restaurant-stats {
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+
+
+
+    .food-grid {
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+
+    .dashboard-section {
+
+
+        padding:18px;
+
+
+    }
+
+
+}
+
+/* =========================
+   MODALS
+========================= */
+
+
+.modal-overlay {
+
+    position: fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,0.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1000;
+
+}
+
+
+
+.menu-modal,
+.delete-modal {
+
+
+    background:white;
+
+    width:450px;
+
+    max-width:90%;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    animation:modalShow .3s ease;
 
 
 }
 
 
 
-.restaurant-form input:focus,
-.restaurant-form textarea:focus{
+@keyframes modalShow {
 
 
-border-color:#0077ff;
+    from{
+
+        transform:scale(.8);
+
+        opacity:0;
+
+    }
 
 
-box-shadow:
+    to{
 
-0 0 12px rgba(0,119,255,.25);
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+
+}
+
+
+
+
+.modal-header {
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+.modal-header h2 {
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#0b3d91;
+
+}
+
+
+
+.close-modal {
+
+
+    border:none;
+
+    background:none;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+.menu-form {
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+
+}
+
+
+
+.menu-form input,
+.menu-form textarea,
+.menu-form select {
+
+
+    padding:13px;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+    outline:none;
+
+    font-size:14px;
+
+
+}
+
+
+
+.menu-form textarea {
+
+
+    height:100px;
+
+    resize:none;
+
+
+}
+
+
+
+
+.availability-box {
+
+
+    display:flex;
+
+    gap:10px;
+
+    align-items:center;
+
+
+}
+
+
+
+
+.save-food-btn {
+
+
+    background:#0b5ed7;
+
+    color:white;
+
+    border:none;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+
+}
+
+
+
+
+.delete-modal {
+
+
+    text-align:center;
+
+
+}
+
+
+
+.delete-icon {
+
+
+    width:70px;
+
+    height:70px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:30px;
+
+
+}
+
+
+
+.delete-actions {
+
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:25px;
+
+
+}
+
+
+
+.cancel-delete-btn,
+.confirm-delete-btn {
+
+
+    flex:1;
+
+    padding:13px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-weight:600;
+
+
+}
+
+
+
+.cancel-delete-btn {
+
+
+    background:#e5e7eb;
+
+    color:#374151;
+
+
+}
+
+
+
+.confirm-delete-btn {
+
+
+    background:#dc2626;
+
+    color:white;
+
+
+}
+
+/* =========================
+   RESTAURANT ORDERS
+========================= */
+
+
+.order-management-card {
+
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+    transition:0.3s;
+
+
+}
+
+
+
+.order-management-card:hover {
+
+
+    transform:translateY(-4px);
 
 
 }
@@ -832,52 +1158,446 @@ box-shadow:
 
 
 
-.restaurant-form button{
 
 
-width:100%;
+.order-header {
 
 
-padding:16px;
+    display:flex;
 
+    justify-content:space-between;
 
-border:none;
+    align-items:center;
 
-
-border-radius:40px;
-
-
-background:#0077ff;
-
-
-color:white;
-
-
-font-size:18px;
-
-
-font-weight:bold;
-
-
-cursor:pointer;
-
-
-transition:.3s;
+    margin-bottom:20px;
 
 
 }
 
 
 
-.restaurant-form button:hover{
+.order-header h3 {
 
 
-transform:
+    color:#0b3d91;
 
-scale(1.04);
-
-
-background:#0056c7;
+    font-size:20px;
 
 
+}
+
+
+
+
+
+
+
+.status {
+
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    text-transform:capitalize;
+
+
+}
+
+
+
+
+
+
+.status.pending {
+
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+
+}
+
+
+
+.status.accepted {
+
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+
+}
+
+
+
+.status.preparing {
+
+
+    background:#ede9fe;
+
+    color:#6d28d9;
+
+
+}
+
+
+
+.status.ready_for_pickup {
+
+
+    background:#dcfce7;
+
+    color:#166534;
+
+
+}
+
+
+
+.status.delivered {
+
+
+    background:#cffafe;
+
+    color:#155e75;
+
+
+}
+
+
+
+.status.cancelled {
+
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+
+}
+
+
+
+
+
+
+
+
+/* CUSTOMER INFORMATION */
+
+
+.customer-info {
+
+
+    background:#f8fafc;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+.customer-info p {
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin:8px 0;
+
+    color:#4b5563;
+
+
+}
+
+
+
+.customer-info svg {
+
+
+    color:#0b5ed7;
+
+
+}
+
+
+
+
+
+
+
+
+/* ORDER ITEMS */
+
+
+.order-items {
+
+
+    border-top:1px solid #e5e7eb;
+
+    border-bottom:1px solid #e5e7eb;
+
+    padding:15px 0;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+.order-item-row {
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:8px 0;
+
+    color:#374151;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ORDER FOOTER */
+
+
+.order-footer {
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+
+}
+
+
+
+.order-footer strong {
+
+
+    color:#0b5ed7;
+
+    font-size:18px;
+
+
+}
+
+
+
+
+
+
+
+.order-actions {
+
+
+    display:flex;
+
+    gap:10px;
+
+
+}
+
+
+
+
+.order-actions button {
+
+
+    border:none;
+
+    padding:11px 18px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-weight:600;
+
+
+}
+
+
+
+
+
+
+
+.accept-btn {
+
+
+    background:#dcfce7;
+
+    color:#166534;
+
+
+}
+
+
+
+.accept-btn:hover {
+
+
+    background:#bbf7d0;
+
+
+}
+
+
+
+
+
+
+.prepare-btn {
+
+
+    background:#ede9fe;
+
+    color:#6d28d9;
+
+
+}
+
+
+
+.prepare-btn:hover {
+
+
+    background:#ddd6fe;
+
+
+}
+
+
+
+
+
+
+
+.ready-btn {
+
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+
+}
+
+
+
+.ready-btn:hover {
+
+
+    background:#bfdbfe;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* MOBILE */
+
+
+@media(max-width:700px){
+
+
+
+    .order-header,
+
+
+    .order-footer {
+
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+
+    }
+
+
+
+
+    .order-actions {
+
+
+        width:100%;
+
+
+    }
+
+
+
+
+
+    .order-actions button {
+
+
+        flex:1;
+
+        justify-content:center;
+
+
+    }
+
+
+
+}
+
+/* =========================
+   RESTAURANT ORDERS PAGE SPACE
+========================= */
+
+
+/* .restaurant-orders-page {
+
+    padding-top: 70px;
+
+} */
+
+.restaurant-dashboard{
+   padding-top: 70px;
 }

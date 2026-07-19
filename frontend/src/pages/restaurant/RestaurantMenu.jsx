@@ -1,198 +1,641 @@
-import React, {useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import "../../Css/restaurant.css";
-import {useNavigate} from "react-router-dom";
-import {
- getMyMenu
-} from "../../services/menuService";
 
 import {
-deleteMenu
-} from "../../services/menuService";
-function RestaurantMenu(){
+  FaSearch,
+  FaPlus,
+  FaEdit,
+  FaTrash,
+  FaUtensils
+} from "react-icons/fa";
 
-const navigate = useNavigate();
-const [menu,setMenu]=useState([]);
-
-
-useEffect(()=>{
-
-loadMenu();
-
-},[]);
+import { getMyMenu } from "../../services/menuService";
 
 
 
-const loadMenu=async()=>{
+function RestaurantMenu() {
 
 
-try{
+  const [menuItems,setMenuItems] = useState([]);
+
+  const [filteredItems,setFilteredItems] = useState([]);
+
+  const [search,setSearch] = useState("");
+
+  const [filter,setFilter] = useState("all");
+
+  const [loading,setLoading] = useState(true);
+
+  const [selectedFood,setSelectedFood] = useState(null);
 
 
-const res = await getMyMenu();
+
+  // =========================
+  // LOAD MENU
+  // =========================
 
 
-if(res.success){
+  const loadMenu = async()=>{
 
-setMenu(res.data);
+
+    try{
+
+
+      setLoading(true);
+
+
+      const response = await getMyMenu();
+
+
+
+      let data = [];
+
+
+      if(response?.data){
+
+        data = response.data;
+
+      }
+
+      else if(Array.isArray(response)){
+
+        data = response;
+
+      }
+
+
+
+      setMenuItems(data);
+
+      setFilteredItems(data);
+
+
+
+    }
+
+    catch(error){
+
+
+      console.log(
+        "Menu loading error:",
+        error
+      );
+
+
+    }
+
+    finally{
+
+
+      setLoading(false);
+
+
+    }
+
+
+  };
+
+
+
+
+
+  useEffect(()=>{
+
+
+    loadMenu();
+
+
+  },[]);
+
+
+
+
+
+
+
+
+  // =========================
+  // SEARCH + FILTER
+  // =========================
+
+
+  useEffect(()=>{
+
+
+    let result = [...menuItems];
+
+
+
+    if(search){
+
+
+      result = result.filter(food=>
+
+        food.name
+        .toLowerCase()
+        .includes(
+          search.toLowerCase()
+        )
+
+      );
+
+
+    }
+
+
+
+
+
+    if(filter==="available"){
+
+
+      result =
+      result.filter(
+        food=>food.isAvailable !== false
+      );
+
+
+    }
+
+
+
+
+    if(filter==="unavailable"){
+
+
+      result =
+      result.filter(
+        food=>food.isAvailable === false
+      );
+
+
+    }
+
+
+
+
+    setFilteredItems(result);
+
+
+
+  },[
+    search,
+    filter,
+    menuItems
+  ]);
+
+
+
+
+
+
+
+  // =========================
+  // ACTIONS
+  // =========================
+
+
+  const handleAddFood = ()=>{
+
+
+    console.log(
+      "Open Add Food Modal"
+    );
+
+
+  };
+
+
+
+
+
+  const handleEdit = (food)=>{
+
+
+    setSelectedFood(food);
+
+
+    console.log(
+      "Edit:",
+      food
+    );
+
+
+  };
+
+
+
+
+
+
+  const handleDelete = (food)=>{
+
+
+    console.log(
+      "Delete:",
+      food
+    );
+
+
+  };
+
+
+
+
+
+
+
+
+  if(loading){
+
+
+    return(
+
+      <div className="restaurant-loading">
+
+        <h3>
+          Loading Menu...
+        </h3>
+
+      </div>
+
+    );
+
+
+  }
+
+
+
+
+
+
+
+
+  return(
+
+
+    <div className="restaurant-dashboard">
+
+
+
+
+
+      {/* HEADER */}
+
+
+
+      <div className="restaurant-header">
+
+
+        <div>
+
+
+          <h1>
+            My Menu
+          </h1>
+
+
+          <p>
+            Manage your restaurant food items
+          </p>
+
+
+        </div>
+
+
+
+
+        <button
+          className="add-food-btn"
+          onClick={handleAddFood}
+        >
+
+
+          <FaPlus/>
+
+          Add Food
+
+
+        </button>
+
+
+
+
+      </div>
+
+
+
+
+
+
+
+
+      {/* SEARCH AREA */}
+
+
+
+      <div className="dashboard-section">
+
+
+        <div
+          style={{
+            display:"flex",
+            gap:"15px",
+            flexWrap:"wrap"
+          }}
+        >
+
+
+
+          <div
+            style={{
+              flex:1,
+              minWidth:"250px",
+              display:"flex",
+              alignItems:"center",
+              gap:"10px",
+              background:"#f1f5f9",
+              padding:"12px 18px",
+              borderRadius:"12px"
+            }}
+          >
+
+
+            <FaSearch/>
+
+
+            <input
+
+              value={search}
+
+              onChange={
+                e=>setSearch(
+                  e.target.value
+                )
+              }
+
+              placeholder="Search food..."
+
+              style={{
+                border:"none",
+                outline:"none",
+                background:"transparent",
+                width:"100%"
+              }}
+
+            />
+
+
+          </div>
+
+
+
+
+
+          <select
+
+            value={filter}
+
+            onChange={
+              e=>setFilter(
+                e.target.value
+              )
+            }
+
+            style={{
+              padding:"12px",
+              borderRadius:"10px",
+              border:"1px solid #ddd"
+            }}
+
+          >
+
+            <option value="all">
+              All Foods
+            </option>
+
+
+            <option value="available">
+              Available
+            </option>
+
+
+            <option value="unavailable">
+              Unavailable
+            </option>
+
+
+          </select>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+      {/* MENU LIST */}
+
+
+
+
+      <div className="dashboard-section">
+
+
+
+        {
+
+          filteredItems.length === 0 ?
+
+
+
+          (
+
+            <div className="empty-menu">
+
+
+              <FaUtensils/>
+
+
+              <h3>
+                No Food Found
+              </h3>
+
+
+              <p>
+                Add your restaurant meals
+              </p>
+
+
+
+            </div>
+
+
+          )
+
+
+
+          :
+
+
+
+          (
+
+            <div className="food-grid">
+
+
+
+              {
+
+                filteredItems.map(food=>(
+
+
+                  <div
+                    className="food-card"
+                    key={food._id}
+                  >
+
+
+
+                    <img
+
+                      src={
+                        food.image ||
+                        "https://via.placeholder.com/300"
+                      }
+
+                      alt={food.name}
+
+                    />
+
+
+
+
+                    <div className="food-info">
+
+
+                      <h3>
+                        {food.name}
+                      </h3>
+
+
+
+
+                      <p>
+                        {food.description}
+                      </p>
+
+
+
+
+                      <strong>
+
+                        {food.price} ETB
+
+                      </strong>
+
+
+
+
+
+                      <div className="food-actions">
+
+
+                        <button
+
+                          className="edit-btn"
+
+                          onClick={()=>
+                            handleEdit(food)
+                          }
+
+                        >
+
+
+                          <FaEdit/>
+
+                          Edit
+
+
+                        </button>
+
+
+
+
+
+                        <button
+
+                          className="delete-btn"
+
+                          onClick={()=>
+                            handleDelete(food)
+                          }
+
+                        >
+
+
+                          <FaTrash/>
+
+                          Delete
+
+
+                        </button>
+
+
+
+                      </div>
+
+
+
+                    </div>
+
+
+
+                  </div>
+
+
+
+                ))
+
+              }
+
+
+
+            </div>
+
+
+          )
+
+
+        }
+
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+  );
+
 
 }
 
-
-}catch(error){
-
-console.log(error);
-
-}
-
-
-};
-
-
-const handleDelete=async(id)=>{
-
-
-const confirmDelete =
-window.confirm(
-"Are you sure you want to delete this food?"
-);
-
-
-if(!confirmDelete) return;
-
-
-await deleteMenu(id);
-
-
-loadMenu();
-
-
-};
-
-
-return(
-
-<div className="restaurant-dashboard">
-
-
-<div className="restaurant-header">
-
-<h1>
-🍔 My Menu
-</h1>
-
-<p>
-Manage your restaurant food items
-</p>
-
-
-</div>
-
-
-
-
-
-<div className="dashboard-actions">
-
-
-<button
-onClick={()=>navigate("/add-menu")}
->
-+ Add New Food
-</button>
-
-</div>
-
-
-
-
-
-
-<div className="dashboard-cards">
-
-
-{
-
-menu.map((item)=>(
-
-
-<div
-className="dashboard-card"
-key={item._id}
->
-
-
-<img
-
-src={
-item.image ||
-"https://via.placeholder.com/200"
-}
-
-alt={item.name}
-
-style={{
-width:"150px",
-height:"150px",
-borderRadius:"20px",
-objectFit:"cover"
-}}
-
-/>
-
-
-
-<h3>
-
-{item.name}
-
-</h3>
-
-
-<p>
-
-ETB {item.price}
-
-</p>
-
-
-
-<button
-onClick={()=>
-navigate(`/edit-menu/${item._id}`)
-}
->
-Edit
-</button>
-
-
-
-<button
-onClick={()=>handleDelete(item._id)}
->
-Delete
-</button>
-
-
-
-</div>
-
-
-))
-
-
-}
-
-
-</div>
-
-
-</div>
-
-
-);
-
-
-}
 
 
 export default RestaurantMenu;

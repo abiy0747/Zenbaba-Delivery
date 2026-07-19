@@ -10,6 +10,8 @@ function Profile() {
 
 const { user, logout } = useContext(AuthContext);
 
+const role = user?.role || localStorage.getItem("role");
+
 const navigate = useNavigate();
 
 

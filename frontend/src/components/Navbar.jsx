@@ -15,6 +15,8 @@ function Navbar() {
 
 const { user, logout } = useContext(AuthContext);
 
+const role = user?.role || localStorage.getItem("role");
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!e.target.closest(".navbar-menu") && !e.target.closest(".hamburger-icon")) {
@@ -139,49 +141,98 @@ const { user, logout } = useContext(AuthContext);
           >
             ☰
           </div>
+{role === "restaurant" ? (
+  <>
+    <Link 
+      to="/restaurant-dashboard"
+      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+    >
+      Dashboard
+    </Link>
 
-          <Link to="/" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
-            Home
-          </Link>
-          <Link to="/menu" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
-            Menu
-          </Link>
-          <Link to="/restaurants" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
-            Restaurants
-          </Link>
+    <Link 
+      to="/restaurant-orders"
+      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+    >
+      Orders
+    </Link>
+  </>
+) : (
+  <>
+    <Link 
+      to="/"
+      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+    >
+      Home
+    </Link>
 
-          <Link to="/my-orders" style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>
-            My Orders
-          </Link>
 
+    <Link 
+      to="/menu"
+      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+    >
+      Menu
+    </Link>
+
+
+    <Link 
+      to="/restaurants"
+      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+    >
+      Restaurants
+    </Link>
+
+
+    <Link 
+      to="/my-orders"
+      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+    >
+      My Orders
+    </Link>
+  </>
+)}
           
 
             
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "10px", position: "relative" }}>
-          <div style={{ position: "relative" }}>
-            <Link to="/cart" style={{ color: "black", fontSize: "clamp(14px,1.5vw,22px)" }}>
-              <FaShoppingCart />
-            </Link>
-           {cartCount > 0 && (
-  <span
-    style={{
-      position: "absolute",
-      top: "-6px",
-      right: "-8px",
-      backgroundColor: "red",
-      color: "white",
-      borderRadius: "50%",
-      padding: "2px 6px",
-      fontSize: "clamp(8px,0.8vw,12px)",
-      fontWeight: "bold",
-    }}
-  >
-    {cartCount}
-  </span>
+         {role !== "restaurant" && (
+
+  <div style={{ position: "relative" }}>
+
+    <Link 
+      to="/cart" 
+      style={{ 
+        color: "black", 
+        fontSize: "clamp(14px,1.5vw,22px)" 
+      }}
+    >
+      <FaShoppingCart />
+    </Link>
+
+
+    {cartCount > 0 && (
+      <span
+        style={{
+          position: "absolute",
+          top: "-6px",
+          right: "-8px",
+          backgroundColor: "red",
+          color: "white",
+          borderRadius: "50%",
+          padding: "2px 6px",
+          fontSize: "clamp(8px,0.8vw,12px)",
+          fontWeight: "bold",
+        }}
+      >
+        {cartCount}
+      </span>
+    )}
+
+  </div>
+
 )}
-          </div>
 
           {/* Navbar Profile */}
           {user ? (
@@ -339,13 +390,60 @@ const { user, logout } = useContext(AuthContext);
   )}
 </div>
 
-        <Link to="/" style={linkStyle}><FaHome /> Home</Link>
-        <Link to="/menu" style={linkStyle}><FaUtensils /> Menu</Link>
-        <Link to="/cart" style={linkStyle}><FaShoppingCart /> Cart</Link>
-        <Link to="/checkout" style={linkStyle}><FaCreditCard /> Checkout</Link>
-        <Link to="/help" style={linkStyle}><FaQuestionCircle /> Help Center</Link>
-        <Link to="/contact" style={linkStyle}><FaEnvelope /> Contact</Link>
-        <Link to="/restaurants" style={linkStyle}><FaUtensils /> Restaurants</Link>
+       {role === "restaurant" ? (
+
+<>
+<Link 
+to="/restaurant-dashboard" 
+style={linkStyle}
+>
+📊 Dashboard
+</Link>
+
+<Link 
+to="/restaurant-orders"
+style={linkStyle}
+>
+📦 Orders
+</Link>
+
+</>
+
+) : (
+
+<>
+
+<Link to="/" style={linkStyle}>
+<FaHome /> Home
+</Link>
+
+<Link to="/menu" style={linkStyle}>
+<FaUtensils /> Menu
+</Link>
+
+<Link to="/cart" style={linkStyle}>
+<FaShoppingCart /> Cart
+</Link>
+
+<Link to="/checkout" style={linkStyle}>
+<FaCreditCard /> Checkout
+</Link>
+
+<Link to="/help" style={linkStyle}>
+<FaQuestionCircle /> Help Center
+</Link>
+
+<Link to="/contact" style={linkStyle}>
+<FaEnvelope /> Contact
+</Link>
+
+<Link to="/restaurants" style={linkStyle}>
+<FaUtensils /> Restaurants
+</Link>
+
+</>
+
+)}
       
       </div>
 

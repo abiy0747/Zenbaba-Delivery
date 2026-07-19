@@ -19,8 +19,11 @@ import MyOrders from "./pages/MyOrders";
 import OrderDetails from "./pages/OrderDetails";
 import RestaurantDashboard from "./pages/restaurant/RestaurantDashboard";
 import RestaurantMenu from "./pages/restaurant/RestaurantMenu";
-import AddMenu from "./pages/restaurant/AddMenu";
-import EditMenu from "./pages/restaurant/EditMenu";
+// import AddMenu from "./pages/restaurant/AddMenu";
+// import EditMenu from "./pages/restaurant/EditMenu";
+import RestaurantOrders from "./pages/restaurant/RestaurantOrders";
+import ProtectedRoute from "./components/ProtectedRoute";
+import DriverDashboard from "./pages/driver/DriverDashboard";
 function App() {
   return (
     <AuthProvider>
@@ -49,21 +52,46 @@ function App() {
 
 />
 <Route
-path="/restaurant-dashboard"
-element={<RestaurantDashboard />}
+  path="/restaurant-dashboard"
+  element={
+    <ProtectedRoute allowedRoles={["restaurant"]}>
+      <RestaurantDashboard />
+    </ProtectedRoute>
+  }
 />
+
+
 <Route
-path="/restaurant-menu"
-element={<RestaurantMenu/>}
+  path="/restaurant-menu"
+  element={
+    <ProtectedRoute allowedRoles={["restaurant"]}>
+      <RestaurantMenu />
+    </ProtectedRoute>
+  }
 />
+
+
 <Route
+  path="/restaurant-orders"
+  element={
+    <ProtectedRoute allowedRoles={["restaurant"]}>
+      <RestaurantOrders />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+path="/driver-dashboard"
+element={<DriverDashboard/>}
+/>
+{/* <Route
 path="/add-menu"
 element={<AddMenu/>}
 />
 <Route
 path="/edit-menu/:id"
 element={<EditMenu/>}
-/>
+/> */}
        <Route path="/help" element={<HelpCenter />} />
        <Route path="/contact" element={<Contact />} />
 

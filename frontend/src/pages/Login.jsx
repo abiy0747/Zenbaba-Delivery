@@ -7,9 +7,11 @@ import { AuthContext } from "../context/AuthContext";
 
 function Login({ onClose, onSwitchToRegister }) {
 
+
   const { login } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
 
 
   const initialState = {
@@ -18,116 +20,272 @@ function Login({ onClose, onSwitchToRegister }) {
   };
 
 
+
   const [form, setForm] = useState(initialState);
 
   const [loading, setLoading] = useState(false);
 
 
 
+
+
   const resetForm = () => {
+
     setForm(initialState);
+
   };
+
+
 
 
 
   const handleChange = (e) => {
 
+
     setForm({
+
       ...form,
+
       [e.target.name]: e.target.value
+
     });
+
 
   };
 
 
 
+
+
+
+
+
+  const redirectUser = (role) => {
+
+
+    switch(role){
+
+
+      case "restaurant":
+
+        navigate("/restaurant-dashboard");
+
+        break;
+
+
+
+      case "driver":
+
+        navigate("/driver-dashboard");
+
+        break;
+
+
+
+      case "admin":
+
+        navigate("/admin-dashboard");
+
+        break;
+
+
+
+      case "customer":
+
+      default:
+
+        navigate("/");
+
+        break;
+
+
+    }
+
+
+  };
+
+
+
+
+
+
+
+
+
+
   const handleSubmit = async (e) => {
+
 
     e.preventDefault();
 
-console.log("LOGIN CLICKED");
+
     try {
+
 
       setLoading(true);
 
 
-     const data = await loginUser(
-  form.email,
-  form.password
-);
 
-console.log("BACKEND RESPONSE:", data);
+      const data = await loginUser(
+
+        form.email,
+
+        form.password
+
+      );
+
+
+
+
 
       console.log("LOGIN RESPONSE:", data);
+
+
 
 
 
       if(data.success){
 
 
+
         const token = data.data.tokens.accessToken;
+
 
         const user = data.data.user;
 
 
 
+
+
+        // Save authentication data
+
+        localStorage.setItem(
+
+          "token",
+
+          token
+
+        );
+
+
+
+        localStorage.setItem(
+
+          "role",
+
+          user.role
+
+        );
+
+
+
+        localStorage.setItem(
+
+          "user",
+
+          JSON.stringify(user)
+
+        );
+
+
+
+
+
+
+
+
+        // Update Auth Context
+
         login({
 
-          name: user.name,
+          name:user.name,
 
-          email: user.email,
+          email:user.email,
 
-          role: user.role,
+          role:user.role,
 
-          token: token
+          token:token
 
         });
 
-      console.log("USER DATA:", data.data.user);
-console.log("TOKEN DATA:", data.data.tokens);
+
+
+
+
+
+
 
         resetForm();
 
 
 
+
         if(onClose){
+
           onClose();
+
         }
 
 
 
-        navigate("/");
+
+
+
+
+        // Redirect based on role
+
+        redirectUser(user.role);
+
 
 
       }
 
 
+
+
+
     } catch(error){
+
 
 
       console.log(error);
 
 
+
       alert(
+
         error.response?.data?.message ||
+
         "Login failed"
+
       );
+
 
 
     } finally {
 
+
       setLoading(false);
 
+
     }
+
 
   };
 
 
 
 
+
+
+
+
+
   useEffect(()=>{
 
+
     resetForm();
+
 
   },[]);
 
@@ -135,52 +293,84 @@ console.log("TOKEN DATA:", data.data.tokens);
 
 
 
+
+
+
+
   return (
+
+
 
     <div
 
+
       className="login-overlay"
+
 
       onClick={()=>{
 
+
         resetForm();
 
+
         if(onClose){
+
           onClose();
+
         }
 
+
       }}
+
 
     >
 
 
+
+
+
       <div
+
 
         className="login-box"
 
+
         onClick={(e)=>e.stopPropagation()}
+
 
       >
 
 
 
+
+
+
         <button
+
 
           className="close-btn"
 
+
           onClick={()=>{
+
 
             resetForm();
 
+
             onClose();
 
+
           }}
+
 
         >
 
           ✕
 
+
         </button>
+
+
 
 
 
@@ -195,26 +385,37 @@ console.log("TOKEN DATA:", data.data.tokens);
 
 
 
+
+
         <form onSubmit={handleSubmit}>
 
 
           <input
 
+
             className="login-input"
+
 
             name="email"
 
+
             type="email"
+
 
             placeholder="Email"
 
+
             value={form.email}
+
 
             onChange={handleChange}
 
+
             required
 
+
           />
+
 
 
 
@@ -222,21 +423,30 @@ console.log("TOKEN DATA:", data.data.tokens);
 
           <input
 
+
             className="login-input"
+
 
             name="password"
 
+
             type="password"
+
 
             placeholder="Password"
 
+
             value={form.password}
+
 
             onChange={handleChange}
 
+
             required
 
+
           />
+
 
 
 
@@ -245,21 +455,28 @@ console.log("TOKEN DATA:", data.data.tokens);
 
           <button
 
+
             className="login-btn"
+
 
             type="submit"
 
+
             disabled={loading}
+
 
           >
 
+
             {loading ? "Logging in..." : "Login"}
+
 
           </button>
 
 
 
         </form>
+
 
 
 
@@ -281,14 +498,18 @@ console.log("TOKEN DATA:", data.data.tokens);
 
 
 
+
         <button
 
+
           className="google-btn"
+
 
           onClick={()=>{
 
 
-            login({
+            const googleUser = {
+
 
               name:"Google User",
 
@@ -296,17 +517,39 @@ console.log("TOKEN DATA:", data.data.tokens);
 
               role:"customer"
 
-            });
+
+            };
+
+
+
+            localStorage.setItem(
+
+              "role",
+
+              googleUser.role
+
+            );
+
+
+
+            login(googleUser);
 
 
 
             resetForm();
 
 
+
             onClose();
 
 
+
+            navigate("/");
+
+
+
           }}
+
 
         >
 
@@ -322,23 +565,31 @@ console.log("TOKEN DATA:", data.data.tokens);
 
 
 
+
         <p className="login-footer">
 
 
           Don't have an account?{" "}
 
 
+
           <span
+
 
             className="login-link"
 
+
             onClick={()=>{
+
 
               resetForm();
 
+
               onSwitchToRegister();
 
+
             }}
+
 
           >
 
@@ -353,13 +604,17 @@ console.log("TOKEN DATA:", data.data.tokens);
 
 
 
+
       </div>
+
+
 
 
     </div>
 
 
   );
+
 
 }
 

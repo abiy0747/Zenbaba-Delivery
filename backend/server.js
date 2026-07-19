@@ -9,6 +9,7 @@ import menuRoutes from "./routes/menuRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import deliveryRoutes from "./routes/deliveryRoutes.js";
+import driverRoutes from "./routes/driverRoutes.js";
 dotenv.config();
 
 connectDB();
@@ -24,6 +25,7 @@ app.use("/api/menu", menuRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/delivery", deliveryRoutes);
+app.use("/api/drivers", driverRoutes);
 app.use(errorMiddleware);
 const PORT = process.env.PORT || 5000;
 

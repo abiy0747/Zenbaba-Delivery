@@ -1,7 +1,7 @@
 import Delivery from "../models/Delivery.js";
 import Order from "../models/Order.js";
 import User from "../models/User.js";
-
+import Driver from "../models/Driver.js";
 // Admin assigns driver
 export const assignDriver = async (req, res) => {
   try {
@@ -65,33 +65,39 @@ if (existingDelivery) {
 };
 
 // Driver views deliveries
-export const getMyDeliveries = async (req, res) => {
-  try {
+export const getMyDeliveries = async(req,res)=>{
 
-    const deliveries = await Delivery.find({
-      driver: req.user._id,
-    })
-      .populate("order")
-      .sort({ createdAt: -1 });
+try{
 
-    res.status(200).json({
-      success: true,
-      count: deliveries.length,
-      data: deliveries,
-    });
+const deliveries = await Delivery.find({
+driver:req.user._id
+})
+.populate("order")
+.sort({
+createdAt:-1
+});
 
-  } catch (error) {
 
-    console.error(error);
+res.status(200).json({
 
-    res.status(500).json({
-      success: false,
-      message: "Failed to get deliveries.",
-    });
+success:true,
+data:deliveries
 
-  }
+});
+
+
+}catch(error){
+
+res.status(500).json({
+
+success:false,
+message:error.message
+
+});
+
+}
+
 };
-
 // Driver updates delivery status
 export const updateDeliveryStatus = async (req, res) => {
   try {
@@ -161,4 +167,199 @@ export const getAllDeliveries = async (req, res) => {
     });
 
   }
+};
+
+// Driver views available deliveries
+export const getAvailableDeliveries = async (req, res) => {
+
+  try {
+
+
+    const deliveries = await Delivery.find({
+
+      status:"waiting",
+
+      driver:null
+
+    })
+    .populate({
+
+      path:"order",
+
+      populate:[
+        {
+          path:"restaurant",
+          select:"name address"
+        },
+        {
+          path:"customer",
+          select:"name phone"
+        }
+      ]
+
+    })
+    .sort({
+      createdAt:-1
+    });
+
+
+
+    res.status(200).json({
+
+      success:true,
+
+      count:deliveries.length,
+
+      data:deliveries
+
+    });
+
+
+
+  } catch(error){
+
+
+    console.error(error);
+
+
+    res.status(500).json({
+
+      success:false,
+
+      message:"Failed to get available deliveries."
+
+    });
+
+
+  }
+
+};
+
+
+
+
+
+// Driver accepts delivery
+export const acceptDelivery = async(req,res)=>{
+
+
+try{
+
+
+const delivery = await Delivery.findById(req.params.id);
+
+
+
+if(!delivery){
+
+return res.status(404).json({
+
+success:false,
+
+message:"Delivery not found"
+
+});
+
+}
+
+
+
+
+if(delivery.driver){
+
+return res.status(400).json({
+
+success:false,
+
+message:"Delivery already accepted"
+
+});
+
+}
+
+
+
+
+// Find Driver profile
+
+const driver = await Driver.findOne({
+
+user:req.user._id
+
+});
+
+
+
+
+
+if(!driver){
+
+return res.status(404).json({
+
+success:false,
+
+message:"Driver profile not found"
+
+});
+
+}
+
+
+
+
+
+delivery.driver = driver._id;
+
+delivery.status = "accepted";
+
+
+await delivery.save();
+
+
+
+
+
+driver.isAvailable=false;
+
+driver.status="busy";
+
+
+await driver.save();
+
+
+
+
+
+
+res.status(200).json({
+
+success:true,
+
+message:"Delivery accepted successfully",
+
+data:delivery
+
+});
+
+
+
+
+}catch(error){
+
+
+console.log(error);
+
+
+res.status(500).json({
+
+success:false,
+
+message:"Accept delivery failed"
+
+});
+
+
+}
+
+
 };
