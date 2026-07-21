@@ -1,7 +1,7 @@
 import Order from "../models/Order.js";
 import Cart from "../models/Cart.js";
 import Restaurant from "../models/Restaurant.js";
-
+import Delivery from "../models/Delivery.js";
 // Create Order (Selected Cart Items Only)
 export const createOrder = async (req, res) => {
 
@@ -200,6 +200,7 @@ export const createOrder = async (req, res) => {
       deliveryAddress,
 
       phone,
+      orderStatus:"preparing",
 
     });
 
@@ -389,62 +390,193 @@ export const getRestaurantOrders = async (req, res) => {
 };
 
 // Restaurant updates order status
+// Restaurant updates order status
+
 export const updateOrderStatus = async (req, res) => {
-  try {
 
-    const { orderStatus } = req.body;
+try {
 
-    const order = await Order.findById(req.params.id);
 
-    if (!order) {
-      return res.status(404).json({
-        success: false,
-        message: "Order not found.",
-      });
-    }
+const { orderStatus } = req.body;
 
-    const validTransitions = {
-  pending: ["accepted", "cancelled"],
-  accepted: ["preparing"],
-  preparing: ["ready_for_pickup"],
-  ready_for_pickup: ["driver_assigned"],
-  driver_assigned: ["out_for_delivery"],
-  out_for_delivery: ["delivered"],
-  delivered: [],
-  cancelled: [],
+
+
+const order = await Order.findById(req.params.id);
+
+
+
+if(!order){
+
+return res.status(404).json({
+
+success:false,
+
+message:"Order not found"
+
+});
+
+}
+
+
+
+
+
+const validTransitions = {
+
+
+pending:[
+"accepted",
+"cancelled"
+],
+
+
+accepted:[
+"preparing"
+],
+
+
+preparing:[
+"ready_for_pickup"
+],
+
+
+ready_for_pickup:[],
+
+
+driver_assigned:[
+"out_for_delivery"
+],
+
+
+out_for_delivery:[
+"delivered"
+],
+
+
+delivered:[],
+
+
+cancelled:[]
+
+
 };
+
+
+
+
+
 
 const currentStatus = order.orderStatus;
 
-if (!validTransitions[currentStatus].includes(orderStatus)) {
-  return res.status(400).json({
-    success: false,
-    message: `Cannot change order status from '${currentStatus}' to '${orderStatus}'.`,
-  });
+
+
+if(!validTransitions[currentStatus].includes(orderStatus)){
+
+
+return res.status(400).json({
+
+success:false,
+
+message:
+`Cannot change order from ${currentStatus} to ${orderStatus}`
+
+});
+
 }
+
+
+
+
 
 order.orderStatus = orderStatus;
 
+
+
 await order.save();
 
-    res.status(200).json({
-      success: true,
-      message: "Order status updated.",
-      data: order,
-    });
 
-  } catch (error) {
 
-    console.error(error);
 
-    res.status(500).json({
-      success: false,
-      message: "Failed to update order.",
-    });
 
-  }
+
+
+
+// =====================================
+// CREATE DELIVERY WHEN READY
+// =====================================
+
+if(orderStatus === "ready_for_pickup"){
+
+
+
+const existingDelivery = await Delivery.findOne({
+
+order:order._id
+
+});
+
+
+
+
+if(!existingDelivery){
+
+
+
+await Delivery.create({
+
+order:order._id,
+
+driver:null,
+
+status:"waiting"
+
+});
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+res.status(200).json({
+
+success:true,
+
+message:"Order status updated",
+
+data:order
+
+});
+
+
+
+
+
+}catch(error){
+
+
+console.log(error);
+
+
+res.status(500).json({
+
+success:false,
+
+message:"Failed to update order"
+
+});
+
+
+}
+
+
 };
-
 
 // Customer cancels pending order
 export const cancelOrder = async (req, res) => {

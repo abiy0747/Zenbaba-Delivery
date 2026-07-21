@@ -14,6 +14,12 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
 
+    driver: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "Driver",
+  default: null,
+},
+
     items: [
       {
         menuItem: {

@@ -9,7 +9,8 @@ baseURL:"http://localhost:5000/api/drivers",
 
 
 
-// Add token automatically
+
+// Add JWT token automatically
 
 API.interceptors.request.use((config)=>{
 
@@ -34,33 +35,18 @@ return config;
 
 
 
-// Get driver profile
+
+// ==================================
+// Get Driver Profile
+// ==================================
 
 export const getMyDriverProfile = async()=>{
 
 
-const res = await API.get("/me");
+const res = await API.get(
 
+"/me"
 
-return res.data;
-
-
-};
-
-
-
-
-
-// Update driver availability
-
-export const updateDriverStatus = async(isAvailable)=>{
-
-
-const res = await API.put(
-"/status",
-{
-isAvailable
-}
 );
 
 
@@ -68,3 +54,95 @@ return res.data;
 
 
 };
+
+
+
+
+
+
+
+
+
+// ==================================
+// Toggle Driver Availability
+// Backend:
+// PUT /api/drivers/availability
+// ==================================
+
+export const updateDriverStatus = async()=>{
+
+
+const res = await API.put(
+
+"/availability"
+
+);
+
+
+return res.data;
+
+
+};
+
+
+
+
+
+
+
+
+
+// ==================================
+// Create Driver Profile
+// ==================================
+
+export const createDriverProfile = async(data)=>{
+
+
+const res = await API.post(
+
+"/profile",
+
+data
+
+);
+
+
+return res.data;
+
+
+};
+
+
+
+
+
+
+
+
+
+// ==================================
+// Update Driver Profile
+// ==================================
+
+export const updateDriverProfile = async(data)=>{
+
+
+const res = await API.put(
+
+"/profile",
+
+data
+
+);
+
+
+return res.data;
+
+
+};
+
+
+
+
+export default API;

@@ -1,164 +1,192 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 import {
   getMyDriverProfile,
-  updateDriverStatus
+  updateDriverStatus,
 } from "../../services/driverService";
-
 
 import {
   getAvailableDeliveries,
-  acceptDelivery
+  acceptDelivery,
+  getMyDeliveries,
+  pickUpDelivery,
+  startDelivery,
+  completeDelivery,
 } from "../../services/deliveryService";
-
-
-import {
-  FaMotorcycle,
-  FaToggleOn,
-  FaToggleOff,
-  FaBox,
-  FaMapMarkerAlt
-} from "react-icons/fa";
-
 
 import "../../Css/driverDashboard.css";
 
 
+function DriverDashboard() {
 
-function DriverDashboard(){
+  const { user } = useContext(AuthContext);
 
 
-const { user } = useContext(AuthContext);
+  const [driver, setDriver] = useState(null);
 
+  const [deliveries, setDeliveries] = useState([]);
 
+  const [myDeliveries, setMyDeliveries] = useState([]);
 
-const [driver,setDriver] = useState(null);
+  const [online, setOnline] = useState(false);
 
-const [deliveries,setDeliveries] = useState([]);
 
-const [online,setOnline] = useState(true);
 
+  useEffect(() => {
 
+    loadDriver();
 
+    loadAvailableDeliveries();
 
+    loadMyDeliveries();
 
-useEffect(()=>{
+  }, []);
 
 
-loadDriver();
 
-loadDeliveries();
+  // =========================
+  // LOAD DRIVER PROFILE
+  // =========================
 
+  const loadDriver = async () => {
 
-},[]);
+    try {
 
+      const data = await getMyDriverProfile();
 
+      setDriver(data.driver);
 
+      setOnline(data.driver.isAvailable);
 
 
+    } catch(err){
 
-const loadDriver = async()=>{
+      console.log(err);
 
+    }
 
-try{
+  };
 
 
-const data = await getMyDriverProfile();
 
 
-setDriver(data.data);
+  // =========================
+  // AVAILABLE DELIVERIES
+  // =========================
 
+  const loadAvailableDeliveries = async () => {
 
-setOnline(data.data.isAvailable);
+    try{
 
+      const data = await getAvailableDeliveries();
 
-}
+      setDeliveries(data.deliveries || []);
 
-catch(error){
 
+    }catch(err){
 
-console.log(error);
+      console.log(err);
 
+    }
 
-}
+  };
 
 
 
-};
 
+  // =========================
+  // MY DELIVERIES
+  // =========================
 
+  const loadMyDeliveries = async()=>{
 
+    try{
 
+      const data = await getMyDeliveries();
 
+      setMyDeliveries(data.deliveries || []);
 
 
-const loadDeliveries = async()=>{
+    }catch(err){
 
+      console.log(err);
 
-try{
+    }
 
+  };
 
-const data = await getAvailableDeliveries();
 
 
-setDeliveries(data.data || []);
 
 
-}
+  const refresh = ()=>{
 
-catch(error){
+    loadDriver();
 
+    loadAvailableDeliveries();
 
-console.log(error);
+    loadMyDeliveries();
 
+  };
 
-}
 
 
 
-};
 
 
+  // =========================
+  // ONLINE / OFFLINE TOGGLE
+  // =========================
 
+  const toggleStatus = async()=>{
 
+    try{
 
 
+      await updateDriverStatus();
 
 
+      setOnline(prev=>!prev);
 
-const toggleStatus = async()=>{
 
+      refresh();
 
-try{
 
 
-const newStatus = !online;
+    }catch(err){
 
+      console.log(err);
 
-setOnline(newStatus);
+    }
 
+  };
 
 
-await updateDriverStatus(newStatus);
 
 
 
-}
 
-catch(error){
+  // =========================
+  // ACCEPT DELIVERY
+  // =========================
 
+  const handleAcceptDelivery = async(id)=>{
 
-console.log(error);
+    try{
 
+      await acceptDelivery(id);
 
-}
+      refresh();
 
 
+    }catch(err){
 
-};
+      console.log(err);
 
+    }
 
+  };
 
 
 
@@ -166,291 +194,491 @@ console.log(error);
 
 
 
-const handleAcceptDelivery = async(id)=>{
+  // =========================
+  // PICKUP
+  // =========================
 
+  const handlePickup = async(id)=>{
 
-try{
+    try{
 
+      await pickUpDelivery(id);
 
-await acceptDelivery(id);
+      refresh();
 
 
+    }catch(err){
 
-loadDeliveries();
+      console.log(err);
 
+    }
 
+  };
 
-}
 
-catch(error){
 
 
-console.log(error);
 
 
-}
 
+  // =========================
+  // START DELIVERY
+  // =========================
 
+  const handleStartDelivery = async(id)=>{
 
-};
+    try{
 
+      await startDelivery(id);
 
+      refresh();
 
 
+    }catch(err){
 
+      console.log(err);
 
+    }
 
+  };
 
-return (
 
-<div className="driver-dashboard">
 
 
 
-<h1>
-🚴 Driver Dashboard
-</h1>
 
 
 
+  // =========================
+  // COMPLETE DELIVERY
+  // =========================
 
+  const handleComplete = async(id)=>{
 
-<div className="driver-profile">
+    try{
 
+      await completeDelivery(id);
 
+      refresh();
 
-<div className="driver-icon">
 
-<FaMotorcycle/>
+    }catch(err){
 
-</div>
+      console.log(err);
 
+    }
 
+  };
 
 
 
-<div>
 
 
-<h2>
 
-{driver?.user?.name || user?.name || "Driver"}
 
-</h2>
 
+  return (
 
+    <div className="driver-dashboard">
 
-<p>
 
-Status:
+      <h1>
+        🏍️ Driver Dashboard
+      </h1>
 
-<span className={online ? "online":"offline"}>
 
-{online ? " Online":" Offline"}
 
-</span>
 
 
-</p>
+      {/* DRIVER PROFILE */}
 
+      <div className="driver-profile">
 
 
-</div>
+        <div>
 
 
+          <h2>
 
+            {
+            driver?.user?.name ||
+            user?.name ||
+            "Driver"
+            }
 
+          </h2>
 
 
 
-<button
+          <p>
 
-className="status-btn"
+            Status:
 
-onClick={toggleStatus}
+            <span className={online ? "online":"offline"}>
 
->
+              {
+              online
+              ? " Online"
+              : " Offline"
+              }
 
+            </span>
 
-{
 
-online ?
+          </p>
 
-<FaToggleOn/>
 
-:
+        </div>
 
-<FaToggleOff/>
 
-}
 
 
-</button>
 
+        {/* TOGGLE */}
 
 
+        <label className="status-toggle">
 
-</div>
 
+          <input
 
+          type="checkbox"
 
+          checked={online}
 
+          onChange={toggleStatus}
 
+          />
 
 
+          <span className="slider"></span>
 
-<h2>
 
-Available Deliveries
+        </label>
 
-</h2>
 
 
 
+      </div>
 
 
 
 
 
-<div className="delivery-grid">
 
 
 
-{
 
-deliveries.length === 0 ?
+      {/* AVAILABLE DELIVERIES */}
 
 
-<p>
-No available deliveries.
-</p>
+      <h2>
+        Available Deliveries
+      </h2>
 
 
-:
 
-deliveries.map(item=>(
 
+      <div className="delivery-grid">
 
 
-<div
+      {
+      deliveries.length===0
 
-className="delivery-card"
+      ?
 
-key={item._id}
+      <p>
+        No available deliveries.
+      </p>
 
->
 
+      :
 
 
+      deliveries.map(item=>(
 
 
-<h3>
+      <div
+      className="delivery-card"
+      key={item._id}
+      >
 
-<FaBox/>
 
- Order #{item._id.slice(-5)}
+        <h3>
+          Order #{item._id.slice(-5)}
+        </h3>
 
-</h3>
 
 
+        <p>
+          <b>Restaurant:</b>
+          {" "}
+          {item.order?.restaurant?.name}
+        </p>
 
 
 
-<p>
+        <p>
+          <b>Customer:</b>
+          {" "}
+          {item.order?.customer?.name}
+        </p>
 
-Restaurant:
 
-<b>
 
-{item.order?.restaurant?.name || "Restaurant"}
+        <p>
+          <b>Address:</b>
+          {" "}
+          {item.order?.deliveryAddress || "No address"}
+        </p>
 
-</b>
 
-</p>
 
+        <p>
+          <b>
+          ETB {item.order?.totalAmount}
+          </b>
+        </p>
 
 
 
+        <button
+        onClick={()=>handleAcceptDelivery(item._id)}
+        >
 
-<p>
+          Accept Delivery
 
-Customer:
+        </button>
 
-{item.order?.customer?.name || "Customer"}
 
-</p>
 
+      </div>
 
 
+      ))
 
+      }
 
-<p>
 
-<FaMapMarkerAlt/>
 
-{
+      </div>
 
-item.order?.deliveryAddress ||
 
-"No address"
 
-}
 
 
-</p>
 
 
 
 
+      {/* MY DELIVERIES */}
 
-<h3>
 
-ETB {item.order?.totalAmount || 0}
 
-</h3>
+      <h2>
+        My Deliveries
+      </h2>
 
 
 
 
 
+      <div className="delivery-grid">
 
-<button
 
-onClick={()=>handleAcceptDelivery(item._id)}
+      {
 
->
 
-Accept Delivery
+      myDeliveries.length===0
 
-</button>
 
+      ?
 
 
+      <p>
+        No assigned deliveries.
+      </p>
 
 
+      :
 
-</div>
 
 
+      myDeliveries.map(item=>(
 
-))
 
 
-}
+      <div
 
+      className="delivery-card"
 
+      key={item._id}
 
+      >
 
-</div>
 
 
 
+      <h3>
 
+      Order #{item._id.slice(-5)}
 
-</div>
+      </h3>
 
-);
 
+
+
+
+      <p>
+
+      <b>
+      Restaurant:
+      </b>
+
+      {" "}
+
+      {item.order?.restaurant?.name}
+
+      </p>
+
+
+
+
+
+
+      <p>
+
+      <b>
+      Customer:
+      </b>
+
+      {" "}
+
+      {item.order?.customer?.name}
+
+      </p>
+
+
+
+
+
+
+
+      <p>
+
+      <b>
+      Status:
+      </b>
+
+      {" "}
+
+      <span className={`status ${item.status}`}>
+
+      {item.status.replaceAll("_"," ")}
+
+      </span>
+
+
+      </p>
+
+
+
+
+
+
+
+      {
+      item.status==="accepted" &&
+
+      <button
+      onClick={()=>handlePickup(item._id)}
+      >
+
+      Pick Up Order
+
+      </button>
+
+      }
+
+
+
+
+
+
+
+      {
+      item.status==="picked_up" &&
+
+      <button
+      onClick={()=>handleStartDelivery(item._id)}
+      >
+
+      Start Delivery
+
+      </button>
+
+      }
+
+
+
+
+
+
+
+      {
+      item.status==="out_for_delivery" &&
+
+      <button
+      onClick={()=>handleComplete(item._id)}
+      >
+
+      Complete Delivery
+
+      </button>
+
+      }
+
+
+
+
+
+
+
+
+      {
+      item.status==="delivered" &&
+
+      <button disabled>
+
+      Delivered ✓
+
+      </button>
+
+      }
+
+
+
+
+      </div>
+
+
+
+      ))
+
+      }
+
+
+
+
+      </div>
+
+
+
+
+    </div>
+
+
+  );
 
 }
 

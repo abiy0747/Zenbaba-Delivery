@@ -1,16 +1,16 @@
 import express from "express";
 
 import {
-  assignDriver,
-  getMyDeliveries,
-  updateDeliveryStatus,
-  getAllDeliveries,
-  getAvailableDeliveries,
-  acceptDelivery
-} from "../controllers/deliveryController.js";
+createDriverProfile,
+getMyDriverProfile,
+updateDriverProfile,
+toggleAvailability,
+getAllDrivers
+}
+from "../controllers/driverController.js";
+
 
 import protect from "../middleware/authMiddleware.js";
-
 import authorize from "../middleware/roleMiddleware.js";
 
 
@@ -18,58 +18,69 @@ const router = express.Router();
 
 
 
-
-// Driver available deliveries
-
-router.get(
-
-"/available",
-
-protect,
-
-authorize("driver"),
-
-getAvailableDeliveries
-
-);
-
-
-
-
-
-
-// Driver accepts delivery
+// Create driver profile
 
 router.post(
-
-"/accept/:id",
-
+"/profile",
 protect,
-
 authorize("driver"),
-
-acceptDelivery
-
+createDriverProfile
 );
 
-// Driver available deliveries
+
+
+// Get my driver profile
 
 router.get(
-"/available",
+"/me",
 protect,
 authorize("driver"),
-getAvailableDeliveries
+getMyDriverProfile
 );
 
 
 
-// Driver accepts delivery
+// Update profile
 
-router.post(
-"/accept/:id",
+router.put(
+"/profile",
 protect,
 authorize("driver"),
-acceptDelivery
+updateDriverProfile
+);
+
+
+
+// Frontend uses /status
+// so add this route
+
+router.put(
+"/status",
+protect,
+authorize("driver"),
+toggleAvailability
+);
+
+
+
+// Keep old route also
+
+router.put(
+"/availability",
+protect,
+authorize("driver"),
+toggleAvailability
+);
+
+
+
+// Admin
+
+router.get(
+"/all",
+protect,
+authorize("admin"),
+getAllDrivers
 );
 
 

@@ -1,66 +1,70 @@
 import mongoose from "mongoose";
 
+
 const driverSchema = new mongoose.Schema(
-  {
 
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-      unique: true,
-    },
+{
 
-
-    phone: {
-      type: String,
-      required: true,
-    },
+user:{
+type:mongoose.Schema.Types.ObjectId,
+ref:"User",
+required:true,
+unique:true
+},
 
 
-    vehicleType: {
-      type: String,
-      enum: [
-        "motorcycle",
-        "car",
-        "bicycle",
-      ],
-      required: true,
-    },
+phone:{
+type:String,
+required:true
+},
 
 
-    vehicleNumber: {
-      type: String,
-      required: true,
-    },
+vehicleType:{
+type:String,
+enum:[
+"motorcycle",
+"car",
+"bicycle"
+],
+required:true
+},
 
 
-    isAvailable: {
-      type: Boolean,
-      default: true,
-    },
+vehicleNumber:{
+type:String,
+required:true
+},
 
 
-    status: {
-      type: String,
-      enum: [
-        "active",
-        "inactive",
-        "busy",
-      ],
-      default: "active",
-    },
+isAvailable:{
+type:Boolean,
+default:true
+},
 
 
-  },
-  {
-    timestamps:true,
-  }
+status:{
+type:String,
+enum:[
+"available",
+"busy",
+"inactive"
+],
+default:"available"
+}
+
+},
+
+{
+timestamps:true
+}
+
 );
 
 
+
 const Driver = mongoose.model(
-  "Driver",
-  driverSchema
+"Driver",
+driverSchema
 );
 
 

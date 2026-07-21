@@ -3,7 +3,7 @@ import axios from "axios";
 
 const API = axios.create({
 
-baseURL:"http://localhost:5000/api/delivery",
+baseURL:"http://localhost:5000/api/delivery"
 
 });
 
@@ -31,7 +31,6 @@ return config;
 
 
 
-// Available deliveries
 
 export const getAvailableDeliveries = async()=>{
 
@@ -49,17 +48,79 @@ return res.data;
 
 
 
-// Accept delivery
+
 
 export const acceptDelivery = async(id)=>{
 
 
-const res = await API.post(
-`/accept/${id}`
+const res = await API.put(
+
+`/${id}/accept`
+
 );
 
 
 return res.data;
 
+
+};
+
+
+
+export const getMyDeliveries = async()=>{
+
+
+const res = await API.get(
+
+"/my"
+
+);
+
+
+return res.data;
+
+
+};
+
+
+// Pickup order
+
+export const pickUpDelivery = async(id)=>{
+
+const res = await API.put(
+`/${id}/pickup`
+);
+
+return res.data;
+
+};
+
+
+
+
+// Start delivery
+
+export const startDelivery = async(id)=>{
+
+const res = await API.put(
+`/${id}/start`
+);
+
+return res.data;
+
+};
+
+
+
+
+// Complete delivery
+
+export const completeDelivery = async(id)=>{
+
+const res = await API.put(
+`/${id}/complete`
+);
+
+return res.data;
 
 };

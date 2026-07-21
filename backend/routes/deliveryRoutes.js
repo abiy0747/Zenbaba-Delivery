@@ -1,27 +1,105 @@
 import express from "express";
+
 import {
-  assignDriver,
+  getAvailableDeliveries,
+  acceptDelivery,
   getMyDeliveries,
-  updateDeliveryStatus,
-  getAllDeliveries,
+  pickUpDelivery,
+  startDelivery,
+  completeDelivery,
+  getAllDeliveries
 } from "../controllers/deliveryController.js";
 
+
 import protect from "../middleware/authMiddleware.js";
-import authorize from "../middleware/authorize.js";
+import authorize from "../middleware/roleMiddleware.js";
+
 
 const router = express.Router();
 
-// Admin
-router.post(
-  "/assign",
-  protect,
-  authorize("admin"),
-  assignDriver
-);
-router.get("/", protect, getAllDeliveries);
 
-// Driver
-router.get("/my-deliveries", protect, getMyDeliveries);
-router.put("/:id/status", protect, authorize("driver"), updateDeliveryStatus);
+
+// Driver available deliveries
+
+router.get(
+"/available",
+protect,
+authorize("driver"),
+getAvailableDeliveries
+);
+
+
+
+
+// Driver accept delivery
+
+router.put(
+"/:deliveryId/accept",
+protect,
+authorize("driver"),
+acceptDelivery
+);
+
+
+
+
+// Driver own deliveries
+
+router.get(
+"/my",
+protect,
+authorize("driver"),
+getMyDeliveries
+);
+
+
+
+
+// Pickup
+
+router.put(
+"/:deliveryId/pickup",
+protect,
+authorize("driver"),
+pickUpDelivery
+);
+
+
+
+
+// Start delivery
+
+router.put(
+"/:deliveryId/start",
+protect,
+authorize("driver"),
+startDelivery
+);
+
+
+
+
+// Complete
+
+router.put(
+"/:deliveryId/complete",
+protect,
+authorize("driver"),
+completeDelivery
+);
+
+
+
+
+// Admin
+
+router.get(
+"/all",
+protect,
+authorize("admin"),
+getAllDeliveries
+);
+
+
 
 export default router;

@@ -1,126 +1,883 @@
+/* =================================================
+   DRIVER DASHBOARD PREMIUM UI
+================================================= */
+
+
 .driver-dashboard{
 
-padding:100px 40px;
+    min-height:100vh;
 
-background:#f5f7fb;
+    padding:90px 35px;
 
-min-height:100vh;
+    background:
+    linear-gradient(
+        135deg,
+        #edf5ff,
+        #ffffff
+    );
+
+    animation:fadeIn .6s ease;
 
 }
 
+
+
+/* =================================================
+   MAIN TITLE
+================================================= */
+
+
+.driver-dashboard h1{
+
+    font-size:38px;
+
+    font-weight:800;
+
+    color:#0645ad;
+
+    margin-bottom:35px;
+
+    letter-spacing:.5px;
+
+}
+
+
+
+
+
+/* =================================================
+   DRIVER PROFILE CARD
+================================================= */
 
 
 .driver-profile{
 
-background:white;
 
-padding:25px;
+    display:flex;
 
-border-radius:15px;
+    justify-content:space-between;
 
-display:flex;
+    align-items:center;
 
-align-items:center;
 
-gap:20px;
+    background:
 
-box-shadow:0 5px 20px rgba(0,0,0,.1);
+    rgba(255,255,255,.85);
+
+
+    backdrop-filter:blur(15px);
+
+
+    padding:25px 32px;
+
+
+    border-radius:24px;
+
+
+    border:
+
+    1px solid rgba(0,119,255,.12);
+
+
+    box-shadow:
+
+    0 15px 40px rgba(0,80,255,.12);
+
+
+    margin-bottom:45px;
+
+
+    transition:.4s;
+
 
 }
 
 
 
-.driver-icon{
 
-font-size:50px;
+.driver-profile:hover{
 
-color:#0077ff;
+
+    transform:translateY(-6px);
+
+
+    box-shadow:
+
+    0 25px 55px rgba(0,119,255,.22);
+
 
 }
+
+
+
+
+
+.driver-profile h2{
+
+
+    color:#073b9c;
+
+
+    font-size:28px;
+
+
+    margin-bottom:8px;
+
+
+}
+
+
+
+
+
+.driver-profile p{
+
+
+    color:#666;
+
+
+    font-size:16px;
+
+
+}
+
+
 
 
 
 .online{
 
-color:green;
 
-font-weight:bold;
+    color:#00a651;
+
+    font-weight:700;
 
 }
+
 
 
 .offline{
 
-color:red;
 
-font-weight:bold;
+    color:#ff3b30;
+
+    font-weight:700;
+
+}
+
+
+
+
+
+
+/* =================================================
+   ONLINE TOGGLE
+================================================= */
+
+
+.status-toggle{
+
+
+    position:relative;
+
+
+    width:65px;
+
+
+    height:34px;
+
+
+    display:block;
+
 
 }
 
 
 
-.status-btn{
+.status-toggle input{
 
-margin-left:auto;
 
-font-size:35px;
+    display:none;
 
-border:none;
-
-background:none;
-
-cursor:pointer;
 
 }
 
+
+
+.slider{
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    background:#d1d5db;
+
+
+    border-radius:50px;
+
+
+    cursor:pointer;
+
+
+    transition:.4s;
+
+
+}
+
+
+
+.slider:before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:26px;
+
+
+    height:26px;
+
+
+    left:4px;
+
+
+    bottom:4px;
+
+
+    background:white;
+
+
+    border-radius:50%;
+
+
+    transition:.4s;
+
+
+    box-shadow:
+
+    0 4px 10px rgba(0,0,0,.25);
+
+
+}
+
+
+
+
+
+.status-toggle input:checked + .slider{
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #00c853,
+        #009624
+    );
+
+
+}
+
+
+
+.status-toggle input:checked + .slider:before{
+
+
+    transform:translateX(31px);
+
+
+}
+
+
+
+
+
+
+
+/* =================================================
+   SECTION TITLES
+================================================= */
+
+
+.driver-dashboard h2{
+
+
+    color:#004aad;
+
+
+    font-size:27px;
+
+
+    font-weight:750;
+
+
+    margin:35px 0 20px;
+
+
+}
+
+
+
+
+
+
+
+/* =================================================
+   DELIVERY GRID
+================================================= */
 
 
 .delivery-grid{
 
-display:grid;
 
-grid-template-columns:
-repeat(auto-fit,minmax(280px,1fr));
+    display:grid;
 
-gap:25px;
+
+    grid-template-columns:
+
+    repeat(
+        auto-fit,
+        minmax(290px,1fr)
+    );
+
+
+    gap:25px;
+
 
 }
+
+
+
+
+
+
+
+/* =================================================
+   DELIVERY CARD
+================================================= */
+
+
+.delivery-card{
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+    background:white;
+
+
+    padding:22px;
+
+
+    border-radius:22px;
+
+
+    border:
+
+    1px solid rgba(0,119,255,.10);
+
+
+    box-shadow:
+
+
+    0 12px 30px rgba(0,0,0,.08);
+
+
+    transition:.45s;
+
+
+}
+
+
+
+
+
+/* Blue top light */
+
+
+.delivery-card::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:0;
+
+
+    left:0;
+
+
+    width:100%;
+
+
+    height:5px;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #0077ff,
+        #00c6ff
+    );
+
+
+}
+
+
+
+
+
+
+/* Motorcycle decoration */
+
+
+.delivery-card::after{
+
+
+    content:"🏍️";
+
+
+    position:absolute;
+
+
+    right:15px;
+
+
+    bottom:10px;
+
+
+    font-size:55px;
+
+
+    opacity:.06;
+
+
+    transition:.5s;
+
+
+}
+
+
+
+
+
+.delivery-card:hover::after{
+
+
+    opacity:.15;
+
+
+    transform:
+
+    translateX(-10px)
+    rotate(-10deg);
+
+
+}
+
+
+
+
+
+.delivery-card:hover{
+
+
+    transform:
+
+    translateY(-10px)
+    scale(1.02);
+
+
+    box-shadow:
+
+
+    0 25px 55px rgba(0,119,255,.20);
+
+
+}
+
+
+
+
+
+
+
+
+/* =================================================
+   CARD TEXT
+================================================= */
+
+
+.delivery-card h3{
+
+
+    color:#0055d4;
+
+
+    font-size:21px;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+.delivery-card p{
+
+
+    color:#555;
+
+
+    font-size:14px;
+
+
+    margin:8px 0;
+
+
+    line-height:1.6;
+
+
+}
+
+
+
+.delivery-card b{
+
+
+    color:#111;
+
+
+}
+
+
+
+
+
+
+
+/* =================================================
+   STATUS STYLE (NO BACKGROUND)
+================================================= */
+
+
+.status{
+
+
+    font-weight:700;
+
+
+    text-transform:capitalize;
+
+
+}
+
+
+
+.status::before{
+
+
+    content:"● ";
+
+
+}
+
+
+
+
+.status.accepted{
+
+
+    color:#0077ff;
+
+
+}
+
+
+
+.status.picked_up{
+
+
+    color:#ff9800;
+
+
+}
+
+
+
+.status.out_for_delivery{
+
+
+    color:#7b2cff;
+
+
+}
+
+
+
+.status.delivered{
+
+
+    color:#00a651;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =================================================
+   BUTTON
+================================================= */
+
+
+.delivery-card button{
+
+
+    width:100%;
+
+
+    margin-top:16px;
+
+
+    padding:13px;
+
+
+    border:none;
+
+
+    border-radius:14px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #0077ff,
+        #0047b3
+    );
+
+
+    color:white;
+
+
+    font-size:15px;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    transition:.35s;
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(0,119,255,.3);
+
+
+}
+
+
+
+
+
+.delivery-card button:hover{
+
+
+    transform:
+
+    translateY(-4px);
+
+
+    box-shadow:
+
+
+    0 18px 35px rgba(0,119,255,.45);
+
+
+}
+
+
+
+
+.delivery-card button:disabled{
+
+
+    background:#10b759;
+
+
+    cursor:default;
+
+
+    box-shadow:none;
+
+
+}
+
+
+
+
+
+
+
+/* =================================================
+   EMPTY MESSAGE
+================================================= */
+
+
+.delivery-grid > p{
+
+
+    background:white;
+
+
+    padding:25px;
+
+
+    border-radius:18px;
+
+
+    text-align:center;
+
+
+    color:#777;
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(0,0,0,.05);
+
+
+}
+
+
+
+
+
+
+
+
+/* =================================================
+   ANIMATION
+================================================= */
+
+
+@keyframes fadeIn{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:translateY(30px);
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:translateY(0);
+
+
+    }
+
+
+}
+
+
 
 
 
 .delivery-card{
 
-background:white;
 
-padding:25px;
+    animation:
 
-border-radius:15px;
+    fadeIn .6s ease;
 
-box-shadow:0 5px 15px rgba(0,0,0,.1);
 
 }
 
 
 
-.delivery-card button{
-
-background:#0077ff;
-
-color:white;
-
-border:none;
-
-padding:12px 20px;
-
-border-radius:8px;
-
-cursor:pointer;
-
-}
 
 
-.delivery-card button:hover{
 
-background:#005fcc;
+
+/* =================================================
+   MOBILE RESPONSIVE
+================================================= */
+
+
+@media(max-width:700px){
+
+
+    .driver-dashboard{
+
+
+        padding:80px 15px;
+
+
+    }
+
+
+
+    .driver-profile{
+
+
+        flex-direction:column;
+
+
+        align-items:flex-start;
+
+
+        gap:20px;
+
+
+    }
+
+
+
+    .driver-dashboard h1{
+
+
+        font-size:30px;
+
+
+    }
+
+
 
 }

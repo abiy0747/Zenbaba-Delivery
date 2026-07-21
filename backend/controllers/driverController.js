@@ -1,46 +1,68 @@
-import Delivery from "../models/Delivery.js";
 import Driver from "../models/Driver.js";
 
 
 
-// Get available deliveries
-export const getAvailableDeliveries = async (req,res)=>{
+// ==========================================
+// Create Driver Profile
+// ==========================================
 
+export const createDriverProfile = async(req,res)=>{
 
 try{
 
 
-const deliveries = await Delivery.find({
+const {
+phone,
+vehicleType,
+vehicleNumber
+}=req.body;
 
-status:"waiting",
 
-driver:null
 
-})
-.populate({
+const existing = await Driver.findOne({
 
-path:"order",
+user:req.user.id
 
-populate:[
-{
-path:"restaurant",
-select:"name address"
-},
-{
-path:"customer",
-select:"name phone"
+});
+
+
+if(existing){
+
+return res.status(400).json({
+
+success:false,
+
+message:"Driver profile already exists"
+
+});
+
 }
-]
+
+
+
+
+const driver = await Driver.create({
+
+user:req.user.id,
+
+phone,
+
+vehicleType,
+
+vehicleNumber
 
 });
 
 
 
-res.status(200).json({
+
+res.status(201).json({
 
 success:true,
 
-data:deliveries
+message:"Driver profile created",
+
+driver
 
 });
 
@@ -56,7 +78,77 @@ res.status(500).json({
 
 success:false,
 
-message:"Failed to get deliveries."
+message:"Server error"
+
+});
+
+
+}
+
+};
+
+
+
+
+
+
+
+
+
+// ==========================================
+// Get My Driver Profile
+// ==========================================
+
+export const getMyDriverProfile = async(req,res)=>{
+
+
+try{
+
+
+const driver = await Driver.findOne({
+
+user:req.user.id
+
+})
+.populate("user","name email phone");
+
+
+
+if(!driver){
+
+return res.status(404).json({
+
+success:false,
+
+message:"Driver profile not found"
+
+});
+
+}
+
+
+
+res.status(200).json({
+
+success:true,
+
+driver
+
+});
+
+
+
+}catch(error){
+
+
+console.log(error);
+
+
+res.status(500).json({
+
+success:false,
+
+message:"Server error"
 
 });
 
@@ -73,107 +165,62 @@ message:"Failed to get deliveries."
 
 
 
-// Driver accepts delivery
-export const acceptDelivery = async(req,res)=>{
+
+// ==========================================
+// Update Driver Profile
+// ==========================================
+
+export const updateDriverProfile = async(req,res)=>{
 
 
 try{
 
 
-const delivery = await Delivery.findById(
-req.params.id
-);
-
-
-
-if(!delivery){
-
-
-return res.status(404).json({
-
-success:false,
-
-message:"Delivery not found."
-
-});
-
-
-}
-
-
-
-
-
-
-if(delivery.driver){
-
-
-return res.status(400).json({
-
-success:false,
-
-message:"Delivery already accepted."
-
-});
-
-
-}
-
-
-
-
-
 const driver = await Driver.findOne({
 
-user:req.user._id
+user:req.user.id
 
 });
-
 
 
 
 if(!driver){
 
-
 return res.status(404).json({
 
 success:false,
 
-message:"Driver profile not found."
+message:"Driver profile not found"
 
 });
-
 
 }
 
 
 
 
+const {
 
+phone,
 
+vehicleType,
 
-delivery.driver = driver._id;
+vehicleNumber
 
-delivery.status = "accepted";
-
-
-
-await delivery.save();
-
-
-
+}=req.body;
 
 
 
 
-driver.isAvailable = false;
+driver.phone = phone || driver.phone;
 
-driver.status="busy";
+driver.vehicleType = vehicleType || driver.vehicleType;
+
+driver.vehicleNumber = vehicleNumber || driver.vehicleNumber;
+
 
 
 await driver.save();
-
-
 
 
 
@@ -182,13 +229,11 @@ res.status(200).json({
 
 success:true,
 
-message:"Delivery accepted successfully.",
+message:"Driver profile updated",
 
-data:delivery
+driver
 
 });
-
-
 
 
 
@@ -202,7 +247,160 @@ res.status(500).json({
 
 success:false,
 
-message:"Failed to accept delivery."
+message:"Server error"
+
+});
+
+
+}
+
+
+};
+
+
+
+
+
+
+
+
+
+// ==========================================
+// Driver Online / Offline
+// ==========================================
+
+export const toggleAvailability = async(req,res)=>{
+
+
+try{
+
+
+const driver = await Driver.findOne({
+
+user:req.user.id
+
+});
+
+
+
+if(!driver){
+
+return res.status(404).json({
+
+success:false,
+
+message:"Driver not found"
+
+});
+
+}
+
+
+
+
+driver.isAvailable = !driver.isAvailable;
+
+
+
+driver.status = driver.isAvailable
+
+? "available"
+
+: "inactive";
+
+
+
+
+await driver.save();
+
+
+
+
+res.status(200).json({
+
+success:true,
+
+message:"Availability updated",
+
+driver
+
+});
+
+
+
+}catch(error){
+
+
+console.log(error);
+
+
+res.status(500).json({
+
+success:false,
+
+message:"Server error"
+
+});
+
+
+}
+
+
+};
+
+
+
+
+
+
+
+
+
+// ==========================================
+// Admin Get All Drivers
+// ==========================================
+
+export const getAllDrivers = async(req,res)=>{
+
+
+try{
+
+
+const drivers = await Driver.find()
+
+.populate(
+
+"user",
+
+"name email phone"
+
+);
+
+
+
+res.status(200).json({
+
+success:true,
+
+count:drivers.length,
+
+drivers
+
+});
+
+
+
+}catch(error){
+
+
+console.log(error);
+
+
+res.status(500).json({
+
+success:false,
+
+message:"Server error"
 
 });
 

@@ -1,262 +1,115 @@
 import Delivery from "../models/Delivery.js";
-import Order from "../models/Order.js";
-import User from "../models/User.js";
 import Driver from "../models/Driver.js";
-// Admin assigns driver
-export const assignDriver = async (req, res) => {
-  try {
-    const { orderId, driverId } = req.body;
-
-    const order = await Order.findById(orderId);
-
-    if (!order) {
-      return res.status(404).json({
-        success: false,
-        message: "Order not found.",
-      });
-    }
-
-    const driver = await User.findById(driverId);
-
-    if (!driver || driver.role !== "driver") {
-      return res.status(404).json({
-        success: false,
-        message: "Driver not found.",
-      });
-    }
-
-    // Check if this order already has a driver
-const existingDelivery = await Delivery.findOne({
-  order: orderId,
-});
-
-if (existingDelivery) {
-  return res.status(400).json({
-    success: false,
-    message: "This order has already been assigned to a driver.",
-  });
-}
+import Order from "../models/Order.js";
 
 
-    const delivery = await Delivery.create({
-      order: orderId,
-      driver: driverId,
-    });
 
-    order.orderStatus = "driver_assigned";
-    await order.save();
+// ==========================================
+// GET AVAILABLE DELIVERIES
+// All drivers can see waiting orders
+// ==========================================
 
-    res.status(201).json({
-      success: true,
-      message: "Driver assigned successfully.",
-      data: delivery,
-    });
+export const getAvailableDeliveries = async (req, res) => {
 
-  } catch (error) {
+try {
 
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-      message: "Failed to assign driver.",
-    });
-
-  }
-};
-
-// Driver views deliveries
-export const getMyDeliveries = async(req,res)=>{
-
-try{
 
 const deliveries = await Delivery.find({
-driver:req.user._id
+
+status:"waiting",
+
+driver:null
+
 })
-.populate("order")
+.populate({
+
+path:"order",
+
+populate:[
+
+{
+path:"restaurant",
+select:"name address phone"
+},
+
+{
+path:"customer",
+select:"name phone"
+}
+
+]
+
+})
 .sort({
+
 createdAt:-1
+
 });
+
 
 
 res.status(200).json({
 
 success:true,
-data:deliveries
+
+count:deliveries.length,
+
+deliveries
 
 });
+
 
 
 }catch(error){
 
+console.log(error);
+
+
 res.status(500).json({
 
 success:false,
-message:error.message
+
+message:"Server error"
 
 });
+
 
 }
 
 };
-// Driver updates delivery status
-export const updateDeliveryStatus = async (req, res) => {
-  try {
-
-    const { status } = req.body;
-
-    const delivery = await Delivery.findById(req.params.id);
-
-    if (!delivery) {
-      return res.status(404).json({
-        success: false,
-        message: "Delivery not found.",
-      });
-    }
-
-    delivery.status = status;
-
-    if (status === "delivered") {
-      delivery.deliveredAt = new Date();
-
-      const order = await Order.findById(delivery.order);
-      order.orderStatus = "delivered";
-      await order.save();
-    }
-
-    await delivery.save();
-
-    res.status(200).json({
-      success: true,
-      message: "Delivery updated successfully.",
-      data: delivery,
-    });
-
-  } catch (error) {
-
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-      message: "Failed to update delivery.",
-    });
-
-  }
-};
-
-// Admin views all deliveries
-export const getAllDeliveries = async (req, res) => {
-  try {
-
-    const deliveries = await Delivery.find()
-      .populate("driver", "name phone")
-      .populate("order");
-
-    res.status(200).json({
-      success: true,
-      count: deliveries.length,
-      data: deliveries,
-    });
-
-  } catch (error) {
-
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-      message: "Failed to get deliveries.",
-    });
-
-  }
-};
-
-// Driver views available deliveries
-export const getAvailableDeliveries = async (req, res) => {
-
-  try {
-
-
-    const deliveries = await Delivery.find({
-
-      status:"waiting",
-
-      driver:null
-
-    })
-    .populate({
-
-      path:"order",
-
-      populate:[
-        {
-          path:"restaurant",
-          select:"name address"
-        },
-        {
-          path:"customer",
-          select:"name phone"
-        }
-      ]
-
-    })
-    .sort({
-      createdAt:-1
-    });
-
-
-
-    res.status(200).json({
-
-      success:true,
-
-      count:deliveries.length,
-
-      data:deliveries
-
-    });
-
-
-
-  } catch(error){
-
-
-    console.error(error);
-
-
-    res.status(500).json({
-
-      success:false,
-
-      message:"Failed to get available deliveries."
-
-    });
-
-
-  }
-
-};
 
 
 
 
 
-// Driver accepts delivery
+
+
+
+// ==========================================
+// ACCEPT DELIVERY
+// First driver wins
+// ==========================================
+
 export const acceptDelivery = async(req,res)=>{
-
 
 try{
 
 
-const delivery = await Delivery.findById(req.params.id);
+const driver = await Driver.findOne({
+
+user:req.user.id
+
+});
 
 
 
-if(!delivery){
+if(!driver){
 
 return res.status(404).json({
 
 success:false,
 
-message:"Delivery not found"
+message:"Driver profile not found"
 
 });
 
@@ -265,7 +118,54 @@ message:"Delivery not found"
 
 
 
-if(delivery.driver){
+if(driver.status !== "available"){
+
+return res.status(400).json({
+
+success:false,
+
+message:"Driver is not available"
+
+});
+
+}
+
+
+
+
+const delivery = await Delivery.findOneAndUpdate(
+
+{
+
+_id:req.params.deliveryId,
+
+status:"waiting",
+
+driver:null
+
+},
+
+{
+
+driver:driver._id,
+
+status:"accepted",
+
+acceptedAt:new Date()
+
+},
+
+{
+
+new:true
+
+}
+
+);
+
+
+
+if(!delivery){
 
 return res.status(400).json({
 
@@ -280,15 +180,135 @@ message:"Delivery already accepted"
 
 
 
-// Find Driver profile
 
-const driver = await Driver.findOne({
+driver.status="busy";
 
-user:req.user._id
+driver.isAvailable=false;
+
+
+await driver.save();
+
+
+
+
+await delivery.populate({
+
+path:"order",
+
+populate:[
+
+{
+path:"restaurant",
+select:"name address phone"
+},
+
+{
+path:"customer",
+select:"name phone"
+}
+
+]
 
 });
 
 
+
+
+res.status(200).json({
+
+success:true,
+
+message:"Delivery accepted successfully",
+
+delivery
+
+});
+
+
+
+
+}catch(error){
+
+console.log("Accept delivery error:",error);
+
+
+res.status(500).json({
+
+success:false,
+
+message:"Server error"
+
+});
+
+
+}
+
+
+};
+
+
+
+
+
+
+
+
+
+
+// ==========================================
+// GET DRIVER DELIVERIES
+// ==========================================
+
+export const updateDeliveryStatus = async (req, res) => {
+
+try {
+
+const { status } = req.body;
+
+req.params.deliveryId = req.params.id;
+
+switch (status) {
+
+case "picked_up":
+return pickUpDelivery(req, res);
+
+case "out_for_delivery":
+return startDelivery(req, res);
+
+case "delivered":
+return completeDelivery(req, res);
+
+default:
+return res.status(400).json({
+success:false,
+message:"Invalid delivery status"
+});
+
+}
+
+} catch (error) {
+
+console.log("Update delivery status error:", error);
+
+res.status(500).json({
+success:false,
+message:"Server error"
+});
+
+}
+
+};
+
+export const getMyDeliveries = async(req,res)=>{
+
+try{
+
+
+const driver = await Driver.findOne({
+
+user:req.user.id
+
+});
 
 
 
@@ -308,24 +328,163 @@ message:"Driver profile not found"
 
 
 
-delivery.driver = driver._id;
+const deliveries = await Delivery.find({
 
-delivery.status = "accepted";
+driver:driver._id
+
+})
+.populate({
+
+path:"order",
+
+populate:[
+
+{
+path:"restaurant",
+select:"name address phone"
+},
+
+{
+path:"customer",
+select:"name phone"
+}
+
+]
+
+})
+.sort({
+
+createdAt:-1
+
+});
+
+
+
+
+res.status(200).json({
+
+success:true,
+
+count:deliveries.length,
+
+deliveries
+
+});
+
+
+
+}catch(error){
+
+
+console.log(error);
+
+
+res.status(500).json({
+
+success:false,
+
+message:"Server error"
+
+});
+
+
+}
+
+
+};
+
+
+
+
+
+
+
+
+
+// ==========================================
+// PICK UP ORDER
+// Driver takes food from restaurant
+// ==========================================
+
+export const pickUpDelivery = async(req,res)=>{
+
+try{
+
+
+const driver = await Driver.findOne({
+
+user:req.user.id
+
+});
+
+
+
+const delivery = await Delivery.findById(
+
+req.params.deliveryId
+
+);
+
+
+
+if(!delivery){
+
+return res.status(404).json({
+
+success:false,
+
+message:"Delivery not found"
+
+});
+
+}
+
+
+
+
+if(
+
+delivery.driver.toString()
+!==driver._id.toString()
+
+){
+
+return res.status(403).json({
+
+success:false,
+
+message:"Not your delivery"
+
+});
+
+}
+
+
+
+
+
+if(delivery.status !== "accepted"){
+
+return res.status(400).json({
+
+success:false,
+
+message:"Delivery cannot be picked up"
+
+});
+
+}
+
+
+
+
+
+delivery.status="picked_up";
+
+delivery.pickedUpAt=new Date();
 
 
 await delivery.save();
-
-
-
-
-
-driver.isAvailable=false;
-
-driver.status="busy";
-
-
-await driver.save();
-
 
 
 
@@ -335,9 +494,152 @@ res.status(200).json({
 
 success:true,
 
-message:"Delivery accepted successfully",
+message:"Order picked up successfully",
 
-data:delivery
+delivery
+
+});
+
+
+
+
+}catch(error){
+
+
+console.log("Pickup error:",error);
+
+
+res.status(500).json({
+
+success:false,
+
+message:"Server error"
+
+});
+
+
+}
+
+};
+
+
+
+
+
+
+
+
+
+
+
+// ==========================================
+// START DELIVERY
+// Driver leaves restaurant
+// ==========================================
+
+export const startDelivery = async(req,res)=>{
+
+try{
+
+
+const driver = await Driver.findOne({
+
+user:req.user.id
+
+});
+
+
+
+const delivery = await Delivery.findById(
+
+req.params.deliveryId
+
+);
+
+
+
+if(!delivery){
+
+return res.status(404).json({
+
+success:false,
+
+message:"Delivery not found"
+
+});
+
+}
+
+
+
+
+if(
+
+delivery.driver.toString()
+!==driver._id.toString()
+
+){
+
+return res.status(403).json({
+
+success:false,
+
+message:"Not your delivery"
+
+});
+
+}
+
+
+
+
+
+if(delivery.status !== "picked_up"){
+
+return res.status(400).json({
+
+success:false,
+
+message:"Pickup required first"
+
+});
+
+}
+
+
+
+
+
+delivery.status="out_for_delivery";
+
+
+await delivery.save();
+
+
+
+
+await Order.findByIdAndUpdate(
+
+delivery.order,
+
+{
+
+orderStatus:"out_for_delivery"
+
+}
+
+);
+
+
+
+
+res.status(200).json({
+
+success:true,
+
+message:"Delivery started",
+
+delivery
 
 });
 
@@ -354,7 +656,262 @@ res.status(500).json({
 
 success:false,
 
-message:"Accept delivery failed"
+message:"Server error"
+
+});
+
+
+}
+
+
+};
+
+
+
+
+
+
+
+
+
+// ==========================================
+// COMPLETE DELIVERY
+// ==========================================
+
+export const completeDelivery = async(req,res)=>{
+
+try{
+
+
+const driver = await Driver.findOne({
+
+user:req.user.id
+
+});
+
+
+
+const delivery = await Delivery.findById(
+
+req.params.deliveryId
+
+);
+
+
+
+if(!delivery){
+
+return res.status(404).json({
+
+success:false,
+
+message:"Delivery not found"
+
+});
+
+}
+
+
+
+
+if(
+
+delivery.driver.toString()
+!==driver._id.toString()
+
+){
+
+return res.status(403).json({
+
+success:false,
+
+message:"Not your delivery"
+
+});
+
+}
+
+
+
+
+if(delivery.status !== "out_for_delivery"){
+
+return res.status(400).json({
+
+success:false,
+
+message:"Delivery is not out for delivery"
+
+});
+
+}
+
+
+
+
+
+delivery.status="delivered";
+
+delivery.deliveredAt=new Date();
+
+
+await delivery.save();
+
+
+
+
+
+await Order.findByIdAndUpdate(
+
+delivery.order,
+
+{
+
+orderStatus:"delivered"
+
+}
+
+);
+
+
+
+
+
+
+driver.status="available";
+
+driver.isAvailable=true;
+
+
+await driver.save();
+
+
+
+
+
+
+res.status(200).json({
+
+success:true,
+
+message:"Delivery completed successfully",
+
+delivery
+
+});
+
+
+
+
+}catch(error){
+
+
+console.log(error);
+
+
+res.status(500).json({
+
+success:false,
+
+message:"Server error"
+
+});
+
+
+}
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+// ==========================================
+// ADMIN GET ALL DELIVERIES
+// ==========================================
+
+export const getAllDeliveries = async(req,res)=>{
+
+try{
+
+
+const deliveries = await Delivery.find()
+
+.populate({
+
+path:"driver",
+
+populate:{
+
+path:"user",
+
+select:"name phone"
+
+}
+
+})
+
+
+.populate({
+
+path:"order",
+
+populate:[
+
+{
+path:"restaurant",
+select:"name address"
+},
+
+{
+path:"customer",
+select:"name phone"
+}
+
+]
+
+})
+
+
+.sort({
+
+createdAt:-1
+
+});
+
+
+
+
+res.status(200).json({
+
+success:true,
+
+count:deliveries.length,
+
+deliveries
+
+});
+
+
+
+}catch(error){
+
+
+console.log(error);
+
+
+res.status(500).json({
+
+success:false,
+
+message:"Server error"
 
 });
 
