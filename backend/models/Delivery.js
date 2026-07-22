@@ -35,6 +35,25 @@ const deliverySchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+
+    driverLocation:{
+
+    latitude:{
+        type:Number,
+        default:null
+    },
+
+    longitude:{
+        type:Number,
+        default:null
+    },
+
+    updatedAt:{
+        type:Date,
+        default:null
+    }
+
+},
   },
   {
     timestamps: true,

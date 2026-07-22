@@ -8,7 +8,7 @@ import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 // Import the provider (note the correct capitalization)
-import { ShoppingCartProvider } from "./context/ShoppingCartContext";
+// import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import Restaurants from "./pages/Restaurants";
 import HelpCenter from "./pages/HelpCenter";
 import Contact from "./pages/Contact";
@@ -24,6 +24,12 @@ import RestaurantMenu from "./pages/restaurant/RestaurantMenu";
 import RestaurantOrders from "./pages/restaurant/RestaurantOrders";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DriverDashboard from "./pages/driver/DriverDashboard";
+import Favorites from "./pages/profile/Favorites";
+import Addresses from "./pages/profile/Addresses";
+import Payments from "./pages/profile/Payments";
+import Notifications from "./pages/profile/Notifications";
+import Settings from "./pages/profile/Settings";
+import Rewards from "./pages/profile/Rewards";
 function App() {
   return (
     <AuthProvider>
@@ -31,7 +37,7 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/restaurants" element={<Restaurants />} />
+          {/* <Route path="/restaurants" element={<Restaurants />} /> */}
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/menu" element={<Menu />} />
@@ -39,7 +45,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/restaurants" element={<Restaurants />} />
+          {/* <Route path="/restaurants" element={<Restaurants />} /> */}
          
            <Route
   path="/my-orders"
@@ -81,9 +87,43 @@ function App() {
 />
 
 <Route
-path="/driver-dashboard"
-element={<DriverDashboard/>}
+  path="/driver-dashboard"
+  element={
+    <ProtectedRoute allowedRoles={["driver"]}>
+      <DriverDashboard />
+    </ProtectedRoute>
+  }
 />
+
+<Route
+path="/favorites"
+element={<Favorites />}
+/>
+
+
+<Route
+path="/addresses"
+element={<Addresses />}
+/>
+
+
+<Route
+path="/payments"
+element={<Payments />}
+/>
+
+
+<Route
+path="/notifications"
+element={<Notifications />}
+/>
+
+
+<Route
+path="/settings"
+element={<Settings />}
+/>
+<Route path="/rewards" element={<Rewards />} />
 {/* <Route
 path="/add-menu"
 element={<AddMenu/>}

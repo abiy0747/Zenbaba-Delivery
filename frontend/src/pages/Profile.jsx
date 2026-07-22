@@ -318,108 +318,86 @@ Account
 
 
 <ProfileItem
-
 icon="📦"
-
 title="My Orders"
-
-desc="Track your food deliveries"
-
+desc="Track active orders and view order history"
 onClick={()=>navigate("/my-orders")}
-
 />
 
 
 
 
 
-
-
 <ProfileItem
-
-icon="❤️"
-
-title="Favorite Restaurants"
-
-desc="Your saved restaurants"
-
-onClick={()=>navigate("/favorites")}
-
-/>
-
-
-
-
-
-
-<ProfileItem
-
 icon="📍"
-
 title="Delivery Addresses"
-
-desc="Manage your locations"
-
+desc="Manage home, work and delivery locations"
 onClick={()=>navigate("/addresses")}
-
 />
 
 
-
-
-
-
-
 <ProfileItem
-
 icon="💳"
-
 title="Payment Methods"
-
-desc="Manage payments"
-
+desc="Manage payments and transaction history"
 onClick={()=>navigate("/payments")}
-
 />
 
 
-
-
-
+<ProfileItem
+icon="🎁"
+title="Rewards & Offers"
+desc="Coupons, discounts and loyalty points"
+onClick={()=>navigate("/rewards")}
+/>
 
 
 <ProfileItem
+icon="⭐"
+title="Reviews & Ratings"
+desc="Rate restaurants and drivers"
+onClick={()=>navigate("/reviews")}
+/>
 
+
+<ProfileItem
+icon="🏍️"
+title="Delivery Preferences"
+desc="Delivery notes and contact preferences"
+onClick={()=>navigate("/delivery-preferences")}
+/>
+
+
+<ProfileItem
 icon="🔔"
-
 title="Notifications"
-
-desc="Your latest updates"
-
+desc="Manage order and promotional alerts"
 onClick={()=>navigate("/notifications")}
-
 />
-
-
-
-
-
-
 
 
 <ProfileItem
-
-icon="⚙️"
-
-title="Settings"
-
-desc="Account preferences"
-
-onClick={()=>navigate("/settings")}
-
+icon="🔐"
+title="Security"
+desc="Password and account protection"
+onClick={()=>navigate("/security")}
 />
 
 
+<ProfileItem
+icon="⚙️"
+title="Settings"
+desc="Manage your account information"
+onClick={()=>navigate("/settings")}
+/>
+
+
+<ProfileItem
+icon="📞"
+title="Help Center"
+desc="Support, FAQ and customer service"
+onClick={()=>navigate("/help-center")}
+/>
 
 
 

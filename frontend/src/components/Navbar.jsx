@@ -141,63 +141,84 @@ const role = user?.role || localStorage.getItem("role");
           >
             ☰
           </div>
-{role === "restaurant" ? (
-  <>
-    <Link 
-      to="/restaurant-dashboard"
-      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
-    >
-      Dashboard
-    </Link>
+{
+role === "restaurant" ? (
 
-    <Link 
-      to="/restaurant-orders"
-      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
-    >
-      Orders
-    </Link>
-  </>
+<>
+<Link 
+to="/restaurant-dashboard"
+style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+>
+Dashboard
+</Link>
+
+
+<Link 
+to="/restaurant-orders"
+style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+>
+Orders
+</Link>
+</>
+
+
+) : role === "driver" ? (
+
+<>
+<Link 
+to="/driver-dashboard"
+style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+>
+🏍️ Driver Dashboard
+</Link>
+</>
+
+
 ) : (
-  <>
-    <Link 
-      to="/"
-      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
-    >
-      Home
-    </Link>
+
+<>
+
+<Link 
+to="/"
+style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+>
+Home
+</Link>
 
 
-    <Link 
-      to="/menu"
-      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
-    >
-      Menu
-    </Link>
+<Link 
+to="/menu"
+style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+>
+Menu
+</Link>
 
 
-    <Link 
-      to="/restaurants"
-      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
-    >
-      Restaurants
-    </Link>
+{/* <Link 
+to="/restaurants"
+style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+>
+Restaurants
+</Link> */}
 
 
-    <Link 
-      to="/my-orders"
-      style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
-    >
-      My Orders
-    </Link>
-  </>
-)}
-          
+<Link 
+to="/my-orders"
+style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+>
+My Orders
+</Link>
+
+</>
+
+)
+}     
 
             
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "10px", position: "relative" }}>
-         {role !== "restaurant" && (
+         {role !== "restaurant" && role !== "driver" && (
 
   <div style={{ position: "relative" }}>
 
@@ -390,15 +411,18 @@ const role = user?.role || localStorage.getItem("role");
   )}
 </div>
 
-       {role === "restaurant" ? (
+      {
+role === "restaurant" ? (
 
 <>
+
 <Link 
-to="/restaurant-dashboard" 
+to="/restaurant-dashboard"
 style={linkStyle}
 >
 📊 Dashboard
 </Link>
+
 
 <Link 
 to="/restaurant-orders"
@@ -409,6 +433,21 @@ style={linkStyle}
 
 </>
 
+
+) : role === "driver" ? (
+
+<>
+
+<Link 
+to="/driver-dashboard"
+style={linkStyle}
+>
+🏍️ Driver Dashboard
+</Link>
+
+</>
+
+
 ) : (
 
 <>
@@ -417,33 +456,40 @@ style={linkStyle}
 <FaHome /> Home
 </Link>
 
+
 <Link to="/menu" style={linkStyle}>
 <FaUtensils /> Menu
 </Link>
+
 
 <Link to="/cart" style={linkStyle}>
 <FaShoppingCart /> Cart
 </Link>
 
+
 <Link to="/checkout" style={linkStyle}>
 <FaCreditCard /> Checkout
 </Link>
+
 
 <Link to="/help" style={linkStyle}>
 <FaQuestionCircle /> Help Center
 </Link>
 
+
 <Link to="/contact" style={linkStyle}>
 <FaEnvelope /> Contact
 </Link>
 
-<Link to="/restaurants" style={linkStyle}>
+
+{/* <Link to="/restaurants" style={linkStyle}>
 <FaUtensils /> Restaurants
-</Link>
+</Link> */}
 
 </>
 
-)}
+)
+}
       
       </div>
 

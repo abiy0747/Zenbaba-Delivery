@@ -1,43 +1,27 @@
-/* =================================================
-   DRIVER DASHBOARD PREMIUM UI
-================================================= */
+/* =====================================================
+   ZENBABA LUXURY DRIVER DASHBOARD
+===================================================== */
 
 
-.driver-dashboard{
+.lux-driver-dashboard{
 
     min-height:100vh;
 
-    padding:90px 35px;
+    padding:90px 40px;
 
     background:
+    radial-gradient(
+        circle at top right,
+        #dbeafe,
+        transparent 40%
+    ),
     linear-gradient(
         135deg,
-        #edf5ff,
+        #f8fbff,
         #ffffff
     );
 
-    animation:fadeIn .6s ease;
-
-}
-
-
-
-/* =================================================
-   MAIN TITLE
-================================================= */
-
-
-.driver-dashboard h1{
-
-    font-size:38px;
-
-    font-weight:800;
-
-    color:#0645ad;
-
-    margin-bottom:35px;
-
-    letter-spacing:.5px;
+    animation:pageEnter .7s ease;
 
 }
 
@@ -45,12 +29,10 @@
 
 
 
-/* =================================================
-   DRIVER PROFILE CARD
-================================================= */
+/* ================= HEADER ================= */
 
 
-.driver-profile{
+.lux-header{
 
 
     display:flex;
@@ -60,34 +42,60 @@
     align-items:center;
 
 
+    padding:35px;
+
+
+    border-radius:30px;
+
+
     background:
 
-    rgba(255,255,255,.85);
+    rgba(255,255,255,.75);
 
 
-    backdrop-filter:blur(15px);
-
-
-    padding:25px 32px;
-
-
-    border-radius:24px;
+    backdrop-filter:blur(20px);
 
 
     border:
 
-    1px solid rgba(0,119,255,.12);
+    1px solid rgba(255,255,255,.8);
 
 
     box-shadow:
 
-    0 15px 40px rgba(0,80,255,.12);
+    0 20px 60px rgba(37,99,235,.15);
 
 
-    margin-bottom:45px;
+    margin-bottom:35px;
 
 
-    transition:.4s;
+}
+
+
+
+.lux-header h1{
+
+
+    font-size:40px;
+
+
+    color:#0f172a;
+
+
+    margin-bottom:10px;
+
+
+}
+
+
+
+.lux-header p{
+
+
+    color:#64748b;
+
+
+    font-size:18px;
 
 
 }
@@ -95,48 +103,10 @@
 
 
 
-.driver-profile:hover{
+.lux-header strong{
 
 
-    transform:translateY(-6px);
-
-
-    box-shadow:
-
-    0 25px 55px rgba(0,119,255,.22);
-
-
-}
-
-
-
-
-
-.driver-profile h2{
-
-
-    color:#073b9c;
-
-
-    font-size:28px;
-
-
-    margin-bottom:8px;
-
-
-}
-
-
-
-
-
-.driver-profile p{
-
-
-    color:#666;
-
-
-    font-size:16px;
+    color:#2563eb;
 
 
 }
@@ -145,56 +115,72 @@
 
 
 
-.online{
+/* ================= ONLINE AREA ================= */
 
 
-    color:#00a651;
+.online-box{
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
 
     font-weight:700;
 
-}
-
-
-
-.offline{
-
-
-    color:#ff3b30;
-
-    font-weight:700;
 
 }
 
 
 
 
+.active-dot{
 
 
-/* =================================================
-   ONLINE TOGGLE
-================================================= */
+    color:#22c55e;
 
 
-.status-toggle{
+    animation:pulse 1.5s infinite;
+
+
+}
+
+
+
+
+.inactive-dot{
+
+
+    color:#ef4444;
+
+
+}
+
+
+
+
+
+/* TOGGLE */
+
+
+.lux-toggle{
+
+
+    width:70px;
+
+    height:36px;
 
 
     position:relative;
 
 
-    width:65px;
-
-
-    height:34px;
-
-
-    display:block;
-
-
 }
 
 
 
-.status-toggle input{
+.lux-toggle input{
 
 
     display:none;
@@ -204,7 +190,8 @@
 
 
 
-.slider{
+
+.lux-toggle span{
 
 
     position:absolute;
@@ -213,7 +200,7 @@
     inset:0;
 
 
-    background:#d1d5db;
+    background:#cbd5e1;
 
 
     border-radius:50px;
@@ -229,7 +216,7 @@
 
 
 
-.slider:before{
+.lux-toggle span:before{
 
 
     content:"";
@@ -238,16 +225,14 @@
     position:absolute;
 
 
-    width:26px;
+    width:28px;
 
-
-    height:26px;
+    height:28px;
 
 
     left:4px;
 
-
-    bottom:4px;
+    top:4px;
 
 
     background:white;
@@ -261,7 +246,7 @@
 
     box-shadow:
 
-    0 4px 10px rgba(0,0,0,.25);
+    0 5px 15px rgba(0,0,0,.2);
 
 
 }
@@ -269,16 +254,15 @@
 
 
 
-
-.status-toggle input:checked + .slider{
+.lux-toggle input:checked + span{
 
 
     background:
 
     linear-gradient(
-        135deg,
-        #00c853,
-        #009624
+    135deg,
+    #22c55e,
+    #16a34a
     );
 
 
@@ -286,38 +270,11 @@
 
 
 
-.status-toggle input:checked + .slider:before{
+
+.lux-toggle input:checked + span:before{
 
 
-    transform:translateX(31px);
-
-
-}
-
-
-
-
-
-
-
-/* =================================================
-   SECTION TITLES
-================================================= */
-
-
-.driver-dashboard h2{
-
-
-    color:#004aad;
-
-
-    font-size:27px;
-
-
-    font-weight:750;
-
-
-    margin:35px 0 20px;
+    transform:translateX(34px);
 
 
 }
@@ -328,12 +285,11 @@
 
 
 
-/* =================================================
-   DELIVERY GRID
-================================================= */
+
+/* ================= STATS ================= */
 
 
-.delivery-grid{
+.stats-container{
 
 
     display:grid;
@@ -342,12 +298,15 @@
     grid-template-columns:
 
     repeat(
-        auto-fit,
-        minmax(290px,1fr)
+    auto-fit,
+    minmax(220px,1fr)
     );
 
 
     gap:25px;
+
+
+    margin-bottom:45px;
 
 
 }
@@ -356,14 +315,29 @@
 
 
 
+.stat-card{
 
 
-/* =================================================
-   DELIVERY CARD
-================================================= */
+    padding:28px;
 
 
-.delivery-card{
+    border-radius:25px;
+
+
+    background:white;
+
+
+    border:
+
+    1px solid #e5e7eb;
+
+
+    box-shadow:
+
+    0 15px 40px rgba(15,23,42,.08);
+
+
+    transition:.4s;
 
 
     position:relative;
@@ -372,27 +346,50 @@
     overflow:hidden;
 
 
-    background:white;
+}
 
 
-    padding:22px;
+
+.stat-card:before{
 
 
-    border-radius:22px;
+    content:"";
 
 
-    border:
+    position:absolute;
 
-    1px solid rgba(0,119,255,.10);
+
+    width:100px;
+
+    height:100px;
+
+
+    right:-40px;
+
+    top:-40px;
+
+
+    background:#dbeafe;
+
+
+    border-radius:50%;
+
+
+}
+
+
+
+.stat-card:hover{
+
+
+    transform:
+
+    translateY(-10px);
 
 
     box-shadow:
 
-
-    0 12px 30px rgba(0,0,0,.08);
-
-
-    transition:.45s;
+    0 25px 55px rgba(37,99,235,.2);
 
 
 }
@@ -401,10 +398,154 @@
 
 
 
-/* Blue top light */
+.stat-card h3{
 
 
-.delivery-card::before{
+    font-size:35px;
+
+
+}
+
+
+
+.stat-card p{
+
+
+    color:#64748b;
+
+
+    margin:10px 0;
+
+
+}
+
+
+
+.stat-card strong{
+
+
+    font-size:30px;
+
+
+    color:#2563eb;
+
+
+}
+
+
+
+
+
+
+
+/* ================= TITLES ================= */
+
+
+.lux-driver-dashboard h2{
+
+
+    margin:45px 0 25px;
+
+
+    font-size:30px;
+
+
+    color:#0f172a;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ================= GRID ================= */
+
+
+.lux-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+
+    repeat(
+    auto-fit,
+    minmax(320px,1fr)
+    );
+
+
+    gap:30px;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+/* ================= DELIVERY CARD ================= */
+
+
+.lux-card{
+
+
+    position:relative;
+
+
+    padding:30px;
+
+
+    border-radius:30px;
+
+
+    background:
+
+
+    rgba(255,255,255,.9);
+
+
+    backdrop-filter:blur(15px);
+
+
+    border:
+
+    1px solid rgba(37,99,235,.12);
+
+
+    box-shadow:
+
+
+    0 15px 45px rgba(15,23,42,.1);
+
+
+    overflow:hidden;
+
+
+    transition:.45s;
+
+
+    animation:cardShow .6s ease;
+
+
+}
+
+
+
+
+
+.lux-card:before{
 
 
     content:"";
@@ -428,9 +569,9 @@
     background:
 
     linear-gradient(
-        90deg,
-        #0077ff,
-        #00c6ff
+    90deg,
+    #2563eb,
+    #38bdf8
     );
 
 
@@ -439,72 +580,18 @@
 
 
 
-
-
-/* Motorcycle decoration */
-
-
-.delivery-card::after{
-
-
-    content:"🏍️";
-
-
-    position:absolute;
-
-
-    right:15px;
-
-
-    bottom:10px;
-
-
-    font-size:55px;
-
-
-    opacity:.06;
-
-
-    transition:.5s;
-
-
-}
-
-
-
-
-
-.delivery-card:hover::after{
-
-
-    opacity:.15;
+.lux-card:hover{
 
 
     transform:
 
-    translateX(-10px)
-    rotate(-10deg);
-
-
-}
-
-
-
-
-
-.delivery-card:hover{
-
-
-    transform:
-
-    translateY(-10px)
-    scale(1.02);
+    translateY(-12px);
 
 
     box-shadow:
 
 
-    0 25px 55px rgba(0,119,255,.20);
+    0 30px 70px rgba(37,99,235,.25);
 
 
 }
@@ -513,126 +600,74 @@
 
 
 
+.card-top{
 
 
-
-/* =================================================
-   CARD TEXT
-================================================= */
+    display:flex;
 
 
-.delivery-card h3{
+    justify-content:space-between;
 
 
-    color:#0055d4;
+    align-items:center;
 
 
-    font-size:21px;
-
-
-    margin-bottom:15px;
+    margin-bottom:20px;
 
 
 }
 
 
 
-.delivery-card p{
+.card-top h3{
 
 
-    color:#555;
+    color:#1e3a8a;
 
 
-    font-size:14px;
-
-
-    margin:8px 0;
-
-
-    line-height:1.6;
+    font-size:20px;
 
 
 }
 
 
 
-.delivery-card b{
+.card-top span{
 
 
-    color:#111;
+    background:#eff6ff;
 
 
-}
+    color:#2563eb;
 
 
+    padding:8px 14px;
 
 
-
-
-
-/* =================================================
-   STATUS STYLE (NO BACKGROUND)
-================================================= */
-
-
-.status{
+    border-radius:20px;
 
 
     font-weight:700;
 
 
-    text-transform:capitalize;
-
-
-}
-
-
-
-.status::before{
-
-
-    content:"● ";
-
-
 }
 
 
 
 
-.status.accepted{
-
-
-    color:#0077ff;
-
-
-}
 
 
 
-.status.picked_up{
+.lux-card p{
 
 
-    color:#ff9800;
+    color:#475569;
 
 
-}
+    margin:14px 0;
 
 
-
-.status.out_for_delivery{
-
-
-    color:#7b2cff;
-
-
-}
-
-
-
-.status.delivered{
-
-
-    color:#00a651;
+    font-size:16px;
 
 
 }
@@ -644,43 +679,41 @@
 
 
 
-
-/* =================================================
-   BUTTON
-================================================= */
+/* ================= BUTTON ================= */
 
 
-.delivery-card button{
+.lux-card button{
 
 
     width:100%;
 
 
-    margin-top:16px;
+    margin-top:20px;
 
 
-    padding:13px;
+    padding:15px;
 
 
     border:none;
 
 
-    border-radius:14px;
+    border-radius:18px;
 
 
     background:
 
+
     linear-gradient(
-        135deg,
-        #0077ff,
-        #0047b3
+    135deg,
+    #2563eb,
+    #1d4ed8
     );
 
 
     color:white;
 
 
-    font-size:15px;
+    font-size:16px;
 
 
     font-weight:700;
@@ -692,19 +725,12 @@
     transition:.35s;
 
 
-    box-shadow:
-
-
-    0 10px 25px rgba(0,119,255,.3);
-
-
 }
 
 
 
 
-
-.delivery-card button:hover{
+.lux-card button:hover{
 
 
     transform:
@@ -715,7 +741,7 @@
     box-shadow:
 
 
-    0 18px 35px rgba(0,119,255,.45);
+    0 15px 35px rgba(37,99,235,.4);
 
 
 }
@@ -723,16 +749,10 @@
 
 
 
-.delivery-card button:disabled{
+.lux-card button:disabled{
 
 
-    background:#10b759;
-
-
-    cursor:default;
-
-
-    box-shadow:none;
+    background:#22c55e;
 
 
 }
@@ -743,35 +763,82 @@
 
 
 
-/* =================================================
-   EMPTY MESSAGE
-================================================= */
+
+/* ================= STATUS ================= */
 
 
-.delivery-grid > p{
+.lux-status{
+
+
+    font-weight:800;
+
+
+    text-transform:capitalize;
+
+
+    margin-left:8px;
+
+
+}
+
+
+
+.lux-status.accepted{
+
+
+    color:#2563eb;
+
+
+}
+
+
+.lux-status.picked_up{
+
+
+    color:#f59e0b;
+
+
+}
+
+
+
+.lux-status.out_for_delivery{
+
+
+    color:#9333ea;
+
+
+}
+
+
+
+.lux-status.delivered{
+
+
+    color:#16a34a;
+
+
+}
+
+
+
+
+
+.empty{
+
+
+    padding:30px;
 
 
     background:white;
 
 
-    padding:25px;
-
-
-    border-radius:18px;
+    border-radius:20px;
 
 
     text-align:center;
 
 
-    color:#777;
-
-
-    box-shadow:
-
-
-    0 10px 25px rgba(0,0,0,.05);
-
-
 }
 
 
@@ -781,38 +848,28 @@
 
 
 
-/* =================================================
-   ANIMATION
-================================================= */
+/* ================= ANIMATION ================= */
 
 
-@keyframes fadeIn{
+@keyframes pageEnter{
 
 
-    from{
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
 
 
-        opacity:0;
+to{
 
+opacity:1;
 
-        transform:translateY(30px);
+transform:translateY(0);
 
-
-    }
-
-
-
-    to{
-
-
-        opacity:1;
-
-
-        transform:translateY(0);
-
-
-    }
-
+}
 
 }
 
@@ -820,13 +877,40 @@
 
 
 
-.delivery-card{
+@keyframes cardShow{
 
 
-    animation:
+from{
 
-    fadeIn .6s ease;
+opacity:0;
 
+transform:translateY(25px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+
+
+
+@keyframes pulse{
+
+
+50%{
+
+opacity:.4;
+
+}
 
 }
 
@@ -835,48 +919,39 @@
 
 
 
-
-/* =================================================
-   MOBILE RESPONSIVE
-================================================= */
+/* ================= MOBILE ================= */
 
 
 @media(max-width:700px){
 
 
-    .driver-dashboard{
+.lux-driver-dashboard{
 
+padding:80px 15px;
 
-        padding:80px 15px;
-
-
-    }
-
-
-
-    .driver-profile{
-
-
-        flex-direction:column;
-
-
-        align-items:flex-start;
-
-
-        gap:20px;
-
-
-    }
+}
 
 
 
-    .driver-dashboard h1{
+.lux-header{
 
 
-        font-size:30px;
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:20px;
 
 
-    }
+}
+
+
+
+.lux-header h1{
+
+font-size:30px;
+
+}
 
 
 

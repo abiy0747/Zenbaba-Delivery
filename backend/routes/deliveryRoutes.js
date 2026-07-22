@@ -13,7 +13,10 @@ import {
 
 import protect from "../middleware/authMiddleware.js";
 import authorize from "../middleware/roleMiddleware.js";
-
+import {
+updateDriverLocation
+}
+from "../controllers/locationController.js";
 
 const router = express.Router();
 
@@ -100,6 +103,15 @@ authorize("admin"),
 getAllDeliveries
 );
 
+router.put(
+
+"/location",
+
+protect,
+
+updateDriverLocation
+
+);
 
 
 export default router;

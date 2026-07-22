@@ -16,669 +16,585 @@ import {
 } from "../../services/deliveryService";
 
 import "../../Css/driverDashboard.css";
+import LiveTracker from "./LiveTracker";
+import DriverLocationTracker from "./DriverLocationTracker";
+function DriverDashboard(){
 
+const {user}=useContext(AuthContext);
 
-function DriverDashboard() {
 
-  const { user } = useContext(AuthContext);
+const [driver,setDriver]=useState(null);
+const [deliveries,setDeliveries]=useState([]);
+const [myDeliveries,setMyDeliveries]=useState([]);
+const [online,setOnline]=useState(false);
 
 
-  const [driver, setDriver] = useState(null);
 
-  const [deliveries, setDeliveries] = useState([]);
+useEffect(()=>{
 
-  const [myDeliveries, setMyDeliveries] = useState([]);
+loadDriver();
+loadAvailableDeliveries();
+loadMyDeliveries();
 
-  const [online, setOnline] = useState(false);
+},[]);
 
 
 
-  useEffect(() => {
 
-    loadDriver();
 
-    loadAvailableDeliveries();
+const loadDriver=async()=>{
 
-    loadMyDeliveries();
+try{
 
-  }, []);
+const data=await getMyDriverProfile();
 
+setDriver(data.driver);
 
+setOnline(data.driver.isAvailable);
 
-  // =========================
-  // LOAD DRIVER PROFILE
-  // =========================
 
-  const loadDriver = async () => {
+}catch(err){
 
-    try {
+console.log(err);
 
-      const data = await getMyDriverProfile();
+}
 
-      setDriver(data.driver);
+};
 
-      setOnline(data.driver.isAvailable);
 
 
-    } catch(err){
 
-      console.log(err);
 
-    }
+const loadAvailableDeliveries=async()=>{
 
-  };
+try{
 
+const data=await getAvailableDeliveries();
 
+setDeliveries(data.deliveries || []);
 
 
-  // =========================
-  // AVAILABLE DELIVERIES
-  // =========================
+}catch(err){
 
-  const loadAvailableDeliveries = async () => {
+console.log(err);
 
-    try{
+}
 
-      const data = await getAvailableDeliveries();
+};
 
-      setDeliveries(data.deliveries || []);
 
 
-    }catch(err){
 
-      console.log(err);
 
-    }
+const loadMyDeliveries=async()=>{
 
-  };
+try{
 
+const data=await getMyDeliveries();
 
+setMyDeliveries(data.deliveries || []);
 
 
-  // =========================
-  // MY DELIVERIES
-  // =========================
+}catch(err){
 
-  const loadMyDeliveries = async()=>{
+console.log(err);
 
-    try{
+}
 
-      const data = await getMyDeliveries();
+};
 
-      setMyDeliveries(data.deliveries || []);
 
 
-    }catch(err){
 
-      console.log(err);
 
-    }
 
-  };
+const refresh=()=>{
 
+loadDriver();
+loadAvailableDeliveries();
+loadMyDeliveries();
 
+};
 
 
 
-  const refresh = ()=>{
 
-    loadDriver();
 
-    loadAvailableDeliveries();
 
-    loadMyDeliveries();
+const toggleStatus=async()=>{
 
-  };
+try{
 
+await updateDriverStatus();
 
+setOnline(prev=>!prev);
 
+refresh();
 
 
+}catch(err){
 
-  // =========================
-  // ONLINE / OFFLINE TOGGLE
-  // =========================
+console.log(err);
 
-  const toggleStatus = async()=>{
+}
 
-    try{
+};
 
 
-      await updateDriverStatus();
 
 
-      setOnline(prev=>!prev);
 
+const handleAcceptDelivery=async(id)=>{
 
-      refresh();
+await acceptDelivery(id);
 
+refresh();
 
+};
 
-    }catch(err){
 
-      console.log(err);
 
-    }
+const handlePickup=async(id)=>{
 
-  };
+await pickUpDelivery(id);
 
+refresh();
 
+};
 
 
 
+const handleStartDelivery=async(id)=>{
 
-  // =========================
-  // ACCEPT DELIVERY
-  // =========================
+await startDelivery(id);
 
-  const handleAcceptDelivery = async(id)=>{
+refresh();
 
-    try{
+};
 
-      await acceptDelivery(id);
 
-      refresh();
 
+const handleComplete=async(id)=>{
 
-    }catch(err){
+await completeDelivery(id);
 
-      console.log(err);
+refresh();
 
-    }
+};
 
-  };
 
 
 
 
+return(
 
+<div className="lux-driver-dashboard">
 
 
-  // =========================
-  // PICKUP
-  // =========================
 
-  const handlePickup = async(id)=>{
+{
+myDeliveries.length > 0 &&
 
-    try{
+<DriverLocationTracker
+deliveryId={
+myDeliveries[0]._id
+}
+/>
 
-      await pickUpDelivery(id);
+}
+{/* HEADER */}
 
-      refresh();
+<div className="lux-header">
 
 
-    }catch(err){
+<div>
 
-      console.log(err);
+<h1>
+🏍️ Zenbaba Driver
+</h1>
 
-    }
 
-  };
+<p>
+Welcome back,
+<strong>
+{" "}
+{driver?.user?.name || user?.name || "Driver"}
+</strong>
+</p>
 
 
+</div>
 
 
 
+<div className="online-box">
 
 
-  // =========================
-  // START DELIVERY
-  // =========================
+<span className={online?"active-dot":"inactive-dot"}>
+●
+</span>
 
-  const handleStartDelivery = async(id)=>{
 
-    try{
+<label>
 
-      await startDelivery(id);
+{online?"Online":"Offline"}
 
-      refresh();
+</label>
 
 
-    }catch(err){
 
-      console.log(err);
+<label className="lux-toggle">
 
-    }
 
-  };
+<input
 
+type="checkbox"
 
+checked={online}
 
+onChange={toggleStatus}
 
+/>
 
 
+<span></span>
 
 
-  // =========================
-  // COMPLETE DELIVERY
-  // =========================
+</label>
 
-  const handleComplete = async(id)=>{
 
-    try{
 
-      await completeDelivery(id);
+</div>
 
-      refresh();
 
 
-    }catch(err){
+</div>
 
-      console.log(err);
 
-    }
 
-  };
 
 
 
 
+{/* STATS */}
 
 
+<div className="stats-container">
 
 
-  return (
+<div className="stat-card">
 
-    <div className="driver-dashboard">
+<h3>
+📦
+</h3>
 
+<p>
+Available
+</p>
 
-      <h1>
-        🏍️ Driver Dashboard
-      </h1>
+<strong>
+{deliveries.length}
+</strong>
 
+</div>
 
 
 
 
-      {/* DRIVER PROFILE */}
+<div className="stat-card">
 
-      <div className="driver-profile">
+<h3>
+🚴
+</h3>
 
+<p>
+Active
+</p>
 
-        <div>
+<strong>
+{myDeliveries.filter(
+d=>d.status!=="delivered"
+).length}
+</strong>
 
+</div>
 
-          <h2>
 
-            {
-            driver?.user?.name ||
-            user?.name ||
-            "Driver"
-            }
 
-          </h2>
 
+<div className="stat-card">
 
+<h3>
+✅
+</h3>
 
-          <p>
+<p>
+Completed
+</p>
 
-            Status:
+<strong>
+{myDeliveries.filter(
+d=>d.status==="delivered"
+).length}
+</strong>
 
-            <span className={online ? "online":"offline"}>
+</div>
 
-              {
-              online
-              ? " Online"
-              : " Offline"
-              }
 
-            </span>
 
 
-          </p>
+<div className="stat-card">
 
+<h3>
+💰
+</h3>
 
-        </div>
+<p>
+Earnings
+</p>
 
+<strong>
+ETB
+</strong>
 
+</div>
 
 
 
-        {/* TOGGLE */}
+</div>
 
 
-        <label className="status-toggle">
 
 
-          <input
+<LiveTracker 
+    delivery={myDeliveries[0]}
+/>
 
-          type="checkbox"
 
-          checked={online}
 
-          onChange={toggleStatus}
 
-          />
 
+<h2>
+🔥 Available Deliveries
+</h2>
 
-          <span className="slider"></span>
 
 
-        </label>
 
+<div className="lux-grid">
 
 
+{
+deliveries.length===0 ?
 
-      </div>
+<div className="empty">
 
+No available deliveries
 
+</div>
 
 
+:
 
+deliveries.map(item=>(
 
 
+<div className="lux-card"
+key={item._id}>
 
 
-      {/* AVAILABLE DELIVERIES */}
+<div className="card-top">
 
+<h3>
+🍔
+{item.order?.restaurant?.name}
+</h3>
 
-      <h2>
-        Available Deliveries
-      </h2>
 
+<span>
+ETB {item.order?.totalAmount}
+</span>
 
 
+</div>
 
-      <div className="delivery-grid">
 
 
-      {
-      deliveries.length===0
 
-      ?
+<p>
+📍
+{item.order?.deliveryAddress || "Address unavailable"}
+</p>
 
-      <p>
-        No available deliveries.
-      </p>
 
 
-      :
+<p>
+👤
+{item.order?.customer?.name}
+</p>
 
 
-      deliveries.map(item=>(
 
+<button
 
-      <div
-      className="delivery-card"
-      key={item._id}
-      >
+onClick={()=>handleAcceptDelivery(item._id)}
 
+>
 
-        <h3>
-          Order #{item._id.slice(-5)}
-        </h3>
+Accept Delivery →
 
+</button>
 
 
-        <p>
-          <b>Restaurant:</b>
-          {" "}
-          {item.order?.restaurant?.name}
-        </p>
 
+</div>
 
 
-        <p>
-          <b>Customer:</b>
-          {" "}
-          {item.order?.customer?.name}
-        </p>
+))
 
 
+}
 
-        <p>
-          <b>Address:</b>
-          {" "}
-          {item.order?.deliveryAddress || "No address"}
-        </p>
 
+</div>
 
 
-        <p>
-          <b>
-          ETB {item.order?.totalAmount}
-          </b>
-        </p>
 
 
 
-        <button
-        onClick={()=>handleAcceptDelivery(item._id)}
-        >
 
-          Accept Delivery
 
-        </button>
 
 
+<h2>
+🚚 My Deliveries
+</h2>
 
-      </div>
 
 
-      ))
+<div className="lux-grid">
 
-      }
 
+{
+myDeliveries.map(item=>(
 
 
-      </div>
+<div className="lux-card"
+key={item._id}>
 
 
+<div className="card-top">
 
 
+<h3>
 
+🏍️ Order #{item._id.slice(-5)}
 
+</h3>
 
 
+</div>
 
-      {/* MY DELIVERIES */}
 
 
 
-      <h2>
-        My Deliveries
-      </h2>
+<p>
 
+Status:
 
+<span className={`lux-status ${item.status}`}>
 
+{item.status.replaceAll("_"," ")}
 
+</span>
 
-      <div className="delivery-grid">
 
+</p>
 
-      {
 
 
-      myDeliveries.length===0
 
 
-      ?
 
+{
+item.status==="accepted" &&
 
-      <p>
-        No assigned deliveries.
-      </p>
+<button onClick={()=>handlePickup(item._id)}>
 
+Pickup Order
 
-      :
+</button>
 
+}
 
 
-      myDeliveries.map(item=>(
 
 
 
-      <div
+{
+item.status==="picked_up" &&
 
-      className="delivery-card"
+<button onClick={()=>handleStartDelivery(item._id)}>
 
-      key={item._id}
+Start Delivery
 
-      >
+</button>
 
+}
 
 
 
-      <h3>
 
-      Order #{item._id.slice(-5)}
 
-      </h3>
+{
+item.status==="out_for_delivery" &&
 
+<button onClick={()=>handleComplete(item._id)}>
 
+Complete
 
+</button>
 
+}
 
-      <p>
 
-      <b>
-      Restaurant:
-      </b>
 
-      {" "}
 
-      {item.order?.restaurant?.name}
 
-      </p>
+{
+item.status==="delivered" &&
 
+<button disabled>
 
+Delivered ✓
 
+</button>
 
+}
 
 
-      <p>
 
-      <b>
-      Customer:
-      </b>
 
-      {" "}
+</div>
 
-      {item.order?.customer?.name}
 
-      </p>
+))
 
+}
 
 
 
+</div>
 
 
 
-      <p>
 
-      <b>
-      Status:
-      </b>
 
-      {" "}
+</div>
 
-      <span className={`status ${item.status}`}>
 
-      {item.status.replaceAll("_"," ")}
+);
 
-      </span>
-
-
-      </p>
-
-
-
-
-
-
-
-      {
-      item.status==="accepted" &&
-
-      <button
-      onClick={()=>handlePickup(item._id)}
-      >
-
-      Pick Up Order
-
-      </button>
-
-      }
-
-
-
-
-
-
-
-      {
-      item.status==="picked_up" &&
-
-      <button
-      onClick={()=>handleStartDelivery(item._id)}
-      >
-
-      Start Delivery
-
-      </button>
-
-      }
-
-
-
-
-
-
-
-      {
-      item.status==="out_for_delivery" &&
-
-      <button
-      onClick={()=>handleComplete(item._id)}
-      >
-
-      Complete Delivery
-
-      </button>
-
-      }
-
-
-
-
-
-
-
-
-      {
-      item.status==="delivered" &&
-
-      <button disabled>
-
-      Delivered ✓
-
-      </button>
-
-      }
-
-
-
-
-      </div>
-
-
-
-      ))
-
-      }
-
-
-
-
-      </div>
-
-
-
-
-    </div>
-
-
-  );
 
 }
 
