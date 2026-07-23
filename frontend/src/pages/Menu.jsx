@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import "../Css/menu.css";
 
@@ -6,20 +6,30 @@ import { getMenus } from "../services/menuService";
 
 import { useCart } from "../context/CartContext";
 
+import { AuthContext } from "../context/AuthContext";
+
+import Login from "./Login";
+
 
 function Menu() {
+
+
+const { user } = useContext(AuthContext);
+
+const [showLoginPopup, setShowLoginPopup] = useState(false);
 
 
 const { addItem } = useCart();
 
 
-const [menuItems,setMenuItems]=useState([]);
 
-const [search,setSearch]=useState("");
+const [menuItems,setMenuItems] = useState([]);
 
-const [category,setCategory]=useState("All");
+const [search,setSearch] = useState("");
 
-const [selectedRestaurant,setSelectedRestaurant]=useState(null);
+const [category,setCategory] = useState("All");
+
+const [selectedRestaurant,setSelectedRestaurant] = useState(null);
 
 
 
@@ -35,13 +45,12 @@ loadMenus();
 
 
 
-const loadMenus=async()=>{
 
+const loadMenus = async()=>{
 
 try{
 
-
-const data=await getMenus();
+const data = await getMenus();
 
 
 console.log(data);
@@ -55,19 +64,14 @@ setMenuItems(data.data);
 }
 
 
-
 }catch(error){
 
-
 console.log(error);
-
 
 }
 
 
-
 };
-
 
 
 
@@ -93,10 +97,9 @@ item.name
 &&
 
 (
-
 !selectedRestaurant ||
 
-item.restaurant.name === selectedRestaurant.name
+item.restaurant?.name === selectedRestaurant.name
 
 )
 
@@ -116,7 +119,12 @@ item.restaurant.name === selectedRestaurant.name
 
 return (
 
+<>
+
+
 <div className="menu-page">
+
+
 
 
 
@@ -130,6 +138,7 @@ return (
 </h1>
 
 
+
 <p className="menu-subtitle">
 
 Fresh food from your favorite restaurants
@@ -137,7 +146,9 @@ Fresh food from your favorite restaurants
 </p>
 
 
+
 </div>
+
 
 
 
@@ -169,6 +180,7 @@ onChange={(e)=>setSearch(e.target.value)}
 
 
 
+
 <div className="menu-filters">
 
 
@@ -185,7 +197,6 @@ className={`filter-btn ${
 category===cat ? "active": ""
 }`}
 
-
 onClick={()=>setCategory(cat)}
 
 >
@@ -201,7 +212,9 @@ onClick={()=>setCategory(cat)}
 }
 
 
+
 </div>
+
 
 
 
@@ -219,15 +232,15 @@ onClick={()=>setCategory(cat)}
 filteredItems.map((item)=>(
 
 
-
 <div
 
 key={item._id}
 
 className="menu-card"
 
-
 >
+
+
 
 
 
@@ -237,18 +250,17 @@ className="menu-card"
 <img
 
 src={
-
 item.image ||
 
 "https://via.placeholder.com/300"
 
 }
 
-
 alt={item.name}
 
 
 />
+
 
 
 
@@ -273,11 +285,13 @@ alt={item.name}
 <div className="menu-content">
 
 
+
 <h3>
 
 {item.name}
 
 </h3>
+
 
 
 
@@ -293,7 +307,10 @@ alt={item.name}
 
 
 
+
+
 <div className="menu-bottom">
+
 
 
 <h4>
@@ -306,6 +323,9 @@ ETB {Number(item.price).toFixed(2)}
 
 
 
+
+
+
 <button
 
 className="add-btn"
@@ -313,36 +333,44 @@ className="add-btn"
 onClick={()=>{
 
 
+if(!user){
+
+setShowLoginPopup(true);
+
+return;
+
+}
+
+
+
 console.log(
-
 "ADDING ITEM:",
-
 item._id
-
 );
+
 
 
 addItem(item._id);
 
 
+
 }}
 
-
 >
-
 
 +
 
 Add
-
 
 </button>
 
 
 
 
-</div>
 
+
+
+</div>
 
 
 
@@ -370,12 +398,46 @@ Add
 
 
 
+
+
 </div>
+
+
+
+
+
+
+
+
+
+{/* LOGIN POPUP */}
+
+{
+
+showLoginPopup && (
+
+<Login
+
+onClose={()=>setShowLoginPopup(false)}
+
+
+/>
+
+)
+
+}
+
+
+
+</>
+
 
 );
 
 
+
 }
+
 
 
 export default Menu;

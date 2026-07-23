@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import { FaHome, FaUtensils, FaShoppingCart, FaCreditCard, FaQuestionCircle, FaEnvelope, FaUser } from "react-icons/fa";
+import {
+  FaHome,
+  FaUtensils,
+  FaShoppingCart,
+  FaCreditCard,
+  FaQuestionCircle,
+  FaEnvelope,
+  FaUser,
+  FaHandshake,
+} from "react-icons/fa";
 import palmLogo from "../assets/palm.png";
 import { useCart } from "../context/CartContext";
 import Login from "../pages/Login";
@@ -142,12 +151,35 @@ const role = user?.role || localStorage.getItem("role");
             ☰
           </div>
 {
-role === "restaurant" ? (
+role === "admin" ? (
 
 <>
+
+<Link
+to="/admin-applications"
+style={{
+color:"black",
+textDecoration:"none",
+fontWeight:"bold"
+}}
+>
+⚙️ Partner Applications
+</Link>
+
+</>
+
+
+) : role === "restaurant" ? (
+
+<>
+
 <Link 
 to="/restaurant-dashboard"
-style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+style={{ 
+color:"black", 
+textDecoration:"none", 
+fontWeight:"bold" 
+}}
 >
 Dashboard
 </Link>
@@ -155,22 +187,33 @@ Dashboard
 
 <Link 
 to="/restaurant-orders"
-style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+style={{ 
+color:"black", 
+textDecoration:"none", 
+fontWeight:"bold" 
+}}
 >
 Orders
 </Link>
+
 </>
 
 
 ) : role === "driver" ? (
 
 <>
+
 <Link 
 to="/driver-dashboard"
-style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+style={{ 
+color:"black", 
+textDecoration:"none", 
+fontWeight:"bold" 
+}}
 >
 🏍️ Driver Dashboard
 </Link>
+
 </>
 
 
@@ -180,7 +223,11 @@ style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
 
 <Link 
 to="/"
-style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+style={{ 
+color:"black", 
+textDecoration:"none", 
+fontWeight:"bold" 
+}}
 >
 Home
 </Link>
@@ -188,23 +235,36 @@ Home
 
 <Link 
 to="/menu"
-style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+style={{ 
+color:"black", 
+textDecoration:"none", 
+fontWeight:"bold" 
+}}
 >
 Menu
 </Link>
 
 
-{/* <Link 
-to="/restaurants"
-style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+<Link
+to="/become-partner"
+style={{
+color:"black",
+textDecoration:"none",
+fontWeight:"bold"
+}}
 >
-Restaurants
-</Link> */}
+Become a Partner
+</Link>
+
 
 
 <Link 
 to="/my-orders"
-style={{ color:"black", textDecoration:"none", fontWeight:"bold" }}
+style={{ 
+color:"black", 
+textDecoration:"none", 
+fontWeight:"bold" 
+}}
 >
 My Orders
 </Link>
@@ -212,13 +272,17 @@ My Orders
 </>
 
 )
-}     
+
+}    
 
             
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "10px", position: "relative" }}>
-         {role !== "restaurant" && role !== "driver" && (
+         {
+role !== "restaurant" &&
+role !== "driver" &&
+role !== "admin" && (
 
   <div style={{ position: "relative" }}>
 
@@ -411,8 +475,23 @@ My Orders
   )}
 </div>
 
-      {
-role === "restaurant" ? (
+    {
+role === "admin" ? (
+
+<>
+
+<Link 
+to="/admin-applications"
+style={linkStyle}
+>
+⚙️ Partner Applications
+</Link>
+
+
+</>
+
+
+) : role === "restaurant" ? (
 
 <>
 
@@ -431,6 +510,7 @@ style={linkStyle}
 📦 Orders
 </Link>
 
+
 </>
 
 
@@ -444,6 +524,7 @@ style={linkStyle}
 >
 🏍️ Driver Dashboard
 </Link>
+
 
 </>
 
@@ -459,6 +540,11 @@ style={linkStyle}
 
 <Link to="/menu" style={linkStyle}>
 <FaUtensils /> Menu
+</Link>
+
+
+<Link to="/become-partner" style={linkStyle}>
+<FaHandshake /> Become a Partner
 </Link>
 
 
@@ -482,13 +568,10 @@ style={linkStyle}
 </Link>
 
 
-{/* <Link to="/restaurants" style={linkStyle}>
-<FaUtensils /> Restaurants
-</Link> */}
-
 </>
 
 )
+
 }
       
       </div>

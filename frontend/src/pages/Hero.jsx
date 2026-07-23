@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { AuthContext } from "../context/AuthContext";
+import Login from "./Login";
 
 import burger from "../assets/burger.png";
 import pizza from "../assets/pizza.png";
 import tibs from "../assets/tibs.png";
 import arusto from "../assets/arusto.png";
 import beyaynet from "../assets/beyaynet.png";
-
 
 import tomato from "../assets/tomato.png";
 import cheese from "../assets/cheese.png";
@@ -66,7 +67,9 @@ const Hero =()=>{
 
 const navigate = useNavigate();
 
+const { user } = useContext(AuthContext);
 
+const [showLoginPopup, setShowLoginPopup] = useState(false);
 const [currentFood,setCurrentFood]=useState(0);
 
 
@@ -222,18 +225,29 @@ Fast delivery, fresh food and trusted service.
 </p>
 
 
-
 <motion.button
 
 whileHover={{
-  scale:1.08
+scale:1.08
 }}
 
 whileTap={{
-  scale:0.95
+scale:0.95
 }}
 
-onClick={() => navigate("/cart")}
+onClick={()=>{
+
+if(!user){
+
+setShowLoginPopup(true);
+
+return;
+
+}
+
+navigate("/cart");
+
+}}
 
 className="
 mt-8
@@ -248,6 +262,7 @@ cursor-pointer
 "
 
 >
+
 Start Ordering 🍔
 
 </motion.button>
@@ -560,6 +575,15 @@ scale-125
 
 </div>
 
+{showLoginPopup && (
+
+<Login
+
+onClose={()=>setShowLoginPopup(false)}
+
+/>
+
+)}
 
 </section>
 

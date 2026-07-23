@@ -1,0 +1,530 @@
+/* ==========================================
+   Zenbaba Restaurant Application
+   Premium Gold Cinematic Theme
+==========================================*/
+
+.restaurant-page{
+
+    min-height:100vh;
+
+    /* Extra space for fixed navbar */
+    padding:170px 8% 80px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #fffdf7,
+        #fff4c7
+    );
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+/* Background Glow */
+
+.restaurant-page::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:550px;
+
+    height:550px;
+
+    background:
+    rgba(244,180,0,.15);
+
+    border-radius:50%;
+
+    top:-220px;
+
+    left:-160px;
+
+    filter:blur(45px);
+
+}
+
+
+
+
+/* ==========================
+ HEADER
+==========================*/
+
+
+.restaurant-header{
+
+    text-align:center;
+
+    margin-bottom:60px;
+
+    animation:
+    restaurantFade 1s ease;
+
+}
+
+
+
+.restaurant-icon{
+
+    width:120px;
+
+    height:120px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:auto;
+
+    font-size:65px;
+
+    border-radius:35px;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ffd54f,
+        #f4b400
+    );
+
+    box-shadow:
+
+    0 20px 50px rgba(244,180,0,.35);
+
+    animation:
+    restaurantFloat 4s infinite ease-in-out;
+
+}
+
+
+
+.restaurant-header h1{
+
+    margin-top:30px;
+
+    font-size:55px;
+
+    font-weight:800;
+
+}
+
+
+
+.restaurant-header p{
+
+    margin-top:15px;
+
+    font-size:20px;
+
+    color:#666;
+
+}
+
+
+
+
+
+/* ==========================
+ FORM CARD
+==========================*/
+
+
+.restaurant-form{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:55px;
+
+    background:
+
+    rgba(255,255,255,.88);
+
+    backdrop-filter:
+
+    blur(20px);
+
+    border-radius:35px;
+
+    box-shadow:
+
+    0 30px 80px rgba(0,0,0,.12);
+
+    animation:
+
+    restaurantUp 1s ease;
+
+}
+
+
+
+.restaurant-form h2{
+
+    text-align:center;
+
+    font-size:36px;
+
+    margin-bottom:45px;
+
+}
+
+
+
+
+
+/* ==========================
+ GRID
+==========================*/
+
+
+.restaurant-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(2,1fr);
+
+    gap:30px;
+
+}
+
+
+
+.input-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+.input-box label,
+.full-input label{
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+    color:#333;
+
+}
+
+
+
+.input-box input,
+.input-box select,
+.full-input input,
+.full-input textarea{
+
+    padding:16px 20px;
+
+    border-radius:14px;
+
+    border:1px solid #ddd;
+
+    outline:none;
+
+    font-size:16px;
+
+    background:white;
+
+    transition:.3s;
+
+}
+
+
+
+.input-box input:focus,
+.input-box select:focus,
+.full-input input:focus,
+.full-input textarea:focus{
+
+    border-color:#f4b400;
+
+    box-shadow:
+
+    0 0 0 4px rgba(244,180,0,.15);
+
+}
+
+
+
+
+
+/* ==========================
+ FULL WIDTH INPUTS
+==========================*/
+
+
+.full-input{
+
+    margin-top:35px;
+
+}
+
+
+
+.full-input textarea{
+
+    width:100%;
+
+    min-height:150px;
+
+    resize:none;
+
+}
+
+
+
+
+
+/* ==========================
+ UPLOAD SECTION
+==========================*/
+
+
+.restaurant-upload{
+
+    margin-top:40px;
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(3,1fr);
+
+    gap:25px;
+
+}
+
+
+
+.restaurant-upload div{
+
+    padding:25px;
+
+    background:#fff9e5;
+
+    border-radius:22px;
+
+    border:1px dashed #f4b400;
+
+}
+
+
+
+.restaurant-upload label{
+
+    display:block;
+
+    font-weight:600;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.restaurant-upload input{
+
+    width:100%;
+
+}
+
+
+
+
+
+/* ==========================
+ BUTTON
+==========================*/
+
+
+.submit-restaurant{
+
+    margin-top:45px;
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:white;
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #ffd54f,
+
+    #f4b400
+
+    );
+
+    box-shadow:
+
+    0 15px 35px rgba(244,180,0,.35);
+
+    transition:.35s;
+
+}
+
+
+
+.submit-restaurant:hover{
+
+    transform:translateY(-7px);
+
+    box-shadow:
+
+    0 25px 55px rgba(244,180,0,.5);
+
+}
+
+
+
+
+
+/* ==========================
+ ANIMATIONS
+==========================*/
+
+
+@keyframes restaurantFloat{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-15px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+@keyframes restaurantFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+@keyframes restaurantUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(50px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+
+
+/* ==========================
+ RESPONSIVE
+==========================*/
+
+@media(max-width:900px){
+
+.restaurant-page{
+
+    padding:140px 20px 60px;
+
+}
+
+.restaurant-header h1{
+
+    font-size:38px;
+
+}
+
+.restaurant-header p{
+
+    font-size:16px;
+
+}
+
+.restaurant-form{
+
+    padding:30px 20px;
+
+}
+
+.restaurant-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.restaurant-upload{
+
+    grid-template-columns:1fr;
+
+}
+
+}

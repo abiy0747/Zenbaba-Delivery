@@ -84,9 +84,9 @@ function Login({ onClose, onSwitchToRegister }) {
 
       case "admin":
 
-        navigate("/admin-dashboard");
+  navigate("/admin-applications");
 
-        break;
+  break;
 
 
 

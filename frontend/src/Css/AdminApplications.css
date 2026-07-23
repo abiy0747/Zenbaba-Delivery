@@ -1,0 +1,570 @@
+/* ==========================================
+   Zenbaba Admin Applications Dashboard
+   Premium Gold Cinematic Theme
+==========================================*/
+
+
+.admin-app-page{
+
+    min-height:100vh;
+
+    padding:120px 6% 70px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #fffdf7,
+        #fff3c4
+    );
+
+
+}
+
+
+
+/* TITLE */
+
+.admin-app-page > h1{
+
+    text-align:center;
+
+    font-size:50px;
+
+    font-weight:900;
+
+    margin-bottom:60px;
+
+    color:#222;
+
+
+}
+
+
+
+
+/* SECTION */
+
+
+.admin-app-page section{
+
+
+    margin-bottom:70px;
+
+
+}
+
+
+
+.admin-app-page h2{
+
+
+    font-size:32px;
+
+    margin-bottom:30px;
+
+    font-weight:800;
+
+
+}
+
+
+
+
+
+
+
+/* CARD GRID */
+
+
+.application-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(300px,1fr));
+
+
+    gap:30px;
+
+
+}
+
+
+
+
+
+
+
+/* APPLICATION CARD */
+
+
+.application-card{
+
+
+    background:
+
+    rgba(255,255,255,.9);
+
+
+    backdrop-filter:
+
+    blur(20px);
+
+
+
+    border-radius:30px;
+
+
+
+    padding:30px;
+
+
+
+    box-shadow:
+
+    0 25px 60px rgba(0,0,0,.12);
+
+
+
+    transition:.35s;
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+
+.application-card::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:120px;
+
+    height:120px;
+
+
+    background:
+
+    rgba(244,180,0,.15);
+
+
+    border-radius:50%;
+
+
+    top:-40px;
+
+    right:-40px;
+
+
+}
+
+
+
+
+
+.application-card:hover{
+
+
+    transform:
+
+    translateY(-10px);
+
+
+    box-shadow:
+
+    0 35px 80px rgba(244,180,0,.25);
+
+
+}
+
+
+
+
+
+.application-card h3{
+
+
+    font-size:26px;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+
+
+.application-card p{
+
+
+    margin:10px 0;
+
+    color:#555;
+
+    font-size:16px;
+
+
+}
+
+
+
+
+
+/* STATUS */
+
+
+.status{
+
+
+    display:inline-block;
+
+
+    padding:8px 18px;
+
+
+    border-radius:20px;
+
+
+    background:#fff3c4;
+
+
+    color:#b88600;
+
+
+    font-weight:700;
+
+
+    margin-top:15px;
+
+
+}
+
+
+
+
+
+
+
+/* BUTTONS */
+
+
+.action-buttons{
+
+
+    display:flex;
+
+
+    gap:15px;
+
+
+    margin-top:30px;
+
+
+}
+
+
+
+.action-buttons button{
+
+
+    flex:1;
+
+
+    padding:14px;
+
+
+    border:none;
+
+
+    border-radius:14px;
+
+
+    cursor:pointer;
+
+
+    font-weight:700;
+
+
+    font-size:16px;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.approve{
+
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #ffd54f,
+
+    #f4b400
+
+    );
+
+
+    color:white;
+
+
+}
+
+
+
+
+.reject{
+
+
+    background:#222;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+
+.approve:hover,
+.reject:hover{
+
+
+    transform:
+
+    translateY(-5px);
+
+
+}
+
+
+
+
+
+/* MOBILE */
+
+
+@media(max-width:800px){
+
+
+
+.admin-app-page{
+
+
+    padding:
+
+    100px 20px 50px;
+
+
+}
+
+
+
+
+.admin-app-page > h1{
+
+
+    font-size:36px;
+
+
+}
+
+
+
+.admin-app-page h2{
+
+
+    font-size:26px;
+
+
+}
+
+
+
+.application-grid{
+
+
+    grid-template-columns:
+
+    1fr;
+
+
+}
+
+
+
+}
+
+
+.admin-app-page{
+
+min-height:100vh;
+padding:80px 40px 40px;
+background:
+linear-gradient(
+135deg,
+#fffdf7,
+#fff8e1
+);
+
+font-family:"Arial",sans-serif;
+
+}
+
+
+
+
+
+.admin-header{
+
+background:
+linear-gradient(
+135deg,
+#ff9800,
+#ffc107
+);
+
+padding:35px;
+
+border-radius:25px;
+
+color:white;
+
+box-shadow:
+0 15px 40px rgba(255,152,0,0.35);
+
+margin-bottom:35px;
+
+}
+
+
+
+.admin-header h1{
+
+font-size:38px;
+
+margin:0 0 10px;
+
+}
+
+
+
+.admin-header p{
+
+font-size:18px;
+
+opacity:.9;
+
+}
+
+
+
+
+
+.admin-stats{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+
+margin-bottom:45px;
+
+}
+
+
+
+
+
+.stat-card{
+
+background:white;
+
+border-radius:25px;
+
+padding:25px;
+
+box-shadow:
+0 15px 35px rgba(0,0,0,0.08);
+
+border:1px solid #ffe0a3;
+
+transition:.3s;
+
+}
+
+
+
+.stat-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:
+0 20px 45px rgba(255,152,0,.25);
+
+}
+
+
+
+.stat-card h3{
+
+margin:0;
+
+color:#ff9800;
+
+font-size:20px;
+
+}
+
+
+
+.stat-card strong{
+
+display:block;
+
+font-size:45px;
+
+margin:15px 0;
+
+color:#333;
+
+}
+
+
+
+.stat-card p{
+
+color:#777;
+
+}

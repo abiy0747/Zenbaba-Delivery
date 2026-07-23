@@ -18,7 +18,7 @@ import cartRoutes from "./routes/cartRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import deliveryRoutes from "./routes/deliveryRoutes.js";
 import driverRoutes from "./routes/driverRoutes.js";
-
+import applicationRoutes from "./routes/applicationRoutes.js";
 
 
 dotenv.config();
@@ -225,6 +225,11 @@ app.use(
 driverRoutes
 );
 
+
+app.use(
+  "/api/applications",
+  applicationRoutes
+);
 
 
 

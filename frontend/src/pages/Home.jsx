@@ -5,7 +5,7 @@ import FAQ from "./FAQ";
 import Menu from "./Menu";
 import Hero from "./Hero";
 import "../Css/Home.css";
-
+import BecomePartner from "./BecomePartner";
 function Home() {
 
 
@@ -116,7 +116,45 @@ padding:"0 20px"
 
 
 
+{/* ================= BECOME PARTNER ================= */}
 
+<section
+
+style={{
+
+padding:"70px 0",
+
+background:darkMode ? "#111":"#fff8e1",
+
+transition:"0.5s"
+
+}}
+
+>
+
+
+<div
+
+style={{
+
+maxWidth:"1200px",
+
+margin:"auto",
+
+padding:"0 20px"
+
+}}
+
+>
+
+
+<BecomePartner/>
+
+
+</div>
+
+
+</section>
 
 {/* ================= ABOUT ================= */}
 

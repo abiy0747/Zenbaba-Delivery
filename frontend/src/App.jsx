@@ -28,11 +28,34 @@ import Notifications from "./pages/profile/Notifications";
 import Settings from "./pages/profile/Settings";
 import Rewards from "./pages/profile/Rewards";
 import Reviews from "./pages/profile/Reviews";
+import ScrollToTop from "./components/ScrollToTop";
+import BecomePartner from "./pages/BecomePartner";
+import DriverApplication from "./pages/DriverApplication";
+import RestaurantApplication from "./pages/RestaurantApplication";
+import AdminApplications from "./pages/AdminApplications";
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
+    
     <AuthProvider>
     <CartProvider>
       <Router>
+         <Toaster
+            position="top-right"
+            reverseOrder={false}
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: "#fff",
+                color: "#222",
+                borderRadius: "12px",
+                padding: "16px",
+                boxShadow: "0 10px 30px rgba(0,0,0,.15)",
+              },
+            }}
+          />
+      <ScrollToTop />
+      
         <Navbar />
         <Routes>
           {/* <Route path="/restaurants" element={<Restaurants />} /> */}
@@ -50,6 +73,27 @@ function App() {
   element={<MyOrders />}
 
 />
+<Route 
+  path="/become-partner" 
+  element={<BecomePartner />} 
+/>
+
+<Route
+  path="/driver-application"
+  element={<DriverApplication />}
+/>
+
+
+<Route
+  path="/restaurant-application"
+  element={<RestaurantApplication />}
+/>
+
+<Route
+ path="/admin-applications"
+ element={<AdminApplications />}
+/>
+
  <Route
  path="/orders/:id"
  element={<OrderDetails />}

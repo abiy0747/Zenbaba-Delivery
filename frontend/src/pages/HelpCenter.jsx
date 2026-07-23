@@ -220,33 +220,7 @@ function HelpCenter() {
         </div>
       ))}
 
-      <div className="report-section">
-
-        <h2>
-
-          <FaExclamationTriangle />
-
-          Report a Problem
-
-        </h2>
-
-        <div className="report-grid">
-
-          <button>🚫 Missing Item</button>
-
-          <button>🍔 Wrong Order</button>
-
-          <button>💳 Payment Issue</button>
-
-          <button>🏍 Driver Complaint</button>
-
-          <button>⭐ Restaurant Complaint</button>
-
-          <button>📦 Track My Order</button>
-
-        </div>
-
-      </div>
+     
 
       <div className="support-section">
 
