@@ -1,107 +1,327 @@
-// src/pages/HelpCenter.js
-import React from "react";
-import { FaPhone, FaEnvelope, FaTelegram } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import {
+  FaPhone,
+  FaEnvelope,
+  FaTelegram,
+  FaBoxOpen,
+  FaMoneyBillWave,
+  FaMotorcycle,
+  FaUserCog,
+  FaGift,
+  FaExclamationTriangle,
+  FaInfoCircle,
+  FaSearch,
+  FaChevronDown,
+  FaChevronUp,
+} from "react-icons/fa";
+
+import "../Css/HelpCenter.css";
 
 function HelpCenter() {
-  const container = {
-    padding: "100px 20px",
-    maxWidth: "900px",
-    margin: "auto",
-    backgroundColor: "#1a2a2f",
-    color: "white",
-    minHeight: "100vh",
-    borderRadius: "10px",
-  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  const card = {
-    backgroundColor: "#243b44",
-    borderRadius: "10px",
-    padding: "20px",
-    marginBottom: "20px",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-    border: "1px solid #2f4a55",
-  };
+  const [search, setSearch] = useState("");
+  const [openIndex, setOpenIndex] = useState(null);
 
-  const title = {
-    color: "#3AB795",
-    marginBottom: "10px",
-  };
+  const faqs = [
+    {
+      category: "Orders & Delivery",
+      icon: <FaBoxOpen />,
+      items: [
+        {
+          question: "How do I place an order?",
+          answer:
+            "Browse restaurants, choose your favorite meals, add them to your cart, and proceed to checkout.",
+        },
+        {
+          question: "How do I track my order?",
+          answer:
+            "Open My Orders and select your active order to see live delivery tracking.",
+        },
+        {
+          question: "My order is delayed.",
+          answer:
+            "Delivery time depends on restaurant preparation, traffic, and weather conditions.",
+        },
+        {
+          question: "I received the wrong order.",
+          answer:
+            "Open your order details and report the issue within 24 hours.",
+        },
+        {
+          question: "Some items are missing.",
+          answer:
+            "Use the Report Problem option in your order details page.",
+        },
+      ],
+    },
 
-  const supportCard = {
-    backgroundColor: "#243b44",
-    borderRadius: "10px",
-    padding: "20px",
-    marginTop: "30px",
-    border: "1px solid #3AB795",
-  };
+    {
+      category: "Payments & Refunds",
+      icon: <FaMoneyBillWave />,
+      items: [
+        {
+          question: "Cash on Delivery",
+          answer:
+            "Pay the driver when your order arrives.",
+        },
+        {
+          question: "Online payment",
+          answer:
+            "Online payment will be available in a future version.",
+        },
+        {
+          question: "Refunds",
+          answer:
+            "Refunds are reviewed after cancellation or delivery issues.",
+        },
+        {
+          question: "Promo Codes",
+          answer:
+            "Apply promo codes during checkout before placing your order.",
+        },
+      ],
+    },
 
-  const supportItem = {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    fontSize: "16px",
-    marginBottom: "10px",
-    color: "white",
-  };
+    {
+      category: "Driver & Delivery",
+      icon: <FaMotorcycle />,
+      items: [
+        {
+          question: "Driver can't find my address.",
+          answer:
+            "Keep your phone available. Drivers may call before arriving.",
+        },
+        {
+          question: "Estimated delivery time",
+          answer:
+            "Delivery time depends on restaurant preparation and road traffic.",
+        },
+        {
+          question: "Contact my driver",
+          answer:
+            "You can communicate with your driver while the order is active.",
+        },
+      ],
+    },
+
+    {
+      category: "Account",
+      icon: <FaUserCog />,
+      items: [
+        {
+          question: "Change password",
+          answer:
+            "Go to Profile → Security.",
+        },
+        {
+          question: "Manage addresses",
+          answer:
+            "Go to Profile → Delivery Addresses.",
+        },
+        {
+          question: "Edit profile",
+          answer:
+            "Go to Profile → Settings.",
+        },
+      ],
+    },
+
+    {
+      category: "Rewards",
+      icon: <FaGift />,
+      items: [
+        {
+          question: "Reward points",
+          answer:
+            "Earn points for every completed delivery.",
+        },
+        {
+          question: "Free delivery",
+          answer:
+            "Watch for promotional events and special offers.",
+        },
+      ],
+    },
+  ];
 
   return (
-    <div style={container}>
-      <h1 style={{ textAlign: "center" }}>Help Center ❓</h1>
-      <p style={{ textAlign: "center", opacity: 0.8 }}>
-        Find answers to common questions about Zenbaba Delivery.
-      </p>
+    <div className="help-page">
 
-      <div style={card}>
-        <h3 style={title}>How do I place an order?</h3>
+      <div className="help-header">
+
+        <h1>Help Center</h1>
+
         <p>
-          Browse restaurants, choose your favorite food from the menu,
-          add items to your cart, and proceed to checkout.
+          Find answers to your questions and get support for your Zenbaba Delivery account.
         </p>
+
+        <div className="search-box">
+
+          <FaSearch className="search-icon" />
+
+          <input
+            type="text"
+            placeholder="Search help topics..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+
+        </div>
+
       </div>
 
-      <div style={card}>
-        <h3 style={title}>How can I track my order?</h3>
-        <p>
-          After placing an order, go to the "Track Order" section
-          to see the delivery status in real time.
-        </p>
-      </div>
+      {faqs.map((section) => (
+        <div className="help-section" key={section.category}>
 
-      <div style={card}>
-        <h3 style={title}>What payment methods are accepted?</h3>
-        <p>
-          Zenbaba Delivery supports cash on delivery and online payments.
-        </p>
-      </div>
+          <h2>
+            {section.icon}
+            {section.category}
+          </h2>
 
-      <div style={card}>
-        <h3 style={title}>How do I become a delivery driver?</h3>
-        <p>
-          You can apply in the "Become a Driver" section in the menu.
-        </p>
-      </div>
+          {section.items
+            .filter((item) =>
+              item.question.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((item, index) => {
+              const id = section.category + index;
 
-      {/* Support Section */}
-      <div style={supportCard}>
-        <h2 style={{ color: "#3AB795", marginBottom: "15px" }}>
-          Contact Support
+              return (
+                <div
+                  key={id}
+                  className="faq-card"
+                >
+                  <div
+                    className="faq-question"
+                    onClick={() =>
+                      setOpenIndex(openIndex === id ? null : id)
+                    }
+                  >
+                    <span>{item.question}</span>
+
+                    {openIndex === id ? (
+                      <FaChevronUp />
+                    ) : (
+                      <FaChevronDown />
+                    )}
+                  </div>
+
+                  {openIndex === id && (
+                    <div className="faq-answer">
+                      {item.answer}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
+        </div>
+      ))}
+
+      <div className="report-section">
+
+        <h2>
+
+          <FaExclamationTriangle />
+
+          Report a Problem
+
         </h2>
 
-        <div style={supportItem}>
-          <FaPhone color="#3AB795" />
-          <span>+251 912 345 678</span>
+        <div className="report-grid">
+
+          <button>🚫 Missing Item</button>
+
+          <button>🍔 Wrong Order</button>
+
+          <button>💳 Payment Issue</button>
+
+          <button>🏍 Driver Complaint</button>
+
+          <button>⭐ Restaurant Complaint</button>
+
+          <button>📦 Track My Order</button>
+
         </div>
 
-        <div style={supportItem}>
-          <FaEnvelope color="#3AB795" />
-          <span>support@zenbaba.com</span>
-        </div>
-
-        <div style={supportItem}>
-          <FaTelegram color="#3AB795" />
-          <span>@ZenbabaSupport</span>
-        </div>
       </div>
+
+      <div className="support-section">
+
+        <h2>
+
+          <FaPhone />
+
+          Contact Support
+
+        </h2>
+
+        <div className="support-card">
+
+          <div>
+
+            <FaPhone className="support-icon" />
+
+            <span>+251 912 345 678</span>
+
+          </div>
+
+          <div>
+
+            <FaEnvelope className="support-icon" />
+
+            <span>support@zenbaba.com</span>
+
+          </div>
+
+          <div>
+
+            <FaTelegram className="support-icon" />
+
+            <span>@ZenbabaSupport</span>
+
+          </div>
+
+          <div>
+
+            🕒 Monday - Sunday | 8:00 AM - 10:00 PM
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="about-section">
+
+        <h2>
+
+          <FaInfoCircle />
+
+          About Zenbaba
+
+        </h2>
+
+        <div className="about-card">
+
+          <p>
+            <strong>Version:</strong> 1.0.0
+          </p>
+
+          <p>
+            <strong>Privacy Policy:</strong> Your information is securely protected.
+          </p>
+
+          <p>
+            <strong>Terms & Conditions:</strong> By using Zenbaba Delivery you agree to our service policies.
+          </p>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }

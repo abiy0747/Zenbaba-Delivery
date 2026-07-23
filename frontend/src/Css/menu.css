@@ -1,6 +1,7 @@
 /* =====================================
    Zenbaba Menu Page
    Cinematic Food Delivery UI
+   Light + Dark Mode Compatible
 ===================================== */
 
 
@@ -8,33 +9,20 @@
 
 min-height:100vh;
 
-background:
-
-linear-gradient(
-
-135deg,
-
-#eff6ff,
-
-#ffffff
-
-);
-
 padding:100px 20px;
 
 font-family:Arial, Helvetica, sans-serif;
 
-color:#1e293b;
+background:transparent;
+
+color:inherit;
+
+transition:0.5s;
 
 }
 
 
-
-
-
-
-
-/* HEADER */
+/* ================= HEADER ================= */
 
 
 .menu-header {
@@ -51,7 +39,7 @@ animation:fadeDown .8s ease;
 
 font-size:48px;
 
-color:#2563eb;
+color:#FFC107;
 
 margin-bottom:10px;
 
@@ -63,7 +51,7 @@ margin-bottom:10px;
 
 font-size:18px;
 
-color:#64748b;
+opacity:0.7;
 
 }
 
@@ -71,20 +59,16 @@ color:#64748b;
 
 
 
-
-
-/* SEARCH */
+/* ================= SEARCH ================= */
 
 
 .search-wrapper {
-
 
 display:flex;
 
 justify-content:center;
 
 margin:40px 0 25px;
-
 
 }
 
@@ -97,17 +81,26 @@ width:100%;
 
 max-width:600px;
 
+
 padding:16px 25px;
+
 
 border-radius:50px;
 
+
 border:1px solid #cbd5e1;
+
 
 font-size:17px;
 
+
 outline:none;
 
+
 background:white;
+
+
+color:#111;
 
 
 box-shadow:
@@ -117,21 +110,21 @@ box-shadow:
 
 transition:.3s;
 
+
 }
-
-
 
 
 
 .menu-search:focus {
 
 
-border-color:#2563eb;
+border-color:#FFC107;
 
 
 box-shadow:
 
 0 0 0 4px rgba(37,99,235,.15);
+
 
 }
 
@@ -141,7 +134,7 @@ box-shadow:
 
 
 
-/* FILTER */
+/* ================= FILTER ================= */
 
 
 .menu-filters {
@@ -155,7 +148,9 @@ gap:15px;
 
 margin-bottom:40px;
 
+
 }
+
 
 
 
@@ -164,17 +159,24 @@ margin-bottom:40px;
 
 padding:12px 30px;
 
+
 border-radius:30px;
+
 
 border:none;
 
+
 background:white;
 
-color:#2563eb;
+
+color:#FFC107;
+
 
 font-weight:bold;
 
+
 cursor:pointer;
+
 
 box-shadow:
 
@@ -182,6 +184,7 @@ box-shadow:
 
 
 transition:.3s;
+
 
 }
 
@@ -192,16 +195,20 @@ transition:.3s;
 
 transform:translateY(-3px);
 
+
 }
+
 
 
 
 .filter-btn.active {
 
 
-background:#2563eb;
+background:#FFC107;
+
 
 color:white;
+
 
 }
 
@@ -212,13 +219,14 @@ color:white;
 
 
 
-/* GRID */
+/* ================= GRID ================= */
 
 
 .menu-grid {
 
 
 display:grid;
+
 
 grid-template-columns:
 
@@ -227,9 +235,12 @@ repeat(auto-fit,minmax(280px,1fr));
 
 gap:30px;
 
+
 max-width:1200px;
 
+
 margin:auto;
+
 
 }
 
@@ -239,8 +250,7 @@ margin:auto;
 
 
 
-
-/* CARD */
+/* ================= CARD ================= */
 
 
 .menu-card {
@@ -248,7 +258,9 @@ margin:auto;
 
 background:white;
 
+
 border-radius:25px;
+
 
 overflow:hidden;
 
@@ -268,13 +280,10 @@ animation:cardShow .6s ease;
 
 
 
-
 .menu-card:hover {
 
 
-transform:
-
-translateY(-12px);
+transform:translateY(-12px);
 
 
 box-shadow:
@@ -291,7 +300,7 @@ box-shadow:
 
 
 
-/* IMAGE */
+/* ================= IMAGE ================= */
 
 
 .food-image-box {
@@ -299,12 +308,14 @@ box-shadow:
 
 height:230px;
 
+
 position:relative;
+
 
 overflow:hidden;
 
-}
 
+}
 
 
 
@@ -314,11 +325,15 @@ overflow:hidden;
 
 width:100%;
 
+
 height:100%;
+
 
 object-fit:cover;
 
+
 transition:.6s;
+
 
 }
 
@@ -329,6 +344,7 @@ transition:.6s;
 
 transform:scale(1.12);
 
+
 }
 
 
@@ -337,8 +353,7 @@ transform:scale(1.12);
 
 
 
-
-/* RATING */
+/* ================= RATING ================= */
 
 
 .food-badge {
@@ -346,12 +361,18 @@ transform:scale(1.12);
 
 position:absolute;
 
+
 top:15px;
+
 
 right:15px;
 
 
 background:white;
+
+
+color:#111;
+
 
 padding:8px 15px;
 
@@ -375,13 +396,14 @@ box-shadow:
 
 
 
-/* CONTENT */
+/* ================= CONTENT ================= */
 
 
 .menu-content {
 
 
 padding:25px;
+
 
 }
 
@@ -392,10 +414,11 @@ padding:25px;
 
 font-size:24px;
 
+
 margin-bottom:10px;
 
-}
 
+}
 
 
 
@@ -403,11 +426,10 @@ margin-bottom:10px;
 .restaurant-name {
 
 
-color:#64748b;
+opacity:.7;
+
 
 }
-
-
 
 
 
@@ -416,15 +438,17 @@ color:#64748b;
 
 display:flex;
 
+
 justify-content:space-between;
+
 
 align-items:center;
 
+
 margin-top:20px;
 
+
 }
-
-
 
 
 
@@ -433,7 +457,9 @@ margin-top:20px;
 
 font-size:22px;
 
-color:#2563eb;
+
+color:#FFC107;
+
 
 }
 
@@ -444,13 +470,14 @@ color:#2563eb;
 
 
 
-/* ADD BUTTON */
+/* ================= BUTTON ================= */
 
 
 .add-btn {
 
 
-background:#2563eb;
+background:#FFC107;
+
 
 color:white;
 
@@ -480,12 +507,10 @@ transition:.3s;
 .add-btn:hover {
 
 
-background:#1d4ed8;
+background:#FFC107;
 
 
-transform:
-
-scale(1.1);
+transform:scale(1.1);
 
 
 }
@@ -497,7 +522,155 @@ scale(1.1);
 
 
 
-/* ANIMATION */
+
+/* =================================
+   DARK MODE
+================================= */
+
+
+.dark-theme .menu-page {
+
+
+background:#050505;
+
+
+color:white;
+
+
+}
+
+
+
+
+
+.dark-theme .menu-card {
+
+
+background:#111;
+
+
+color:white;
+
+
+box-shadow:
+
+0 15px 35px rgba(255,255,255,.05);
+
+
+}
+
+
+
+
+
+
+.dark-theme .menu-search {
+
+
+background:#181818;
+
+
+color:white;
+
+
+border-color:#333;
+
+
+}
+
+
+
+
+
+
+.dark-theme .filter-btn {
+
+
+background:#181818;
+
+
+color:#4da3ff;
+
+
+}
+
+
+
+
+
+.dark-theme .food-badge {
+
+
+background:#222;
+
+
+color:white;
+
+
+}
+
+
+
+
+
+.dark-theme .restaurant-name {
+
+
+color:#aaa;
+
+
+}
+
+
+
+
+
+.dark-theme .menu-subtitle {
+
+
+color:#bbb;
+
+
+}
+
+
+
+
+
+
+
+/* LIGHT MODE */
+
+
+.light-theme .menu-page {
+
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#eff6ff,
+
+#ffffff
+
+);
+
+
+color:#1e293b;
+
+
+}
+
+
+
+
+
+
+
+
+/* ================= ANIMATION ================= */
 
 
 @keyframes cardShow {
@@ -508,9 +681,8 @@ from{
 
 opacity:0;
 
-transform:
 
-translateY(50px);
+transform:translateY(50px);
 
 
 }
@@ -521,9 +693,8 @@ to{
 
 opacity:1;
 
-transform:
 
-translateY(0);
+transform:translateY(0);
 
 
 }
@@ -545,9 +716,8 @@ from{
 
 opacity:0;
 
-transform:
 
-translateY(-30px);
+transform:translateY(-30px);
 
 
 }
@@ -558,34 +728,33 @@ to{
 
 opacity:1;
 
-transform:
 
-translateY(0);
-
-
-}
+transform:translateY(0);
 
 
 }
 
 
+}
 
 
 
 
 
 
-/* MOBILE */
+
+
+/* ================= MOBILE ================= */
 
 
 @media(max-width:600px){
-
 
 
 .menu-page {
 
 
 padding:80px 15px;
+
 
 }
 
@@ -596,6 +765,7 @@ padding:80px 15px;
 
 font-size:34px;
 
+
 }
 
 
@@ -604,6 +774,7 @@ font-size:34px;
 
 
 flex-wrap:wrap;
+
 
 }
 
@@ -614,8 +785,8 @@ flex-wrap:wrap;
 
 height:200px;
 
-}
 
+}
 
 
 }

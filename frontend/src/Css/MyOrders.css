@@ -40,7 +40,7 @@
 
   font-size:40px;
 
-  color:#2563eb;
+  color:#FFC107;
 
   animation:fadeDown 0.7s ease;
 
@@ -82,7 +82,7 @@
 
   align-items:center;
 
-  color:#2563eb;
+  color:#FFC107;
 
 }
 
@@ -96,7 +96,7 @@
 
   border:5px solid #dbeafe;
 
-  border-top:5px solid #2563eb;
+  border-top:5px solid #FFC107;
 
   border-radius:50%;
 
@@ -157,7 +157,7 @@
 
 .primary-btn {
 
-  background:#2563eb;
+  background:#FFC107;
 
   color:white;
 
@@ -183,7 +183,7 @@
 
   transform:translateY(-3px);
 
-  background:#1d4ed8;
+  background:#FFC107;
 
 }
 
@@ -280,7 +280,7 @@
 
 .price {
 
-  color:#2563eb;
+  color:#FFC107;
 
 }
 
@@ -327,7 +327,7 @@
 
   background:#dbeafe;
 
-  color:#1d4ed8;
+  color:#FFC107;
 
 }
 
@@ -439,7 +439,7 @@
 
   border-radius:12px;
 
-  border-left:5px solid #2563eb;
+  border-left:5px solid #FFC107;
 
 }
 
@@ -502,7 +502,7 @@
 
 .secondary-btn {
 
-  background:#2563eb;
+  background:#FFC107;
 
   color:white;
 
@@ -514,7 +514,7 @@
 
 .secondary-btn:hover {
 
-  background:#1d4ed8;
+  background:#FFC107;
 
   transform:scale(1.03);
 
@@ -565,7 +565,7 @@
 
   right:30px;
 
-  background:#2563eb;
+  background:#FFC107;
 
   color:white;
 

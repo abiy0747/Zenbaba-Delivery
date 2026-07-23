@@ -327,23 +327,6 @@ onClick={()=>navigate("/my-orders")}
 
 
 
-
-<ProfileItem
-icon="📍"
-title="Delivery Addresses"
-desc="Manage home, work and delivery locations"
-onClick={()=>navigate("/addresses")}
-/>
-
-
-<ProfileItem
-icon="💳"
-title="Payment Methods"
-desc="Manage payments and transaction history"
-onClick={()=>navigate("/payments")}
-/>
-
-
 <ProfileItem
 icon="🎁"
 title="Rewards & Offers"
@@ -360,12 +343,7 @@ onClick={()=>navigate("/reviews")}
 />
 
 
-<ProfileItem
-icon="🏍️"
-title="Delivery Preferences"
-desc="Delivery notes and contact preferences"
-onClick={()=>navigate("/delivery-preferences")}
-/>
+
 
 
 <ProfileItem
@@ -376,12 +354,6 @@ onClick={()=>navigate("/notifications")}
 />
 
 
-<ProfileItem
-icon="🔐"
-title="Security"
-desc="Password and account protection"
-onClick={()=>navigate("/security")}
-/>
 
 
 <ProfileItem
@@ -396,7 +368,7 @@ onClick={()=>navigate("/settings")}
 icon="📞"
 title="Help Center"
 desc="Support, FAQ and customer service"
-onClick={()=>navigate("/help-center")}
+onClick={()=>navigate("/help")}
 />
 
 

@@ -47,7 +47,7 @@
 
 .details-header h1 {
 
-  color:#2563eb;
+  color:#FFC107;
 
   font-size:40px;
 
@@ -83,7 +83,7 @@
 
   flex-direction:column;
 
-  color:#2563eb;
+  color:#FFC107;
 
 }
 
@@ -99,7 +99,7 @@
 
   border:5px solid #dbeafe;
 
-  border-top:5px solid #2563eb;
+border-top:5px solid #FFC107;
 
   animation:spin 1s linear infinite;
 
@@ -157,7 +157,7 @@ animation:fadeUp .6s ease;
 
 .tracking-box h2 {
 
-color:#2563eb;
+color:#FFC107;
 
 text-align:center;
 
@@ -270,7 +270,7 @@ transition:.3s;
 
 .step.active {
 
-color:#2563eb;
+color:#FFC107;
 
 }
 
@@ -280,7 +280,7 @@ color:#2563eb;
 .step.active .circle {
 
 
-background:#2563eb;
+background:#FFC107;
 
 color:white;
 
@@ -321,7 +321,7 @@ animation:fadeUp .6s ease;
 .info-card h2 {
 
 
-color:#2563eb;
+color:#FFC107;
 
 margin-bottom:15px;
 
@@ -389,7 +389,7 @@ color:#64748b;
 .total-box {
 
 
-background:#2563eb;
+background:#FFC107;
 
 color:white;
 
@@ -418,7 +418,7 @@ box-shadow:0 10px 25px rgba(37,99,235,.25);
 .back-btn {
 
 
-background:#2563eb;
+background:#FFC107;
 
 color:white;
 
@@ -441,7 +441,7 @@ transition:.3s;
 .back-btn:hover {
 
 
-background:#1d4ed8;
+background:#FFC107;
 
 transform:translateY(-3px);
 

@@ -63,35 +63,7 @@ const AboutUs = () => {
       </section>
 
       {/* MAIN CONTENT */}
-      <section className="about-container">
-        <div className="about-card">
-
-          {/* ✅ CHANGED */}
-          <h2>Delicious Food. Delivered Fast.</h2>
-
-          <p>
-            Our food delivery platform in Bahir Dar connects you with the best
-            local restaurants, cafes, and traditional food spots in one place.
-          </p>
-
-          <p>
-            Whether you're craving Ethiopian dishes like Doro Wat, Kitfo,
-            or fast food like burgers and pizza, we bring it all to you
-            with just a few clicks.
-          </p>
-
-          <p>
-            We focus on speed, freshness, and reliability — ensuring your food
-            arrives hot, fresh, and exactly how you expect it.
-          </p>
-
-          <p>
-            From breakfast to dinner, snacks to drinks, we make ordering food
-            simple, fast, and enjoyable across Bahir Dar.
-          </p>
-
-        </div>
-      </section>
+      
 
       {/* STATS (UNCHANGED LOGIC, ONLY LABELS UPDATED) */}
       <section className="stats">

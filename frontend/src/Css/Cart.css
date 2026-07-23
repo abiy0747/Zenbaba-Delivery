@@ -54,7 +54,7 @@ text-align:center;
 
 font-size:45px;
 
-color:#2563eb;
+color:#FFC107;
 
 animation:titleAnimation .8s ease;
 
@@ -249,7 +249,7 @@ margin-bottom:15px;
 
 font-weight:bold;
 
-color:#2563eb;
+color:#FFC107;
 
 }
 
@@ -327,7 +327,7 @@ margin-top:20px;
 .cart-card h4 {
 
 
-color:#2563eb;
+color:#FFC107;
 
 font-size:20px;
 
@@ -387,7 +387,7 @@ border:none;
 border-radius:50%;
 
 
-background:#2563eb;
+background:#FFC107;
 
 color:white;
 
@@ -407,7 +407,7 @@ transition:.3s;
 .quantity-box button:hover {
 
 
-background:#1d4ed8;
+background:#FFC107;
 
 transform:scale(1.15);
 
@@ -521,7 +521,7 @@ animation:fadeUp .7s ease;
 .cart-summary h1 {
 
 
-color:#2563eb;
+color:#FFC107;
 
 font-size:40px;
 
@@ -614,7 +614,7 @@ transform:translateY(-3px);
 .checkout-btn {
 
 
-background:#2563eb;
+background:#FFC107;
 
 color:white;
 
@@ -628,7 +628,7 @@ color:white;
 .checkout-btn:hover {
 
 
-background:#1d4ed8;
+background:#FFC107;
 
 transform:
 

@@ -1,5 +1,6 @@
 /* =====================================================
    ZENBABA LUXURY DRIVER DASHBOARD
+   Premium Gold Theme
 ===================================================== */
 
 
@@ -12,12 +13,12 @@
     background:
     radial-gradient(
         circle at top right,
-        #dbeafe,
+        #FEF3C7,
         transparent 40%
     ),
     linear-gradient(
         135deg,
-        #f8fbff,
+        #FFFBEB,
         #ffffff
     );
 
@@ -26,14 +27,10 @@
 }
 
 
-
-
-
 /* ================= HEADER ================= */
 
 
 .lux-header{
-
 
     display:flex;
 
@@ -41,33 +38,22 @@
 
     align-items:center;
 
-
     padding:35px;
-
 
     border-radius:30px;
 
-
     background:
-
     rgba(255,255,255,.75);
-
 
     backdrop-filter:blur(20px);
 
-
     border:
-
     1px solid rgba(255,255,255,.8);
 
-
     box-shadow:
-
-    0 20px 60px rgba(37,99,235,.15);
-
+    0 20px 60px rgba(255,193,7,.15);
 
     margin-bottom:35px;
-
 
 }
 
@@ -75,15 +61,11 @@
 
 .lux-header h1{
 
-
     font-size:40px;
-
 
     color:#0f172a;
 
-
     margin-bottom:10px;
-
 
 }
 
@@ -91,28 +73,19 @@
 
 .lux-header p{
 
-
     color:#64748b;
-
 
     font-size:18px;
 
-
 }
-
 
 
 
 .lux-header strong{
 
-
-    color:#2563eb;
-
+    color:#FFC107;
 
 }
-
-
-
 
 
 /* ================= ONLINE AREA ================= */
@@ -120,61 +93,45 @@
 
 .online-box{
 
-
     display:flex;
 
     align-items:center;
 
     gap:12px;
 
-
     font-weight:700;
 
-
 }
-
 
 
 
 .active-dot{
 
-
     color:#22c55e;
-
 
     animation:pulse 1.5s infinite;
 
-
 }
-
 
 
 
 .inactive-dot{
 
-
     color:#ef4444;
-
 
 }
 
 
-
-
-
-/* TOGGLE */
+/* ================= TOGGLE ================= */
 
 
 .lux-toggle{
-
 
     width:70px;
 
     height:36px;
 
-
     position:relative;
-
 
 }
 
@@ -182,35 +139,25 @@
 
 .lux-toggle input{
 
-
     display:none;
-
 
 }
 
 
 
-
 .lux-toggle span{
-
 
     position:absolute;
 
-
     inset:0;
-
 
     background:#cbd5e1;
 
-
     border-radius:50px;
-
 
     cursor:pointer;
 
-
     transition:.4s;
-
 
 }
 
@@ -218,72 +165,49 @@
 
 .lux-toggle span:before{
 
-
     content:"";
 
-
     position:absolute;
-
 
     width:28px;
 
     height:28px;
 
-
     left:4px;
 
     top:4px;
 
-
     background:white;
-
 
     border-radius:50%;
 
-
     transition:.4s;
 
-
     box-shadow:
-
     0 5px 15px rgba(0,0,0,.2);
 
-
 }
-
 
 
 
 .lux-toggle input:checked + span{
 
-
     background:
-
     linear-gradient(
-    135deg,
-    #22c55e,
-    #16a34a
+        135deg,
+        #22c55e,
+        #16a34a
     );
 
-
 }
-
 
 
 
 .lux-toggle input:checked + span:before{
 
-
     transform:translateX(34px);
 
-
 }
-
-
-
-
-
-
 
 
 /* ================= STATS ================= */
@@ -291,60 +215,42 @@
 
 .stats-container{
 
-
     display:grid;
 
-
     grid-template-columns:
-
     repeat(
-    auto-fit,
-    minmax(220px,1fr)
+        auto-fit,
+        minmax(220px,1fr)
     );
-
 
     gap:25px;
 
-
     margin-bottom:45px;
-
 
 }
 
 
 
-
-
 .stat-card{
-
 
     padding:28px;
 
-
     border-radius:25px;
-
 
     background:white;
 
-
     border:
-
     1px solid #e5e7eb;
-
 
     box-shadow:
 
     0 15px 40px rgba(15,23,42,.08);
 
-
     transition:.4s;
-
 
     position:relative;
 
-
     overflow:hidden;
-
 
 }
 
@@ -352,28 +258,21 @@
 
 .stat-card:before{
 
-
     content:"";
 
-
     position:absolute;
-
 
     width:100px;
 
     height:100px;
 
-
     right:-40px;
 
     top:-40px;
 
-
-    background:#dbeafe;
-
+    background:#FEF3C7;
 
     border-radius:50%;
-
 
 }
 
@@ -381,28 +280,20 @@
 
 .stat-card:hover{
 
-
     transform:
-
     translateY(-10px);
-
 
     box-shadow:
 
-    0 25px 55px rgba(37,99,235,.2);
-
+    0 25px 55px rgba(255,193,7,.25);
 
 }
 
 
 
-
-
 .stat-card h3{
 
-
     font-size:35px;
-
 
 }
 
@@ -410,12 +301,9 @@
 
 .stat-card p{
 
-
     color:#64748b;
 
-
     margin:10px 0;
-
 
 }
 
@@ -423,43 +311,24 @@
 
 .stat-card strong{
 
-
     font-size:30px;
 
-
-    color:#2563eb;
-
+    color:#FFC107;
 
 }
-
-
-
-
-
-
 
 /* ================= TITLES ================= */
 
 
 .lux-driver-dashboard h2{
 
-
     margin:45px 0 25px;
-
 
     font-size:30px;
 
-
     color:#0f172a;
 
-
 }
-
-
-
-
-
-
 
 
 
@@ -468,30 +337,18 @@
 
 .lux-grid{
 
-
     display:grid;
-
 
     grid-template-columns:
 
-
     repeat(
-    auto-fit,
-    minmax(320px,1fr)
+        auto-fit,
+        minmax(320px,1fr)
     );
-
 
     gap:30px;
 
-
 }
-
-
-
-
-
-
-
 
 
 
@@ -500,120 +357,85 @@
 
 .lux-card{
 
-
     position:relative;
-
 
     padding:30px;
 
-
     border-radius:30px;
-
 
     background:
 
-
     rgba(255,255,255,.9);
-
 
     backdrop-filter:blur(15px);
 
-
     border:
 
-    1px solid rgba(37,99,235,.12);
-
+    1px solid rgba(255,193,7,.18);
 
     box-shadow:
 
-
     0 15px 45px rgba(15,23,42,.1);
-
 
     overflow:hidden;
 
-
     transition:.45s;
-
 
     animation:cardShow .6s ease;
 
-
 }
-
-
 
 
 
 .lux-card:before{
 
-
     content:"";
-
 
     position:absolute;
 
-
     top:0;
-
 
     left:0;
 
-
     width:100%;
 
-
     height:5px;
-
 
     background:
 
     linear-gradient(
-    90deg,
-    #2563eb,
-    #38bdf8
+        90deg,
+        #FFC107,
+        #FF9800
     );
 
-
 }
-
 
 
 
 .lux-card:hover{
 
-
     transform:
 
     translateY(-12px);
 
-
     box-shadow:
 
-
-    0 30px 70px rgba(37,99,235,.25);
-
+    0 30px 70px rgba(255,193,7,.25);
 
 }
 
 
 
-
-
 .card-top{
-
 
     display:flex;
 
-
     justify-content:space-between;
-
 
     align-items:center;
 
-
     margin-bottom:20px;
-
 
 }
 
@@ -621,12 +443,9 @@
 
 .card-top h3{
 
-
-    color:#1e3a8a;
-
+    color:#92400e;
 
     font-size:20px;
-
 
 }
 
@@ -634,48 +453,29 @@
 
 .card-top span{
 
+    background:#FFFBEB;
 
-    background:#eff6ff;
-
-
-    color:#2563eb;
-
+    color:#FFC107;
 
     padding:8px 14px;
 
-
     border-radius:20px;
-
 
     font-weight:700;
 
-
 }
-
-
-
-
 
 
 
 .lux-card p{
 
-
     color:#475569;
-
 
     margin:14px 0;
 
-
     font-size:16px;
 
-
 }
-
-
-
-
-
 
 
 
@@ -684,83 +484,58 @@
 
 .lux-card button{
 
-
     width:100%;
-
 
     margin-top:20px;
 
-
     padding:15px;
-
 
     border:none;
 
-
     border-radius:18px;
-
 
     background:
 
-
     linear-gradient(
-    135deg,
-    #2563eb,
-    #1d4ed8
+        135deg,
+        #FFC107,
+        #FF9800
     );
-
 
     color:white;
 
-
     font-size:16px;
-
 
     font-weight:700;
 
-
     cursor:pointer;
-
 
     transition:.35s;
 
-
 }
-
 
 
 
 .lux-card button:hover{
 
-
     transform:
 
-    translateY(-4px);
-
+    translateY(-4px)
+    scale(1.03);
 
     box-shadow:
 
-
-    0 15px 35px rgba(37,99,235,.4);
-
+    0 15px 35px rgba(255,193,7,.45);
 
 }
-
 
 
 
 .lux-card button:disabled{
 
-
     background:#22c55e;
 
-
 }
-
-
-
-
-
 
 
 
@@ -769,15 +544,11 @@
 
 .lux-status{
 
-
     font-weight:800;
-
 
     text-transform:capitalize;
 
-
     margin-left:8px;
-
 
 }
 
@@ -785,18 +556,15 @@
 
 .lux-status.accepted{
 
-
-    color:#2563eb;
-
+    color:#FFC107;
 
 }
 
 
+
 .lux-status.picked_up{
 
-
     color:#f59e0b;
-
 
 }
 
@@ -804,9 +572,7 @@
 
 .lux-status.out_for_delivery{
 
-
     color:#9333ea;
-
 
 }
 
@@ -814,106 +580,88 @@
 
 .lux-status.delivered{
 
-
     color:#16a34a;
 
-
 }
-
-
 
 
 
 .empty{
 
-
     padding:30px;
-
 
     background:white;
 
-
     border-radius:20px;
-
 
     text-align:center;
 
-
 }
-
-
-
-
-
-
-
 
 /* ================= ANIMATION ================= */
 
 
 @keyframes pageEnter{
 
+    from{
 
-from{
+        opacity:0;
 
-opacity:0;
+        transform:
+        translateY(30px);
 
-transform:translateY(30px);
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
 
 }
-
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-
 
 
 
 @keyframes cardShow{
 
 
-from{
+    from{
 
-opacity:0;
+        opacity:0;
 
-transform:translateY(25px);
+        transform:
+        translateY(25px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
 
 }
-
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-
 
 
 
 @keyframes pulse{
 
 
-50%{
+    50%{
 
-opacity:.4;
+        opacity:.4;
+
+    }
 
 }
-
-}
-
 
 
 
@@ -925,33 +673,35 @@ opacity:.4;
 @media(max-width:700px){
 
 
-.lux-driver-dashboard{
+    .lux-driver-dashboard{
 
-padding:80px 15px;
+        padding:80px 15px;
 
-}
-
-
-
-.lux-header{
-
-
-flex-direction:column;
-
-align-items:flex-start;
-
-gap:20px;
-
-
-}
+    }
 
 
 
-.lux-header h1{
+    .lux-header{
 
-font-size:30px;
 
-}
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:20px;
+
+
+    }
+
+
+
+    .lux-header h1{
+
+
+        font-size:30px;
+
+
+    }
 
 
 

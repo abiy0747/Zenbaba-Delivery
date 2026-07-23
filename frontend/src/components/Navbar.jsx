@@ -60,19 +60,19 @@ const role = user?.role || localStorage.getItem("role");
     borderRadius: "5px",
     cursor: "pointer",
     fontWeight: "bold",
-    backgroundColor: "#0077ff",
+    backgroundColor: "#FF9800",
     color: "white",
     fontSize: "clamp(10px,1vw,14px)",
   };
 
   const signupButtonStyle = {
     padding: "clamp(3px,0.5vw,8px) clamp(8px,1vw,18px)",
-    border: "1px solid #0077ff",
+    border: "1px solid #FF9800",
     borderRadius: "5px",
     cursor: "pointer",
     fontWeight: "bold",
     backgroundColor: "transparent",
-    color: "#0077ff",
+    color: "#FF9800",
     fontSize: "clamp(10px,1vw,14px)",
   };
 

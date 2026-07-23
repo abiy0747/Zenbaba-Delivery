@@ -51,6 +51,7 @@ iconAnchor:[15,15]
 
 
 
+
 const customerIcon = new L.Icon({
 
   iconUrl:
@@ -129,9 +130,7 @@ useEffect(()=>{
 
 if(!delivery){
 
-console.log(
-"No delivery received"
-);
+console.log("No delivery received");
 
 return;
 
@@ -147,11 +146,8 @@ delivery._id
 
 
 socket.emit(
-
 "joinDelivery",
-
 delivery._id
-
 );
 
 
@@ -193,9 +189,7 @@ return()=>{
 
 
 socket.off(
-
 "driverLocation"
-
 );
 
 
@@ -241,11 +235,9 @@ const end =
 
 
 
-
 const url =
 
 `https://router.project-osrm.org/route/v1/driving/${start};${end}?overview=full&geometries=geojson`;
-
 
 
 
@@ -261,8 +253,7 @@ const data = await response.json();
 
 
 
-
-if(data.routes && data.routes.length>0){
+if(data.routes && data.routes.length > 0){
 
 
 
@@ -276,9 +267,7 @@ data.routes[0]
 
 
 
-const formattedRoute =
-
-coordinates.map(point=>[
+const formattedRoute = coordinates.map(point=>[
 
 point[1],
 
@@ -290,10 +279,7 @@ point[0]
 
 
 
-
-setRoadRoute(
-formattedRoute
-);
+setRoadRoute(formattedRoute);
 
 
 
@@ -303,6 +289,7 @@ setDistance(
 
 (data.routes[0].distance / 1000)
 .toFixed(1)
+
 +
 " KM"
 
@@ -325,7 +312,6 @@ data.routes[0].duration / 60
 " min"
 
 );
-
 
 
 
@@ -454,7 +440,6 @@ className="delivery-map"
 
 
 
-
 <TileLayer
 
 
@@ -498,12 +483,11 @@ icon={restaurantIcon}
 
 
 
+
 <Marker
 
 
-position={
-animatedDriver || defaultDriverPosition
-}
+position={animatedDriver || defaultDriverPosition}
 
 
 icon={driverIcon}
@@ -520,6 +504,7 @@ icon={driverIcon}
 
 
 </Marker>
+
 
 
 
@@ -556,10 +541,11 @@ icon={customerIcon}
 
 
 
+
+
 {
 
 roadRoute.length > 0 &&
-
 
 <Polyline
 
@@ -567,10 +553,13 @@ roadRoute.length > 0 &&
 positions={roadRoute}
 
 
-color="#2563eb"
+color="#FF9800"
 
 
 weight={6}
+
+
+opacity={0.9}
 
 
 />

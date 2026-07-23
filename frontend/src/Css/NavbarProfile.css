@@ -105,7 +105,7 @@
   border: none;
   border-radius: 10px;
 
-  background: linear-gradient(135deg, #0077ff, #4da3ff);
+  background: linear-gradient(135deg, #FFC107, #FF9800);
   color: white;
 
   font-weight: 600;
@@ -235,7 +235,7 @@
   border: none;
   border-radius: 10px;
 
-  background: linear-gradient(135deg, #0077ff, #4da3ff);
+  background: linear-gradient(135deg, #FFC107, #FF9800);
   color: white;
 
   font-weight: 600;

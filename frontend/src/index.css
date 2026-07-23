@@ -1,22 +1,35 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+
+* {
+  font-family: "Space Grotesk", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-html {
-  scroll-behavior: smooth;
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight:700;
 }
 
-/* THIS FIXES "middle screen issue" */
-#about,
-#faq {
-  scroll-margin-top: 150px; /* adjust based on navbar height */
+
+button {
+  font-weight:5500;
+}
+
+@layer components {
+
+  .btn-primary {
+   @apply bg-yellow-400 text-white font-bold px-8 py-3 rounded-full transition-all duration-300;
+    box-shadow: 0 0 30px rgba(250,204,21,0.4);
+  }
+
+  .btn-primary:hover {
+    @apply bg-amber-500 scale-105;
+  }
+
 }

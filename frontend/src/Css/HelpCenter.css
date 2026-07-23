@@ -1,0 +1,363 @@
+/* ===========================
+   HELP CENTER
+=========================== */
+
+.help-page{
+    max-width:1100px;
+    margin:90px auto 40px;
+    padding:25px;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.help-header{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.help-header h1{
+    font-size:42px;
+    color:#FFC107;
+    margin-bottom:10px;
+}
+
+.help-header p{
+    color:#666;
+    font-size:17px;
+    margin-bottom:30px;
+}
+
+/* ===========================
+   SEARCH
+=========================== */
+
+.search-box{
+    max-width:650px;
+    margin:auto;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    padding:16px 18px 16px 55px;
+    border:none;
+    border-radius:50px;
+    background:#fff;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    font-size:16px;
+    transition:.3s;
+}
+
+.search-box input:focus{
+    outline:none;
+    box-shadow:0 12px 30px rgba(0,119,255,.25);
+}
+
+.search-icon{
+    position:absolute;
+    left:20px;
+    top:18px;
+    color:#FFC107;
+    font-size:18px;
+}
+
+/* ===========================
+   SECTION
+=========================== */
+
+.help-section{
+    margin-top:40px;
+}
+
+.help-section h2{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#FFC107;
+    margin-bottom:20px;
+    font-size:28px;
+}
+
+/* ===========================
+   FAQ CARD
+=========================== */
+
+.faq-card{
+    background:#fff;
+    border-radius:18px;
+    margin-bottom:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.faq-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 40px rgba(0,119,255,.15);
+}
+
+.faq-question{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:17px;
+}
+
+.faq-answer{
+    padding:0 22px 22px;
+    color:#666;
+    line-height:1.7;
+    animation:fade .3s ease;
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(-8px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ===========================
+   REPORT
+=========================== */
+
+.report-section{
+
+margin-top:60px;
+
+}
+
+.report-section h2{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+color:#FFC107;
+
+margin-bottom:25px;
+
+}
+
+.report-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:18px;
+
+}
+
+.report-grid button{
+
+padding:18px;
+
+border:none;
+
+border-radius:16px;
+
+background:#fff;
+
+font-size:16px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+transition:.3s;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.report-grid button:hover{
+
+background:#FFC107;
+
+color:white;
+
+transform:translateY(-5px);
+
+}
+
+/* ===========================
+   SUPPORT
+=========================== */
+
+.support-section{
+
+margin-top:60px;
+
+}
+
+.support-section h2{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+color:#FFC107;
+
+margin-bottom:25px;
+
+}
+
+.support-card{
+
+background:white;
+
+border-radius:20px;
+
+padding:30px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+display:flex;
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+.support-card div{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+font-size:17px;
+
+}
+
+.support-icon{
+
+color:#FFC107;
+
+font-size:22px;
+
+}
+
+/* ===========================
+   ABOUT
+=========================== */
+
+.about-section{
+
+margin-top:60px;
+
+}
+
+.about-section h2{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+color:#FFC107;
+
+margin-bottom:20px;
+
+}
+
+.about-card{
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.about-card p{
+
+margin-bottom:18px;
+
+line-height:1.7;
+
+color:#555;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+.help-page{
+
+padding:15px;
+
+}
+
+.help-header h1{
+
+font-size:32px;
+
+}
+
+.help-section h2{
+
+font-size:22px;
+
+}
+
+.faq-question{
+
+font-size:15px;
+
+padding:18px;
+
+}
+
+.search-box input{
+
+font-size:15px;
+
+}
+
+.report-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.support-card{
+
+padding:20px;
+
+}
+
+}

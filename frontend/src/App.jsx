@@ -24,12 +24,10 @@ import RestaurantMenu from "./pages/restaurant/RestaurantMenu";
 import RestaurantOrders from "./pages/restaurant/RestaurantOrders";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DriverDashboard from "./pages/driver/DriverDashboard";
-import Favorites from "./pages/profile/Favorites";
-import Addresses from "./pages/profile/Addresses";
-import Payments from "./pages/profile/Payments";
 import Notifications from "./pages/profile/Notifications";
 import Settings from "./pages/profile/Settings";
 import Rewards from "./pages/profile/Rewards";
+import Reviews from "./pages/profile/Reviews";
 function App() {
   return (
     <AuthProvider>
@@ -95,22 +93,7 @@ function App() {
   }
 />
 
-<Route
-path="/favorites"
-element={<Favorites />}
-/>
 
-
-<Route
-path="/addresses"
-element={<Addresses />}
-/>
-
-
-<Route
-path="/payments"
-element={<Payments />}
-/>
 
 
 <Route
@@ -124,6 +107,7 @@ path="/settings"
 element={<Settings />}
 />
 <Route path="/rewards" element={<Rewards />} />
+<Route path="/reviews" element={<Reviews />} />
 {/* <Route
 path="/add-menu"
 element={<AddMenu/>}

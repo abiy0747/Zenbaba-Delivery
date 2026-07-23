@@ -12,6 +12,7 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.18.1",
+    "framer-motion": "^12.42.2",
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
     "open": "^11.0.0",
@@ -48,5 +49,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.22",
+    "tailwindcss": "^3.4.17"
   }
 }
